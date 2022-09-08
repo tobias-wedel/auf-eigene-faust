@@ -119,6 +119,36 @@ function twtheme_harbor_fields()
 					'type' => 'editor',
 					'label' => 'Einleitungstext'
 				],
+				[
+					'id' => 'country',
+					'name' => 'country',
+					'type' => 'text',
+					'label' => 'Land'
+				],
+				[
+					'id' => 'language',
+					'name' => 'language',
+					'type' => 'text',
+					'label' => 'Sprache'
+				],
+				[
+					'id' => 'currency',
+					'name' => 'currency',
+					'type' => 'text',
+					'label' => 'Währung'
+				],
+				[
+					'id' => 'season',
+					'name' => 'season',
+					'type' => 'text',
+					'label' => 'Beste Reisezeit'
+				],
+				[
+					'id' => 'visa',
+					'name' => 'visa',
+					'type' => 'text',
+					'label' => 'Reisepass / Visum'
+				],
 			],
 		],
 		[
@@ -156,6 +186,12 @@ function twtheme_harbor_fields()
 					'name' => 'text',
 					'type' => 'editor',
 					'label' => 'Text',
+				],
+				[
+					'id' => 'shuttle',
+					'name' => 'shuttle',
+					'type' => 'textarea',
+					'label' => 'Hafenshuttle'
 				],
 			],
 		],
