@@ -1,9 +1,10 @@
 <?php
 
 define('TWTHEME__VERSION', '1.0');
-define('TWTHEME__DOMAIN', 'https://endlosweit.com');
+define('TWTHEME__DOMAIN', 'https://auf-eigene-faust.com');
 define('TWTHEME__DIR', dirname(__FILE__));
 define('TWTHEME__PATH', get_stylesheet_directory_uri());
+define('TWTHEME__OPTIONS', get_option('twtheme'));
 
 $files = [
 	'scripts',
@@ -15,7 +16,8 @@ $files = [
 	'useragent',
 	'shortcodes/shortcodes',
 	'livecanvas/livecanvas',
-	'woocommerce/woocommerce',
+	'admin/admin',
+	'posttypes/posttypes'
 ];
  
 foreach ($files as $file) {

@@ -25,7 +25,7 @@ if (!function_exists('get_current_post_type')) {
 	function get_current_post_type()
 	{
 		global $post, $typenow, $current_screen;
-		
+		 
 		if ($post && $post->post_type) {
 			return $post->post_type;
 		} elseif ($typenow) {
@@ -35,8 +35,18 @@ if (!function_exists('get_current_post_type')) {
 		} elseif (isset($_REQUEST['post_type'])) {
 			return sanitize_key($_REQUEST['post_type']);
 		}
-		
+		 
 		return null;
+	}
+}
+
+
+if (!function_exists('include_theme_files')) {
+	function include_theme_files($files = [], $path)
+	{
+		foreach ($files as $file) {
+			require_once TWTHEME__DIR . '/' . $path . $file . '.php';
+		}
 	}
 }
 
