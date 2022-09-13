@@ -193,6 +193,12 @@ function twtheme_harbor_fields()
 					'type' => 'textarea',
 					'label' => 'Hafenshuttle'
 				],
+				[
+					'id' => 'arrival-airport',
+					'name' => 'arrival-airport',
+					'type' => 'textarea',
+					'label' => 'Anfahrt Flughafen'
+				],
 			],
 		],
 		[
@@ -270,6 +276,18 @@ function twtheme_harbor_fields()
 								'editable' => true,
 								'label' => 'Koordinaten',
 								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
+							],
+							[
+								'id' => 'direction',
+								'name' => 'direction',
+								'type' => 'text',
+								'label' => 'Wegbeschreibung',
+							],
+							[
+								'id' => 'tickets',
+								'name' => 'tickets',
+								'type' => 'text',
+								'label' => 'Tickets',
 							],
 							[
 								'id' => 'text',
