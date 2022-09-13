@@ -168,16 +168,16 @@ function twtheme_harbor_fields()
 					'label' => 'Adresse',
 					'integration' => [
 						'tool' => 'gmaps',
-						'service' => 'location',
-						'type' => 'text',
-						'target' => 'gmaps-coords'
+						'service' => 'geocoding',
+						'target' => 'address-coords'
 					]
 				],
 				[
-					'id' => 'gmaps-coords',
-					'name' => 'gmaps-coords',
+					'id' => 'address-coords',
+					'name' => 'address-coords',
 					'type' => 'text',
 					'readonly' => true,
+					'editable' => true,
 					'label' => 'Koordinaten',
 					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
 				],
@@ -251,6 +251,25 @@ function twtheme_harbor_fields()
 								'name' => 'gallery',
 								'type' => 'gallery',
 								'label' => 'Galerie',
+							],
+							[
+								'id' => 'address',
+								'name' => 'address',
+								'type' => 'integration',
+								'label' => 'Adresse',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+								]
+							],
+							[
+								'id' => 'address-coords',
+								'name' => 'address-coords',
+								'type' => 'text',
+								'readonly' => true,
+								'editable' => true,
+								'label' => 'Koordinaten',
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
 							],
 							[
 								'id' => 'text',

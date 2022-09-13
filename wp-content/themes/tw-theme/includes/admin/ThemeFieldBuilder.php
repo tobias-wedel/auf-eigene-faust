@@ -16,6 +16,7 @@ class ThemeFieldBuilder
 			$final_data['field'] = [];
 			$repeater_fields = ThemeFieldBuilder::repeater_field($field, $args);
 			
+			
 			if (is_array($repeater_fields)) {
 				foreach ($repeater_fields as $fields_group_key => $fields) {
 					foreach ($fields as $field_key => $field) {
@@ -33,13 +34,15 @@ class ThemeFieldBuilder
 		$final_data['full_html'] = '';
 		$final_data['label'] = '';
 		$final_data['field'] = '';
-		
 		$value = isset($field['value']) ? esc_attr($field['value']) : '';
 		$raw_value = isset($field['value']) ? esc_attr($field['value']) : '';
 		$style = !empty($field['style']) ? 'style="' . esc_attr($field['style']) . '"' : '';
 		$class = !empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
 		$name = !empty($field['name']) ? 'name="' . esc_attr(str_replace(' ', '', $field['name'])) . '"' : '';
 		$disabled = !empty($field['disabled']) ? 'disabled' : '';
+		$readonly = !empty($field['readonly']) ? 'readonly' : '';
+		$editable = isset($field['editable']) && $field['editable'] === true ? 'editable' : '';
+		$editable_button = $editable == 'editable' ? '<span class="dashicons dashicons-edit button make-editable"></span>' : '';
 		$readonly = !empty($field['readonly']) ? 'readonly' : '';
 		$required = !empty($field['required']) ? 'required="required"' : '';
 		$placeholder = !empty($field['placeholder']) ? 'placeholder="' . esc_attr($field['placeholder']) . '"' : '';
@@ -100,21 +103,23 @@ class ThemeFieldBuilder
 			case 'email':
 			case 'file':
 			case 'date':
-				$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' />' . $description . "\n";
+				$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' ' . $editable . '/>' . $editable_button . $description . "\n";
 				break;
 		
 			case 'integration':
-				if (isset($field['integration']['tool']) && $field['integration']['tool'] == 'gmaps') {
-					$script = '<script src="https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&callback=initMap&v=weekly" defer></script>';
-				}
-								
-				$data_integration = json_encode($field['integration']);
-				
-				switch ($field['integration']['type']) {
-					case 'text':
-						$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" data-integration=\'' . $data_integration . '\' ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['integration']['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' />' . $description . $script . "\n";
-
-						break;
+				if (isset($field['integration']['tool'])) {
+					$data_integration = json_encode($field['integration']);
+					
+					if ($field['integration']['tool'] == 'gmaps') {
+						wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=weekly', '', '', true);
+										
+						switch ($field['integration']['service']) {
+							case 'geocoding':
+								$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" data-integration=\'' . $data_integration . '\' ' . 'class="' . $class . '"' . ' ' . $style . ' type="text" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' />' . "\n";
+						
+								break;
+						}
+					}
 				}
 				
 				break;
@@ -372,6 +377,7 @@ class ThemeFieldBuilder
 		
 			$html_tabs_content .= '<table class="form-table">';
 			
+			// Get entries from database
 			// If the values_key is numeric its an post ID
 			if (is_numeric($values_key)) {
 				$values = get_post_meta($values_key, $tab['id'], true);
@@ -396,6 +402,7 @@ class ThemeFieldBuilder
 						'options_from_data' => !empty($field['options_from_data']) ? $field['options_from_data'] : '',
 						'disabled' => !empty($field['disabled']) ? $field['disabled'] : '',
 						'readonly' => !empty($field['readonly']) ? $field['readonly'] : '',
+						'editable' => !empty($field['editable']) ? $field['editable'] : '',
 						'data-filter' => !empty($field['data-filter']) ? $field['data-filter'] : '',
 						'integration' => !empty($field['integration']) ? $field['integration'] : '',
 					];
@@ -411,6 +418,7 @@ class ThemeFieldBuilder
 								array_push($field['fields'], $field['fields'][0]);
 							}
 						}
+
 						
 						foreach ($field['fields'] as $repeater_group_key => $repeater_group) {
 							foreach ($repeater_group as $repeater_field_key => $repeater_field) {
@@ -420,12 +428,14 @@ class ThemeFieldBuilder
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['label'] = !empty($repeater_field['label']) ? $repeater_field['label'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['type'] = !empty($repeater_field['type']) ? $repeater_field['type'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['description'] = !empty($repeater_field['description']) ? $repeater_field['description'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration'] = !empty($repeater_field['integration']) ? $repeater_field['integration'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['readonly'] = !empty($repeater_field['readonly']) ? $repeater_field['readonly'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['editable'] = !empty($repeater_field['editable']) ? $repeater_field['editable'] : '';
 							}
 						}
 					} else {
 						// Check if name already contains array brackets
 						$value_key = $values;
-						
 						
 						if (isset($field['name'])) {
 							if (substr($field['name'], 0, 1) == '[') {

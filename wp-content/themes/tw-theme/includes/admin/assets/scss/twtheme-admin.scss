@@ -140,6 +140,31 @@
 		color: #999;
 		margin-top: 0.2rem;
 	}
+
+	input[editable] {
+		width: calc(100% - 50px) !important;
+		margin-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+
+		+ .button {
+			cursor: pointer;
+			border-left: 0;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			width: 49px;
+			position: relative;
+
+			> span {
+				position: absolute;
+				width: 100%;
+				text-align: center;
+				top: 50%;
+				left: 0;
+				transform: translateY(-50%);
+			}
+		}
+	}
 }
 
 .image_preview {

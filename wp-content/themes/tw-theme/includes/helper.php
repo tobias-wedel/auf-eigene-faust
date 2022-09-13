@@ -11,7 +11,7 @@ if (!function_exists('print_rpre')) {
 	function print_rpre($array)
 	{
 		echo '<pre>';
-		print_r($content);
+		print_r($array);
 		echo '</pre>';
 	}
 }
