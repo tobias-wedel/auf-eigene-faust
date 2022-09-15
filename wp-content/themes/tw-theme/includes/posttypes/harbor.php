@@ -219,12 +219,6 @@ function twtheme_harbor_fields()
 								'label' => 'Titel',
 							],
 							[
-								'id' => 'gallery',
-								'name' => 'gallery',
-								'type' => 'gallery',
-								'label' => 'Galerie',
-							],
-							[
 								'id' => 'text',
 								'name' => 'text',
 								'type' => 'editor',
@@ -232,6 +226,36 @@ function twtheme_harbor_fields()
 							],
 						]
 					],
+				],
+				[
+					'id' => 'foot',
+					'name' => 'foot',
+					'type' => 'textarea',
+					'label' => 'Zu Fuß',
+				],
+				[
+					'id' => 'taxi',
+					'name' => 'taxi',
+					'type' => 'textarea',
+					'label' => 'Taxi',
+				],
+				[
+					'id' => 'rental-car',
+					'name' => 'rental-car',
+					'type' => 'textarea',
+					'label' => 'Mietwagen',
+				],
+				[
+					'id' => 'bus',
+					'name' => 'bus',
+					'type' => 'textarea',
+					'label' => 'Bus',
+				],
+				[
+					'id' => 'train',
+					'name' => 'train',
+					'type' => 'textarea',
+					'label' => 'Zug',
 				],
 			],
 		],
@@ -259,6 +283,12 @@ function twtheme_harbor_fields()
 								'label' => 'Galerie',
 							],
 							[
+								'id' => 'text',
+								'name' => 'text',
+								'type' => 'editor',
+								'label' => 'Text',
+							],
+							[
 								'id' => 'address',
 								'name' => 'address',
 								'type' => 'integration',
@@ -280,7 +310,7 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'direction',
 								'name' => 'direction',
-								'type' => 'text',
+								'type' => 'textarea',
 								'label' => 'Wegbeschreibung',
 							],
 							[
@@ -288,12 +318,6 @@ function twtheme_harbor_fields()
 								'name' => 'tickets',
 								'type' => 'text',
 								'label' => 'Tickets',
-							],
-							[
-								'id' => 'text',
-								'name' => 'text',
-								'type' => 'editor',
-								'label' => 'Text',
 							],
 						]
 					],
@@ -362,6 +386,26 @@ function twtheme_harbor_fields()
 								'name' => 'text',
 								'type' => 'editor',
 								'label' => 'Text',
+							],
+							[
+								'id' => 'address',
+								'name' => 'address',
+								'type' => 'integration',
+								'label' => 'Adresse',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'target' => 'address-coords'
+								]
+							],
+							[
+								'id' => 'address-coords',
+								'name' => 'address-coords',
+								'type' => 'text',
+								'readonly' => true,
+								'editable' => true,
+								'label' => 'Koordinaten',
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
 							],
 							[
 								'id' => 'facebook',

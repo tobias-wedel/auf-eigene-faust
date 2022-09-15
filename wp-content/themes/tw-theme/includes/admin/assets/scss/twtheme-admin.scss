@@ -38,6 +38,10 @@
 		}
 	}
 
+	.repeater-group {
+		transition: all 0.2s;
+	}
+
 	.repeater-groups-holder {
 		padding: 0 !important;
 		position: relative;
@@ -287,5 +291,17 @@
 		text-align: center;
 		color: #000;
 		text-decoration: none;
+	}
+}
+
+.sortable-chosen {
+	background: yellow !important;
+	transition: all 0.2s;
+	opacity: 0.4;
+
+	.action-bar span:last-child {
+		display: none !important;
+	}
+	* {
 	}
 }
