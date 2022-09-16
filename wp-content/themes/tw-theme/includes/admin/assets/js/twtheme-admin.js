@@ -250,7 +250,7 @@ function repeater_fields() {
 repeater_fields();
 
 function repeater_fields_refresh_keys(repeater_group_holder) {
-	let repeater_groups = repeater_group_holder.querySelectorAll('table.repeater-group');
+	let repeater_groups = repeater_group_holder.querySelectorAll('.repeater-group');
 	let repeater_groups_count = repeater_groups.length;
 
 	repeater_groups.forEach((group, index) => {
@@ -279,13 +279,13 @@ function add_repeater_block(repeater_group_holder) {
 		wp.editor.remove(editor_id);
 	});
 
-	let repeater_block_html = repeater_group_holder.querySelector('table.repeater-group').outerHTML;
+	let repeater_block_html = repeater_group_holder.querySelector('.repeater-group').outerHTML;
 
 	// Clear all values
 	let placed_block = repeater_group_holder.querySelector('.drag-fields').insertAdjacentHTML('beforeend', repeater_block_html);
 
 	repeater_group_holder
-		.querySelector('table.repeater-group:last-child')
+		.querySelector('.repeater-group:last-child')
 		.querySelectorAll('input, select, textarea, .tw_gallery_mtb')
 		.forEach(element => {
 			switch (element.tagName) {
@@ -357,10 +357,34 @@ function do_sortable(action) {
 	}
 
 	document.querySelectorAll('.drag-fields').forEach(drag_field => {
-		Sortable.create(drag_field, {
-			handle: '.dashicons-editor-ul',
-			animation: 100,
+		let table_wrapper = drag_field.querySelector('.table-wrapper');
+		let drag_field_holder = drag_field.closest('.repeater-groups-holder');
 
+		// Set height to table_wrapper
+		// We need this to make the transition
+		drag_field.querySelectorAll('.drag').forEach((element, i) => {
+			let table_wrapper = element.closest('.table-wrapper');
+
+			element.addEventListener('mouseenter', e => {
+				//	drag_field_holder.style.setProperty('--height', table_wrapper.getBoundingClientRect().height + 'px');
+			});
+
+			// Reset height
+			//element.addEventListener('mouseleave', e => {
+			//	drag_field.style.removeProperty('--height');
+			//	table_wrapper.classList.remove('active');
+			//});
+		});
+
+		Sortable.create(drag_field, {
+			handle: '.drag',
+			animation: 150,
+			onChoose: function (e) {
+				drag_field.classList.add('dragging');
+				drag_field_holder.style.setProperty('--height', table_wrapper.getBoundingClientRect().height + 'px');
+				drag_field.insertAdjacentHTML('afterend', '<div class="repeater-group-spacer"></div>');
+				e.item.querySelector('.table-wrapper').classList.add('active');
+			},
 			onStart: function (e) {
 				// Reindex the fields
 				drag_field
@@ -371,10 +395,13 @@ function do_sortable(action) {
 						wp.editor.remove(editor_id);
 					});
 			},
-
-			onEnd: function (e) {
+			onUnchoose: function (e) {
 				// Reindex the fields
 				repeater_fields_refresh_keys(drag_field.closest('.repeater-groups-holder'));
+				drag_field_holder.style.removeProperty('--height');
+				drag_field_holder.querySelector('.repeater-group-spacer').remove();
+				drag_field.classList.remove('dragging');
+				e.item.querySelector('.table-wrapper').classList.remove('active');
 			},
 		});
 	});

@@ -480,14 +480,14 @@ class ThemeFieldBuilder
 						if (is_array($form_field['label'])) {
 							$html_tabs_content .= '<tr><td colspan="2" class="repeater-groups-holder"><a class="add-block button btn">+</a><div class="drag-fields">';
 							foreach ($form_field['label'] as $group_key => $group) {
-								$html_tabs_content .= '<table class="repeater-group" data-repeatergroupkey="' . $group_key . '"><tr>';
+								$html_tabs_content .= '<div class="repeater-group"><div class="table-wrapper"><table data-repeatergroupkey="' . $group_key . '"><tr>';
 								$group_count = count($group);
 								foreach ($group as $field_key => $field) {
 									if (!empty($form_field['label'][$group_key][$field_key])) {
 										$html_tabs_content .= '<th>';
 										
 										if ($field_key == '0') {
-											$html_tabs_content .= '<div class="action-bar"><span class="small dashicons dashicons-editor-ul"></span><span class="small dashicons dashicons-trash"></span></div>';
+											$html_tabs_content .= '<div class="action-bar"><div class="action-bar-left"><span class="small drag dashicons dashicons-editor-insertmore"></span></div><div class="action-bar-right"><span class="small dashicons dashicons-trash"></span></div></div>';
 										}
 										
 										$html_tabs_content .= $form_field['label'][$group_key][$field_key];
@@ -501,7 +501,7 @@ class ThemeFieldBuilder
 										$html_tabs_content .= '<tr>';
 									}
 								}
-								$html_tabs_content .= '</tr></table>';
+								$html_tabs_content .= '</tr></table></div></div>';
 							}
 							$html_tabs_content .= '</div></td></tr>';
 						} else {
