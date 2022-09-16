@@ -3,19 +3,17 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-add_action('init', 'twtheme_create_post_type_harbor', 0);
-function twtheme_create_post_type_harbor()
-{
-	// Set UI labels for Custom Post Type
-	$labels = [
-		'name' => 'Hafen',
-		'singular_name' => 'Hafen',
-		'menu_name' => 'Häfen',
-	];
+$harbor = new CreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), harbor_fields());
 
-	$args = [
+function harbor_register_post_type_args()
+{
+	return [
 		'label' => 'Hafen',
-		'labels' => $labels,
+		'labels' => [
+			'name' => 'Hafen',
+			'singular_name' => 'Hafen',
+			'menu_name' => 'Häfen',
+		],
 		'supports' => ['title', 'author', 'revisions', 'thumbnail'],
 		'hierarchical' => true,
 		'public' => true,
@@ -33,74 +31,11 @@ function twtheme_create_post_type_harbor()
 		'rewrite' => ['slug' => 'hafen', 'with_front' => true],
 		'show_in_rest' => false,
 		'query_var'=> true,
+		'taxonomies' => array('post_tag'),
 	];
-
-	// Registering your Custom Post Type
-	register_post_type('harbor', $args);
 }
 
-add_action('add_meta_boxes', 'twtheme_harbor_pages_meta_boxes');
-function twtheme_harbor_pages_meta_boxes()
-{
-	add_meta_box('twtheme_harbor_page_options', 'Hafen Inhalte', 'twtheme_harbor_options', 'harbor', 'normal', 'high', null);
-}
-
-function twtheme_harbor_options($post)
-{
-	$html = '';
-	$html_tabs_menu = '';
-	$html_tabs_content = '';
-	
-	
-	// Add a nonce field so we can check for it later.
-	wp_nonce_field('twtheme_harbor_data', '_twtheme_harbor_data_nonce');
-	
-	echo ThemeFieldBuilder::output(twtheme_harbor_fields(), $post->ID);
-}
-
-add_action('save_post', 'save_twtheme_harbor_pages_meta_boxes');
-function save_twtheme_harbor_pages_meta_boxes($post_id)
-{
-	global $pagenow;
-	
-	// Bail out on creating a new post
-	if ($pagenow === 'post-new.php') {
-		return;
-	}
-	
-	// Bail out if this is an autosave
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return;
-	}
-	
-	if (isset($_POST['_inline_edit']) && wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
-		return;
-	}
-	
-	// Bail out if this is not an harbor item
-	if (!isset($_REQUEST['post_type']) || 'harbor' !== $_REQUEST['post_type']) {
-		return;
-	}
-	
-	// Bail out on delete
-	if (isset($_GET['action']) && $_GET['action'] == 'trash') {
-		return;
-	}
-	
-	// Verify nonce
-	if (isset($_REQUEST['_twtheme_harbor_data_nonce']) && !wp_verify_nonce($_REQUEST['_twtheme_harbor_data_nonce'], 'twtheme_harbor_data')) {
-		return;
-	}
-	// Save into DB
-	
-	foreach (twtheme_harbor_fields() as $tab) {
-		if (!empty($tab['fields'])) {
-			update_post_meta($post_id, $tab['id'], $_POST[$tab['id']], false);
-		}
-	}
-}
-
-function twtheme_harbor_fields()
+function harbor_fields()
 {
 	return [
 		[
@@ -117,7 +52,10 @@ function twtheme_harbor_fields()
 					'id' => 'prolog',
 					'name' => 'prolog',
 					'type' => 'editor',
-					'label' => 'Einleitungstext'
+					'label' => 'Einleitungstext',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'country',
@@ -186,18 +124,27 @@ function twtheme_harbor_fields()
 					'name' => 'text',
 					'type' => 'editor',
 					'label' => 'Text',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'shuttle',
 					'name' => 'shuttle',
-					'type' => 'textarea',
-					'label' => 'Hafenshuttle'
+					'type' => 'editor',
+					'label' => 'Hafenshuttle',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'arrival-airport',
 					'name' => 'arrival-airport',
-					'type' => 'textarea',
-					'label' => 'Anfahrt Flughafen'
+					'type' => 'editor',
+					'label' => 'Anfahrt Flughafen',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 			],
 		],
@@ -206,56 +153,49 @@ function twtheme_harbor_fields()
 			'id' => 'mobility',
 			'fields' => [
 				[
-					'id' => 'list',
-					'name' => 'list',
-					'type' => 'repeater',
-					'label' => 'Über den Store',
-					'fields' => [
-						[
-							[
-								'id' => 'title',
-								'name' => 'title',
-								'type' => 'text',
-								'label' => 'Titel',
-							],
-							[
-								'id' => 'text',
-								'name' => 'text',
-								'type' => 'editor',
-								'label' => 'Text',
-							],
-						]
-					],
-				],
-				[
 					'id' => 'foot',
 					'name' => 'foot',
-					'type' => 'textarea',
+					'type' => 'editor',
 					'label' => 'Zu Fuß',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'taxi',
 					'name' => 'taxi',
-					'type' => 'textarea',
+					'type' => 'editor',
 					'label' => 'Taxi',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'rental-car',
 					'name' => 'rental-car',
-					'type' => 'textarea',
+					'type' => 'editor',
 					'label' => 'Mietwagen',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'bus',
 					'name' => 'bus',
-					'type' => 'textarea',
+					'type' => 'editor',
 					'label' => 'Bus',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'id' => 'train',
 					'name' => 'train',
-					'type' => 'textarea',
+					'type' => 'editor',
 					'label' => 'Zug',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 			],
 		],
@@ -287,6 +227,9 @@ function twtheme_harbor_fields()
 								'name' => 'text',
 								'type' => 'editor',
 								'label' => 'Text',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
 							],
 							[
 								'id' => 'address',
@@ -310,8 +253,11 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'direction',
 								'name' => 'direction',
-								'type' => 'textarea',
+								'type' => 'editor',
 								'label' => 'Wegbeschreibung',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
 							],
 							[
 								'id' => 'tickets',
@@ -352,6 +298,9 @@ function twtheme_harbor_fields()
 								'name' => 'text',
 								'type' => 'editor',
 								'label' => 'Text',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
 							],
 						]
 					],
@@ -386,6 +335,9 @@ function twtheme_harbor_fields()
 								'name' => 'text',
 								'type' => 'editor',
 								'label' => 'Text',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
 							],
 							[
 								'id' => 'address',
@@ -455,8 +407,11 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'answer',
 								'name' => 'answer',
-								'type' => 'textarea',
+								'type' => 'editor',
 								'label' => 'Antwort',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
 							],
 						]
 					],
@@ -484,7 +439,7 @@ function twtheme_harbor_fields()
 								'id' => 'widget',
 								'name' => 'widget',
 								'type' => 'textarea',
-								'label' => 'Widget',
+								'label' => 'Widget (HTML)',
 							],
 						],
 					],

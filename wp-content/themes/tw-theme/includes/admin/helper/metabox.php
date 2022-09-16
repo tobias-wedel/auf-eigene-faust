@@ -13,14 +13,3 @@ function image_upload_meta_box($field_name = '', $value= '')
 	<a id="' . $field_name . '_image_delete" class="image_delete_button button">Bild löschen</a>
 	<input id="' . $field_name . '" class="image_data_field" type="hidden" name="' . $field_name . '" value="'.$value.'">';
 }
-
-function add_suffix_to_field_attr($input, $suffix)
-{
-	// Check for array first
-	if (preg_match('/.*\]/', $input)) {
-		return preg_replace('/(.*)(\])/', '$1-' . $suffix . '$2', esc_attr($input));
-	}
-	
-	// If its not an array
-	return $input . '-' . $suffix;
-}

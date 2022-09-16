@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly.
+defined('ABSPATH') || exit;
+
 class ThemeFieldBuilder
 {
 	public static function display_field($field = [], $args = [])
@@ -133,13 +136,19 @@ class ThemeFieldBuilder
 				break;
 				
 			case 'editor':
-				ob_start();
-				wp_editor(html_entity_decode($raw_value), sanitize_title(esc_attr($field['name'])), array(
+				$editor_settings = [
 					'wpautop'	   => true,
 					'media_buttons' => false,
 					'textarea_name' => $field['name'],
-					'textarea_rows' => 8,
-				));
+				];
+				
+				// Add settings to array
+				if (isset($field['settings']) && is_array($field['settings'])) {
+					$editor_settings = array_merge($field['settings'], $editor_settings);
+				}
+				
+				ob_start();
+				wp_editor(html_entity_decode($raw_value), sanitize_title(esc_attr($field['name'])), $editor_settings);
 				$final_data['field'] .= ob_get_contents();
 				ob_end_clean();
 				break;
@@ -405,6 +414,7 @@ class ThemeFieldBuilder
 						'editable' => !empty($field['editable']) ? $field['editable'] : '',
 						'data-filter' => !empty($field['data-filter']) ? $field['data-filter'] : '',
 						'integration' => !empty($field['integration']) ? $field['integration'] : '',
+						'settings' => !empty($field['settings']) ? $field['settings'] : '',
 					];
 					
 					// Check for field groups/repeater
@@ -431,6 +441,7 @@ class ThemeFieldBuilder
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration'] = !empty($repeater_field['integration']) ? $repeater_field['integration'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['readonly'] = !empty($repeater_field['readonly']) ? $repeater_field['readonly'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['editable'] = !empty($repeater_field['editable']) ? $repeater_field['editable'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['settings'] = !empty($repeater_field['settings']) ? $repeater_field['settings'] : '';
 							}
 						}
 					} else {

@@ -62,7 +62,6 @@ jQuery(document).ready(function ($) {
 			let ids = hiddenfieldvalue; // array of IDs of previously selected files. You're gonna build it dynamically
 			ids.forEach(function (id) {
 				let attachment = wp.media.attachment(id);
-				console.log(attachment);
 				selection.add(attachment ? [attachment] : []);
 			}); // would be probably a good idea to check if it is indeed a non-empty array
 		});
@@ -124,8 +123,6 @@ jQuery(document).ready(function ($) {
 			hiddenfield = gallery.parent().find('input[type="hidden"]'),
 			hiddenfieldvalue = hiddenfield.val().split(','),
 			i = hiddenfieldvalue.indexOf(id);
-
-		console.log(hiddenfield);
 
 		$(this).parent().remove();
 
@@ -264,14 +261,25 @@ function repeater_fields_refresh_keys(repeater_group_holder) {
 
 			attributes.forEach(attribute => {
 				element.setAttribute(attribute, element.getAttribute(attribute).replace(/\[\d\]/gm, '[' + index + ']'));
+
+				// Check for wp_editor and the ids because there're sanitized
+				if (attribute == 'class' && element.classList.contains('wp-editor-area')) {
+					element.setAttribute('id', element.getAttribute('id').replace(/\d/g, index));
+					// Refresh Editor
+					refresh_wp_editor(element.getAttribute('id'));
+				}
 			});
 		});
 	});
 }
 
 function add_repeater_block(repeater_group_holder) {
+	repeater_group_holder.querySelectorAll('.wp-editor-area').forEach((textarea, i) => {
+		let editor_id = textarea.id;
+		wp.editor.remove(editor_id);
+	});
+
 	let repeater_block_html = repeater_group_holder.querySelector('table.repeater-group').outerHTML;
-	console.log(repeater_block_html);
 
 	// Clear all values
 	let placed_block = repeater_group_holder.querySelector('.drag-fields').insertAdjacentHTML('beforeend', repeater_block_html);
@@ -290,6 +298,11 @@ function add_repeater_block(repeater_group_holder) {
 					break;
 			}
 		});
+
+	repeater_group_holder.querySelectorAll('.wp-editor-area').forEach((textarea, i) => {
+		let editor_id = textarea.id;
+		refresh_wp_editor(editor_id);
+	});
 }
 
 function remove_repeater_block() {
@@ -343,16 +356,45 @@ function do_sortable(action) {
 		Sortable.destroy();
 	}
 
-	document.querySelectorAll('.drag-fields').forEach(drag_fields => {
-		Sortable.create(drag_fields, {
+	document.querySelectorAll('.drag-fields').forEach(drag_field => {
+		Sortable.create(drag_field, {
 			handle: '.dashicons-editor-ul',
 			animation: 100,
 
+			onStart: function (e) {
+				// Reindex the fields
+				drag_field
+					.closest('.repeater-groups-holder')
+					.querySelectorAll('.wp-editor-area')
+					.forEach((textarea, i) => {
+						let editor_id = textarea.id;
+						wp.editor.remove(editor_id);
+					});
+			},
+
 			onEnd: function (e) {
-				repeater_fields_refresh_keys(drag_fields.closest('.repeater-groups-holder'));
+				// Reindex the fields
+				repeater_fields_refresh_keys(drag_field.closest('.repeater-groups-holder'));
 			},
 		});
 	});
+}
+
+function refresh_wp_editor(editor_id) {
+	wp.editor.remove(editor_id);
+
+	var settings = {
+		tinymce: {
+			wpautop: true,
+			toolbar1: 'formatselect, bold, italic, bullist, numlist, blockquote, hr, alignleft, aligncenter, alignright, link, unlink, wp_more, spellchecker, fullscreen, wp_adv',
+			toolbar2: 'strikethrough, underline, alignjustify, forecolor, pastetext, removeformat, charmap, outdent, indent, undo, redo, wp_help',
+		},
+		quicktags: {
+			buttons: 'strong,em,link,block,ins,img,ul,ol,li,code,more,close',
+		},
+	};
+
+	wp.editor.initialize(editor_id, settings);
 }
 
 make_field_editable();
