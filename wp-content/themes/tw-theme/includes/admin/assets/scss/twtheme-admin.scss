@@ -45,7 +45,6 @@
 		.table-wrapper {
 			transition: all 0.12s;
 			margin-bottom: 10px;
-			overflow: hidden;
 
 			&.active {
 				height: calc(var(--height));
@@ -97,6 +96,13 @@
 					text-align: center;
 					color: white;
 					opacity: 0.4;
+
+					.dashicons-trash {
+						height: 100%;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
 				}
 			}
 
@@ -105,7 +111,7 @@
 			}
 
 			&:hover {
-				.dashicons-trash {
+				.action-bar-right {
 					display: flex;
 
 					&:hover {
@@ -309,6 +315,7 @@
 
 	.table-wrapper {
 		height: 30px !important;
+		overflow: hidden;
 	}
 
 	table {
