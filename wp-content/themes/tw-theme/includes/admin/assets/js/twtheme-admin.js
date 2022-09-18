@@ -350,8 +350,8 @@ function handle_integrations() {
 handle_integrations();
 
 // List with handle
-do_sortable();
-function do_sortable(action) {
+repeater_sortable();
+function repeater_sortable(action) {
 	if (action == 'refresh') {
 		Sortable.destroy();
 	}
@@ -402,6 +402,26 @@ function do_sortable(action) {
 				drag_field_holder.querySelector('.repeater-group-spacer').remove();
 				drag_field.classList.remove('dragging');
 				e.item.querySelector('.table-wrapper').classList.remove('active');
+			},
+		});
+	});
+}
+
+gallery_sortable();
+function gallery_sortable() {
+	document.querySelectorAll('.tw_gallery_mtb').forEach(drag_field => {
+		Sortable.create(drag_field, {
+			handle: 'li',
+			animation: 150,
+			onEnd: function (e) {
+				let ul = e.item.closest('ul');
+				let td = e.item.closest('td');
+				let value = '';
+
+				ul.querySelectorAll('li').forEach((li, i) => {
+					value = value + (i === 0 ? li.dataset.id : ',' + li.dataset.id);
+				});
+				td.querySelector('input.image_data_field').value = value;
 			},
 		});
 	});
