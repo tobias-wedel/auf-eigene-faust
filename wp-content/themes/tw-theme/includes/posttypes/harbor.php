@@ -197,6 +197,15 @@ function harbor_fields()
 						'textarea_rows' => '6',
 					]
 				],
+				[
+					'id' => 'e-scooter',
+					'name' => 'e-scooter',
+					'type' => 'editor',
+					'label' => 'E-Scooter',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
 			],
 		],
 		[
