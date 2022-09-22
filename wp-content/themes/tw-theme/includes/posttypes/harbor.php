@@ -162,6 +162,15 @@ function harbor_fields()
 					]
 				],
 				[
+					'id' => 'e-scooter',
+					'name' => 'e-scooter',
+					'type' => 'editor',
+					'label' => 'E-Scooter',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
 					'id' => 'taxi',
 					'name' => 'taxi',
 					'type' => 'editor',
@@ -193,15 +202,6 @@ function harbor_fields()
 					'name' => 'train',
 					'type' => 'editor',
 					'label' => 'Zug',
-					'settings' => [
-						'textarea_rows' => '6',
-					]
-				],
-				[
-					'id' => 'e-scooter',
-					'name' => 'e-scooter',
-					'type' => 'editor',
-					'label' => 'E-Scooter',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
