@@ -153,6 +153,15 @@ function harbor_fields()
 			'id' => 'mobility',
 			'fields' => [
 				[
+					'id' => 'intro',
+					'name' => 'intro',
+					'type' => 'editor',
+					'label' => 'Introtext',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
 					'id' => 'foot',
 					'name' => 'foot',
 					'type' => 'editor',
