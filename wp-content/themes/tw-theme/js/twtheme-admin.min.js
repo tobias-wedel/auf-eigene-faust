@@ -367,14 +367,12 @@ function handle_integrations() {
 handle_integrations();
 
 function validation_message(element, handle, type, message) {
-	if (handle == 'add') {
-		if (element.nextElementSibling && element.nextElementSibling.classList.contains('message')) {
-			element.nextElementSibling.remove();
-		}
-
-		element.insertAdjacentHTML('afterend', '<span class="message ' + type + '">' + message + '</span>');
-	} else if (handle == 'remove') {
+	if (element.nextElementSibling && element.nextElementSibling.classList.contains('message')) {
 		element.nextElementSibling.remove();
+	}
+
+	if (handle == 'add') {
+		element.insertAdjacentHTML('afterend', '<span class="message ' + type + '">' + message + '</span>');
 	}
 }
 
