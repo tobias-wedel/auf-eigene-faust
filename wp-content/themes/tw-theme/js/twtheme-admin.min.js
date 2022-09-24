@@ -322,29 +322,42 @@ function remove_repeater_block() {
 
 function handle_integrations() {
 	document.addEventListener('change', event => {
-		element = event.target;
-		if (element.hasAttribute('data-integration')) {
-			let integration_field = JSON.parse(element.dataset.integration);
-			if (integration_field.tool == 'gmaps') {
-				function initMap() {}
+		let element = event.target,
+			element_target = '';
 
-				if (integration_field.service == 'geocoding') {
-					geocoder = new google.maps.Geocoder();
-					geocoder.geocode({address: event.target.value}, function (results, status) {
-						if (status == google.maps.GeocoderStatus.OK) {
-							var latitude = results[0].geometry.location.lat();
-							var longitude = results[0].geometry.location.lng();
+		// Check if current input is a source field
+		// Get all target fields and match the current source field
+		let elements_table = element.closest('table');
 
-							element.closest('tr').nextElementSibling.querySelector('input').value = latitude + ', ' + longitude;
-						} else {
-							console.log('Geocode was not successful for the following reason: ' + status);
-						}
-					});
-				}
-
-				function geocode(address) {}
+		elements_table.querySelectorAll('[data-source]').forEach((target_field, i) => {
+			if (target_field.dataset.source != element.id) {
+				return false;
 			}
-		}
+
+			if (target_field.hasAttribute('data-integration')) {
+				let integration = JSON.parse(target_field.dataset.integration);
+
+				if (integration.tool == 'gmaps') {
+					if (integration.service == 'geocoding') {
+						let source_value = document.querySelector('[id="' + target_field.dataset.source + '"]').value;
+
+						geocoder = new google.maps.Geocoder();
+						geocoder.geocode({address: source_value}, function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								var latitude = results[0].geometry.location.lat();
+								var longitude = results[0].geometry.location.lng();
+
+								target_field.value = latitude + ', ' + longitude;
+							} else {
+								console.log('Geocode was not successful for the following reason: ' + status);
+							}
+						});
+					}
+
+					function geocode(address) {}
+				}
+			}
+		});
 	});
 }
 handle_integrations();

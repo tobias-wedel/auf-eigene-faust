@@ -102,13 +102,8 @@ function harbor_fields()
 				[
 					'id' => 'address',
 					'name' => 'address',
-					'type' => 'integration',
-					'label' => 'Adresse',
-					'integration' => [
-						'tool' => 'gmaps',
-						'service' => 'geocoding',
-						'target' => 'address-coords'
-					]
+					'type' => 'text',
+					'label' => 'Adresse'
 				],
 				[
 					'id' => 'address-coords',
@@ -117,7 +112,12 @@ function harbor_fields()
 					'readonly' => true,
 					'editable' => true,
 					'label' => 'Koordinaten',
-					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'address'
+					]
 				],
 				[
 					'id' => 'text',
@@ -252,12 +252,8 @@ function harbor_fields()
 							[
 								'id' => 'address',
 								'name' => 'address',
-								'type' => 'integration',
-								'label' => 'Adresse',
-								'integration' => [
-									'tool' => 'gmaps',
-									'service' => 'geocoding',
-								]
+								'type' => 'text',
+								'label' => 'Adresse'
 							],
 							[
 								'id' => 'address-coords',
@@ -266,7 +262,12 @@ function harbor_fields()
 								'readonly' => true,
 								'editable' => true,
 								'label' => 'Koordinaten',
-								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'source' => 'address'
+								]
 							],
 							[
 								'id' => 'direction',
@@ -360,13 +361,8 @@ function harbor_fields()
 							[
 								'id' => 'address',
 								'name' => 'address',
-								'type' => 'integration',
+								'type' => 'text',
 								'label' => 'Adresse',
-								'integration' => [
-									'tool' => 'gmaps',
-									'service' => 'geocoding',
-									'target' => 'address-coords'
-								]
 							],
 							[
 								'id' => 'address-coords',
@@ -375,7 +371,12 @@ function harbor_fields()
 								'readonly' => true,
 								'editable' => true,
 								'label' => 'Koordinaten',
-								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.'
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'source' => 'address'
+								]
 							],
 							[
 								'id' => 'facebook',
