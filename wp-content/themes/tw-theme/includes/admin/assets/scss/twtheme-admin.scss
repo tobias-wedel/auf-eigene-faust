@@ -332,3 +332,9 @@
 	* {
 	}
 }
+
+.message {
+	&.error {
+		color: red;
+	}
+}

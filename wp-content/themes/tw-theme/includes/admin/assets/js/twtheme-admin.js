@@ -343,13 +343,17 @@ function handle_integrations() {
 
 						geocoder = new google.maps.Geocoder();
 						geocoder.geocode({address: source_value}, function (results, status) {
+							elements_parent = element.closest('td');
+
 							if (status == google.maps.GeocoderStatus.OK) {
+								validation_message(element, 'remove');
+
 								var latitude = results[0].geometry.location.lat();
 								var longitude = results[0].geometry.location.lng();
 
 								target_field.value = latitude + ', ' + longitude;
 							} else {
-								console.log('Geocode was not successful for the following reason: ' + status);
+								validation_message(element, 'add', 'error', 'Fehler: ' + status);
 							}
 						});
 					}
@@ -361,6 +365,18 @@ function handle_integrations() {
 	});
 }
 handle_integrations();
+
+function validation_message(element, handle, type, message) {
+	if (handle == 'add') {
+		if (element.nextElementSibling && element.nextElementSibling.classList.contains('message')) {
+			element.nextElementSibling.remove();
+		}
+
+		element.insertAdjacentHTML('afterend', '<span class="message ' + type + '">' + message + '</span>');
+	} else if (handle == 'remove') {
+		element.nextElementSibling.remove();
+	}
+}
 
 // List with handle
 repeater_sortable();
