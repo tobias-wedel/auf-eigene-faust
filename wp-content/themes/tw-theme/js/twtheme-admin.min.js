@@ -186,10 +186,10 @@ function openTab(event, tab_name) {
 	let wp_http_referer_value = wp_http_referer.value;
 
 	if (wp_http_referer) {
-		let wp_http_referer_url = new URL(easyform_vars.home_url + wp_http_referer_value);
+		let wp_http_referer_url = new URL(twtheme_vars.home_url + wp_http_referer_value);
 
 		wp_http_referer_url.searchParams.set('eftab', tab_name);
-		wp_http_referer.value = wp_http_referer_url.href.replace(easyform_vars.home_url, '');
+		wp_http_referer.value = wp_http_referer_url.href.replace(twtheme_vars.home_url, '');
 	}
 }
 
@@ -303,6 +303,8 @@ function add_repeater_block(repeater_group_holder) {
 		let editor_id = textarea.id;
 		refresh_wp_editor(editor_id);
 	});
+
+	tom_select();
 }
 
 function remove_repeater_block() {
@@ -429,6 +431,8 @@ function repeater_sortable(action) {
 				drag_field_holder.querySelector('.repeater-group-spacer').remove();
 				drag_field.classList.remove('dragging');
 				e.item.querySelector('.table-wrapper').classList.remove('active');
+
+				tom_select();
 			},
 		});
 	});
@@ -480,5 +484,20 @@ function make_field_editable() {
 			e.target.previousElementSibling.removeAttribute('readonly');
 			e.target.previousElementSibling.removeAttribute('disabled');
 		});
+	});
+}
+
+tom_select();
+function tom_select() {
+	var settings = {};
+
+	document.querySelectorAll('.tw-page-wrapper select').forEach((select_field, i) => {
+		// Check tom select elements first
+		let next_sibling = select_field.nextElementSibling;
+		if (next_sibling && next_sibling.classList.contains('ts-wrapper')) {
+			next_sibling.remove();
+		}
+
+		new TomSelect(select_field, settings);
 	});
 }

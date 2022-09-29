@@ -31,7 +31,7 @@ function harbor_register_post_type_args()
 		'rewrite' => ['slug' => 'hafen', 'with_front' => true],
 		'show_in_rest' => false,
 		'query_var'=> true,
-		'taxonomies' => array('post_tag'),
+		'taxonomies' => array('post_tag', 'category'),
 	];
 }
 
@@ -60,20 +60,24 @@ function harbor_fields()
 				[
 					'id' => 'country',
 					'name' => 'country',
-					'type' => 'text',
-					'label' => 'Land'
+					'type' => 'select',
+					'label' => 'Land',
+					'options_from_data' => get_country_list()
 				],
 				[
 					'id' => 'language',
 					'name' => 'language',
-					'type' => 'text',
-					'label' => 'Sprache'
+					'type' => 'select',
+					'multiple' => true,
+					'label' => 'Sprache(n)',
+					'options_from_data' => get_language_list()
 				],
 				[
 					'id' => 'currency',
 					'name' => 'currency',
-					'type' => 'text',
-					'label' => 'Währung'
+					'type' => 'select',
+					'label' => 'Währung',
+					'options_from_data' => get_currency_list()
 				],
 				[
 					'id' => 'season',
@@ -202,6 +206,24 @@ function harbor_fields()
 					'name' => 'bus',
 					'type' => 'editor',
 					'label' => 'Bus',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
+					'id' => 'hop-on-bus',
+					'name' => 'hop-on-bus',
+					'type' => 'editor',
+					'label' => 'Hop-On-Hop-Off Bus',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
+					'id' => 'metro',
+					'name' => 'metro',
+					'type' => 'editor',
+					'label' => 'Metro / U-Bahn',
 					'settings' => [
 						'textarea_rows' => '6',
 					]

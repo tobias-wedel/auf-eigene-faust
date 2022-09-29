@@ -75,3 +75,46 @@ function remove_empty_p($content)
 
 	return $content;
 }
+
+function get_country_list()
+{
+	$options = [];
+		
+	foreach (data_countries() as $key => $country) {
+		$options[] = [
+				'value' => $key,
+				'label' => $country,
+			];
+	}
+		
+	return $options;
+}
+
+function get_currency_list()
+{
+	$options = [];
+		
+	foreach (data_currencies() as $key => $currency) {
+		$options[] = [
+				'value' => $key,
+				'label' => $currency,
+			];
+	}
+		
+	return $options;
+}
+
+
+function get_language_list()
+{
+	$options = [];
+		
+	foreach (data_languages() as $key => $language) {
+		$options[] = [
+				'value' => $key,
+				'label' => $language,
+			];
+	}
+		
+	return $options;
+}

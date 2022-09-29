@@ -36,8 +36,8 @@ class ThemeFieldBuilder
 		$final_data['full_html'] = '';
 		$final_data['label'] = '';
 		$final_data['field'] = '';
-		$value = isset($field['value']) ? esc_attr($field['value']) : '';
-		$raw_value = isset($field['value']) ? esc_attr($field['value']) : '';
+		$value = isset($field['value']) ? $field['value'] : '';
+		$raw_value = isset($field['value']) ? $field['value'] : '';
 		$style = !empty($field['style']) ? 'style="' . esc_attr($field['style']) . '"' : '';
 		$class = !empty($field['class']) ? ' ' . esc_attr($field['class']) : '';
 		$name = !empty($field['name']) ? 'name="' . esc_attr(str_replace(' ', '', $field['name'])) . '"' : '';
@@ -47,6 +47,7 @@ class ThemeFieldBuilder
 		$editable_button = $editable == 'editable' ? '<span class="dashicons dashicons-edit button make-editable"></span>' : '';
 		$readonly = !empty($field['readonly']) ? 'readonly' : '';
 		$required = !empty($field['required']) ? 'required="required"' : '';
+		$multiple = !empty($field['multiple']) ? 'multiple="multiple"' : '';
 		$placeholder = !empty($field['placeholder']) ? 'placeholder="' . esc_attr($field['placeholder']) . '"' : '';
 		$description = !empty($field['description']) ? "\n" . ' <div class="twtheme-field-description">' . wp_kses($field['description'], ['br' => [], 'strong' => [], 'span' => [], 'ol' => [], 'ul' => [], 'li' => [], 'div' => []]) . '</div>' : '';
 		$label_class = !empty($field['label_class']) ? 'class="' . esc_attr($field['label_class']) . '"' : '';
@@ -67,7 +68,6 @@ class ThemeFieldBuilder
 			
 			if (isset($field['integration']['source'])) {
 				$data_integration .= ' data-source="' . $field['integration']['source'] . '"';
-				;
 			}
 		}
 		
@@ -80,7 +80,7 @@ class ThemeFieldBuilder
 
 		$validation = !empty($field['validate']) ? 'data-validation="' . esc_attr($field['validate']) . '"' : '';
 		$options_from_data = !empty($field['options_from_data']) ? $field['options_from_data'] : '';
-
+		
 		// Check the request referrer for meta_box
 		// If yes, check if we are editing or submit a new post
 		if (isset($args['referrer'])) {
@@ -197,7 +197,11 @@ class ThemeFieldBuilder
 
 			case 'select':
 				if (!empty($field['options']) || !empty($options_from_data)) {
-					$final_data['field'] .= '<select ' . $name . ' id="' . esc_attr($field['id']) . '" ' . $validation . ' ' . $disabled . '>';
+					if ($multiple) {
+						$name = 'name="' . $field['name'] . '[]"';
+					}
+					
+					$final_data['field'] .= '<select ' . $name . ' id="' . esc_attr($field['id']) . '" ' . $validation . ' ' . $disabled . ' ' . $multiple . '>';
 
 					// If both exists merger into one array
 					if (!empty($field['options'] && !empty($options_from_data))) {
@@ -205,12 +209,12 @@ class ThemeFieldBuilder
 					} else {
 						$options = !empty($field['options']) ? $field['options'] : $options_from_data;
 					}
-
+					
 					foreach ($options as $key => $option) {
 						$checked = false;
 						$option_value = $option['value'];
-
-						if ($value == $option['value']) {
+						
+						if ($value && (is_array($value) && in_array($option['value'], $value) || !is_array($value) && $value == $option['value'])) {
 							$checked = true;
 						} elseif (!$value && isset($option['checked']) && $option['checked'] == true) {
 							$checked = true;
@@ -222,22 +226,12 @@ class ThemeFieldBuilder
 
 						$final_data['field'] .= '<option ' . selected($checked, true, false) . ' value="' . esc_attr($option['value']) . '">' . esc_attr($option['label']) . '</option>';
 					}
+					
 					$final_data['field'] .= '</select> ';
+					
 					$final_data['field'] .= $description;
 				}
 
-				break;
-
-			case 'select_multi':
-				$final_data['field'] .= '<select name="' . $field['name'] . '[]" id="' . esc_attr($field['id']) . '" multiple="multiple">';
-				foreach ($field['options'] as $k => $v) {
-					$selected = false;
-					if (in_array($k, $value)) {
-						$selected = true;
-					}
-					$final_data['field'] .= '<option ' . selected($selected, true, false) . ' value="' . esc_attr($k) . '" />' . $v . '</label> ';
-				}
-				$final_data['field'] .= '</select> ';
 				break;
 				
 			case 'gallery':
@@ -394,6 +388,7 @@ class ThemeFieldBuilder
 				$tab_id = $values_key . '['.$tab_id.']';
 			}
 			
+			
 			if (!empty($tab['fields'])) {
 				foreach ($tab['fields'] as $field) {
 					$form_field_data = [
@@ -409,6 +404,7 @@ class ThemeFieldBuilder
 						'disabled' => !empty($field['disabled']) ? $field['disabled'] : '',
 						'readonly' => !empty($field['readonly']) ? $field['readonly'] : '',
 						'editable' => !empty($field['editable']) ? $field['editable'] : '',
+						'multiple' => !empty($field['multiple']) ? $field['multiple'] : '',
 						'data-filter' => !empty($field['data-filter']) ? $field['data-filter'] : '',
 						'integration' => !empty($field['integration']) ? $field['integration'] : '',
 						'settings' => !empty($field['settings']) ? $field['settings'] : '',
@@ -431,7 +427,6 @@ class ThemeFieldBuilder
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['value'] = isset($repeater_field['id']) && !empty($values[$field['name']][$repeater_group_key][$repeater_field['id']]) ? $values[$field['name']][$repeater_group_key][$repeater_field['id']] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['name'] = !empty($repeater_field['name']) ? $tab_id . '[' . $field['name'] . '][' . $repeater_group_key . '][' . $repeater_field['name'] . ']' : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['id'] = $form_field_data['fields'][$repeater_group_key][$repeater_field_key]['name'];
-								//print_rpre($form_field_data['fields'][$repeater_group_key][$repeater_field_key]);
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['label'] = !empty($repeater_field['label']) ? $repeater_field['label'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['type'] = !empty($repeater_field['type']) ? $repeater_field['type'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['description'] = !empty($repeater_field['description']) ? $repeater_field['description'] : '';
@@ -443,6 +438,7 @@ class ThemeFieldBuilder
 								
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['readonly'] = !empty($repeater_field['readonly']) ? $repeater_field['readonly'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['editable'] = !empty($repeater_field['editable']) ? $repeater_field['editable'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['multiple'] = !empty($repeater_field['multiple']) ? $repeater_field['multiple'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['settings'] = !empty($repeater_field['settings']) ? $repeater_field['settings'] : '';
 							}
 						}
