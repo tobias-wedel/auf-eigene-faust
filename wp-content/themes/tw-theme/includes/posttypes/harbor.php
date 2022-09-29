@@ -62,6 +62,11 @@ function harbor_fields()
 					'name' => 'country',
 					'type' => 'select',
 					'label' => 'Land',
+					'options' => [
+						[
+							'label' => 'Bitte wählen',
+						],
+					],
 					'options_from_data' => get_country_list()
 				],
 				[
@@ -77,6 +82,11 @@ function harbor_fields()
 					'name' => 'currency',
 					'type' => 'select',
 					'label' => 'Währung',
+					'options' => [
+						[
+							'label' => 'Bitte wählen',
+						],
+					],
 					'options_from_data' => get_currency_list()
 				],
 				[
