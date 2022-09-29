@@ -64,6 +64,7 @@ function harbor_fields()
 					'label' => 'Land',
 					'options' => [
 						[
+							'value' => '',
 							'label' => 'Bitte wählen',
 						],
 					],
@@ -84,6 +85,7 @@ function harbor_fields()
 					'label' => 'Währung',
 					'options' => [
 						[
+							'value' => '',
 							'label' => 'Bitte wählen',
 						],
 					],
