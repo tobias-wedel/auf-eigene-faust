@@ -6,7 +6,6 @@ defined('ABSPATH') || exit;
 $harbor = new TwthemeCreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), harbor_fields());
 $harbor->create_taxonomy('destination', 'harbor', harbor_taxonomy_args());
 
-
 function harbor_register_post_type_args()
 {
 	return [
@@ -33,7 +32,7 @@ function harbor_register_post_type_args()
 		'rewrite' => ['slug' => 'hafen', 'with_front' => true],
 		'show_in_rest' => false,
 		'query_var'=> true,
-		'taxonomies' => array('post_tag', 'category'),
+		'taxonomies' => array('post_tag'),
 	];
 }
 

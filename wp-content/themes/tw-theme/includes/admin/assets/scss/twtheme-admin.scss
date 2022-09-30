@@ -158,19 +158,26 @@
 		margin-top: 0.2rem;
 	}
 
+	.input-holder {
+		display: flex;
+	}
+
 	input[editable] {
-		width: calc(100% - 50px) !important;
 		margin-right: 0;
 		border-top-right-radius: 0;
 		border-bottom-right-radius: 0;
 
-		+ .button {
+		~ .button {
 			cursor: pointer;
 			border-left: 0;
-			border-top-left-radius: 0;
-			border-bottom-left-radius: 0;
+			border-radius: 0;
 			width: 49px;
 			position: relative;
+
+			&:last-of-type {
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+			}
 
 			> span {
 				position: absolute;
@@ -181,6 +188,10 @@
 				transform: translateY(-50%);
 			}
 		}
+	}
+
+	#map-preview {
+		height: 200px;
 	}
 }
 

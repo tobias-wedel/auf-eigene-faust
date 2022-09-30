@@ -86,7 +86,7 @@ class TwthemeCreatePostType
 		$this->taxonomy_posttype = $posttype;
 		$this->taxonomy_args = $args;
 		
-		add_action('init', [$this, 'register_taxonomy'], 0);
+		add_action('init', [$this, 'register_taxonomy']);
 	}
 	
 	public function register_taxonomy()

@@ -359,11 +359,39 @@ function handle_integrations() {
 							}
 						});
 					}
-
-					function geocode(address) {}
 				}
 			}
 		});
+	});
+
+	document.addEventListener('click', event => {
+		let element = event.target;
+
+		// Build map preview
+		// prettier-ignore
+		if(element.classList.contains('map-preview')) {
+			let target_parent = element.closest('td'),
+				value = target_parent.querySelector('input').value.split(','),
+				latlng = { lat: parseFloat(value[0].trim()), lng: parseFloat(value[1].trim()) };
+			
+			if(document.querySelector('#map-preview')) {
+				document.querySelector('#map-preview').remove();
+			}
+			
+			target_parent.insertAdjacentHTML('beforeend', '<div id="map-preview"></div>');
+			
+			const map = new google.maps.Map(document.getElementById("map-preview"), {
+				center: latlng,
+				zoom: 8,
+			});
+			
+			new google.maps.Marker({
+				position: latlng,
+				map
+			});
+			
+			return map;
+		}
 	});
 }
 handle_integrations();

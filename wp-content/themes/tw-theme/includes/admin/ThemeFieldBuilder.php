@@ -45,6 +45,7 @@ class ThemeFieldBuilder
 		$readonly = !empty($field['readonly']) ? 'readonly' : '';
 		$editable = isset($field['editable']) && $field['editable'] === true ? 'editable' : '';
 		$editable_button = $editable == 'editable' ? '<span class="dashicons dashicons-edit button make-editable"></span>' : '';
+		$preview_button = '';
 		$readonly = !empty($field['readonly']) ? 'readonly' : '';
 		$required = !empty($field['required']) ? 'required="required"' : '';
 		$multiple = !empty($field['multiple']) ? 'multiple="multiple"' : '';
@@ -62,6 +63,10 @@ class ThemeFieldBuilder
 				
 			if ($field['integration']['tool'] == 'gmaps') {
 				wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=weekly', '', '', true);
+				
+				if ($field['integration']['service'] == 'geocoding') {
+					$preview_button = '<span class="dashicons dashicons-visibility button map-preview"></span>';
+				}
 			}
 			
 			$data_integration = "data-integration='" . $data_integration . "'";
@@ -122,7 +127,7 @@ class ThemeFieldBuilder
 			case 'email':
 			case 'file':
 			case 'date':
-				$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $data_integration . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' ' . $editable . '/>' . $editable_button . $description . "\n";
+				$final_data['field'] .= '<div class="input-holder"><input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $data_integration . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' ' . $editable . '/>' . $editable_button . $preview_button . '</div>' . $description . "\n";
 				break;
 			case 'text-secret':
 				$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" ' . $style . ' type="text" ' . $name . ' placeholder="' . esc_attr($field['placeholder']) . '" value="" ' . $validation . ' ' . $disabled . '/>' . $description . "\n";
