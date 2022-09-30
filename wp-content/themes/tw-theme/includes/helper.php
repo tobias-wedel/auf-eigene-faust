@@ -42,7 +42,7 @@ if (!function_exists('get_current_post_type')) {
 
 
 if (!function_exists('include_theme_files')) {
-	function include_theme_files($files = [], $path)
+	function include_theme_files($files, $path)
 	{
 		foreach ($files as $file) {
 			require_once TWTHEME__DIR . '/' . $path . $file . '.php';

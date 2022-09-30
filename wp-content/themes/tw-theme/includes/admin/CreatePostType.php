@@ -3,26 +3,26 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class CreatePostType
+class TwthemeCreatePostType
 {
-	public function __construct($post_type, $title, $args = [], $fields)
+	public function __construct($post_type, $title, $args, $fields)
 	{
 		$this->post_type = $post_type;
 		$this->title = $title;
 		$this->args = $args;
 		$this->fields = $fields;
 		
-		add_action('init', [$this, 'twtheme_register_post_type']);
-		add_action('add_meta_boxes', [$this, 'twtheme_add_meta_box']);
-		add_action('save_post', [$this, 'twtheme_save_post']);
+		add_action('init', [$this, 'register_post_type']);
+		add_action('add_meta_boxes', [$this, 'add_meta_box']);
+		add_action('save_post', [$this, 'save_post']);
 	}
 	
-	public function twtheme_register_post_type()
+	public function register_post_type()
 	{
 		register_post_type($this->post_type, $this->args);
 	}
 	
-	public function twtheme_add_meta_box()
+	public function add_meta_box()
 	{
 		add_meta_box('twtheme_' . $this->post_type . '_page_options', $this->title, [$this, 'metabox_fields'], $this->post_type, 'normal', 'high', null);
 	}
@@ -39,7 +39,7 @@ class CreatePostType
 		echo ThemeFieldBuilder::output($this->fields, $post->ID);
 	}
 	
-	public function twtheme_save_post($post_id)
+	public function save_post($post_id)
 	{
 		global $pagenow;
 		
@@ -80,8 +80,17 @@ class CreatePostType
 		}
 	}
 	
-	public function twtheme_create_tag_taxonomies()
+	public function create_taxonomy($name, $posttype, $args)
 	{
-		add_action('init', 'create_tag_taxonomies', 0);
+		$this->taxonomy_name = $name;
+		$this->taxonomy_posttype = $posttype;
+		$this->taxonomy_args = $args;
+		
+		add_action('init', [$this, 'register_taxonomy'], 0);
+	}
+	
+	public function register_taxonomy()
+	{
+		register_taxonomy($this->taxonomy_name, $this->taxonomy_posttype, $this->taxonomy_args);
 	}
 }
