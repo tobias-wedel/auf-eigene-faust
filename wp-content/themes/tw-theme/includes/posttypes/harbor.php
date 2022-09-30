@@ -212,6 +212,15 @@ function harbor_fields()
 					]
 				],
 				[
+					'id' => 'bicycle',
+					'name' => 'bicycle',
+					'type' => 'editor',
+					'label' => 'Fahrrad',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
 					'id' => 'e-scooter',
 					'name' => 'e-scooter',
 					'type' => 'editor',
