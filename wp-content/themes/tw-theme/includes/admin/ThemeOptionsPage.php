@@ -172,7 +172,7 @@ class ThemeOptionsPage
 		echo '		<div id="poststuff">';
 		echo '			<div class="postbox">';
 		echo '				<div class="inside">';
-		echo ThemeFieldBuilder::output($this->form_tabs(), 'twtheme');
+		echo TwthemeFieldBuilder::output($this->form_tabs(), 'twtheme');
 		echo '				</div>';
 		echo '			</div>';
 		echo '		</div>';

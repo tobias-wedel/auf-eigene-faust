@@ -382,7 +382,7 @@ function handle_integrations() {
 			
 			const map = new google.maps.Map(document.getElementById("map-preview"), {
 				center: latlng,
-				zoom: 8,
+				zoom: 12,
 			});
 			
 			new google.maps.Marker({
@@ -523,9 +523,9 @@ function tom_select() {
 		// Check tom select elements first
 		let next_sibling = select_field.nextElementSibling;
 		if (next_sibling && next_sibling.classList.contains('ts-wrapper')) {
-			next_sibling.remove();
+			select_field.tomselect.destroy();
 		}
 
-		new TomSelect(select_field, settings);
+		let control = new TomSelect(select_field, settings);
 	});
 }

@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class ThemeFieldBuilder
+class TwthemeFieldBuilder
 {
 	public static function display_field($field = [], $args = [])
 	{
@@ -17,7 +17,7 @@ class ThemeFieldBuilder
 			$final_data['full_html'] = [];
 			$final_data['label'] = [];
 			$final_data['field'] = [];
-			$repeater_fields = ThemeFieldBuilder::repeater_field($field, $args);
+			$repeater_fields = TwthemeFieldBuilder::repeater_field($field, $args);
 			
 			if (is_array($repeater_fields)) {
 				foreach ($repeater_fields as $fields_group_key => $fields) {
@@ -105,14 +105,14 @@ class ThemeFieldBuilder
 
 						$value = !empty($option_namevalue) ? $option_namevalue : $value;
 						$raw_value = !empty($option_namevalue) ? $option_namevalue : $value;
-						$value = ThemeFieldBuilder::data_filter($value, $field['data-filter']);
+						$value = TwthemeFieldBuilder::data_filter($value, $field['data-filter']);
 
 						break;
 					}
 			}
 		} else {
 			if (!empty($field['data-filter'])) {
-				$value = ThemeFieldBuilder::data_filter($value, $field['data-filter']);
+				$value = TwthemeFieldBuilder::data_filter($value, $field['data-filter']);
 			}
 		}
 
@@ -352,7 +352,7 @@ class ThemeFieldBuilder
 			$repeater_field = [];
 			foreach ($field['fields'] as $repeater_key => $options) {
 				foreach ($options as $key => $option) {
-					$field_rendered = ThemeFieldBuilder::display_field($option, $args);
+					$field_rendered = TwthemeFieldBuilder::display_field($option, $args);
 					$repeater_field[$repeater_key][$key]['full_html'] = $field_rendered['full_html'];
 					$repeater_field[$repeater_key][$key]['label'] = $field_rendered['label'];
 					$repeater_field[$repeater_key][$key]['field'] = $field_rendered['field'];
@@ -481,7 +481,7 @@ class ThemeFieldBuilder
 						$html_tabs_content .= '<tr class="headline">';
 						$html_tabs_content .= '<td colspan="2" style="padding: 0;"><hr /><h3>' . $form_field_data['label'] . '</h3></td>';
 					} else {
-						$form_field = ThemeFieldBuilder::display_field($form_field_data);
+						$form_field = TwthemeFieldBuilder::display_field($form_field_data);
 						
 						// Display Group Fields
 						if (is_array($form_field['label'])) {

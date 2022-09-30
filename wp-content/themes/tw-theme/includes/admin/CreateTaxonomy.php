@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class TwthemeCreatePostType
+class TwthemeCreateTaxonomy
 {
 	public function __construct($post_type, $title, $args, $fields)
 	{

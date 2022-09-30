@@ -33,7 +33,7 @@ include_theme_files(
 	[
 		'helper/helper',
 		'ThemeOptionsPage',
-		'ThemeFieldBuilder',
+		'FieldBuilder',
 		'CreatePostType',
 	],
 	'includes/admin/'
@@ -41,5 +41,5 @@ include_theme_files(
 
 if (is_admin()) {
 	new ThemeOptionsPage();
-	new ThemeFieldBuilder();
+	new TwthemeFieldBuilder();
 }
