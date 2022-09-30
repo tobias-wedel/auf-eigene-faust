@@ -33,7 +33,7 @@ function harbor_register_post_type_args()
 		'rewrite' => ['slug' => 'hafen', 'with_front' => true],
 		'show_in_rest' => false,
 		'query_var'=> true,
-		'taxonomies' => array('post_tag'),
+		'taxonomies' => array('post_tag', 'category'),
 	];
 }
 
