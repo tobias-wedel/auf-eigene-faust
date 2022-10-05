@@ -262,7 +262,7 @@ class TwthemeFieldBuilder
 				$values = !empty($values) ? esc_attr(implode(',', $values)) : '';
 				$multiple = $field['type'] == 'gallery' ? 'multiple' : '';
 				
-				$final_data['field'] .= '</ul></div>';
+				$final_data['field'] .= '</ul>';
 				$final_data['field'] .= '<a id="' . $field['id'] . '_image_button" data-uploader_title="Bilder auswählen" data-uploader_button_text="Bilder wählen" ' . $multiple . ' class="image_upload_button button">Bild(er) wählen</a>';
 				$final_data['field'] .= '<input id="' . $field['id'] . '" class="image_data_field" type="hidden" ' . $name . ' value="' . $values . '">';
 				break;
@@ -363,14 +363,31 @@ class TwthemeFieldBuilder
 		}
 	}
 	
-	public static function output($fields, $values_key, $tabs = true)
+	public static function get_values($page_type, $values_key, $tab_id)
 	{
+		switch ($page_type) {
+			case 'posttype':
+				$values = is_numeric($values_key) ? get_post_meta($values_key, $tab_id, true) : '';
+				break;
+			case 'taxonomy':
+				$values = !empty($values_key) ? get_term_meta($values_key, $tab_id, true) : '';
+				break;
+			case 'option':
+				$values = get_option($values_key)[$tab_id];
+				break;
+		}
+		
+		return $values;
+	}
+	
+	public static function output($fields, $page_type, $values_key, $tabs = true, $table = true)
+	{
+		global $pagenow;
+		
 		$html = '';
 		$html_tabs_menu = '';
 		$html_tabs_content = '';
 		
-		
-		// Build the tabs HTML
 		foreach ($fields as $key => $tab) {
 			$tab_id = $tab['id'];
 			$tab_content_style = $key === array_key_first($fields) ? 'display: block;' : 'display: none;';
@@ -378,21 +395,11 @@ class TwthemeFieldBuilder
 		
 			$html_tabs_menu .= '<button data-tabid="' . $tab_id . '" class="tablink ' . $tab_menu_class . '" onclick="openTab(event, \'' . $tab_id . '\')">' . $tab['title'] . '</button>';
 			$html_tabs_content .= '<div id="' . $tab_id . '" class="tabcontent" style="' . $tab_content_style . '">';
-			$html_tabs_content .= '<h3>' . $tab['title'] . '</h3>';
-		
-			$html_tabs_content .= '<table class="form-table">';
 			
-			// Get entries from database
-			// If the values_key is numeric its an post ID
-			if (is_numeric($values_key)) {
-				$values = get_post_meta($values_key, $tab['id'], true);
-			}
-			// If not its an option
-			else {
-				$values = get_option($values_key)[$tab['id']];
-				$tab_id = $values_key . '['.$tab_id.']';
-			}
+			$html_tabs_content .= '<' . ($table ? 'table' : 'div') . ' class="form-table ' . sanitize_title($pagenow) . '">';
+			$html_tabs_content .= ($table ? '<tr><td colspan="2" style="padding: 0;">' : '') . '<h3>' . $tab['title'] . '</h3>' . ($table ? '</td></tr>' : '');
 			
+			$values = TwthemeFieldBuilder::get_values($page_type, $values_key, $tab_id);
 			
 			if (!empty($tab['fields'])) {
 				foreach ($tab['fields'] as $field) {
@@ -426,7 +433,7 @@ class TwthemeFieldBuilder
 								array_push($field['fields'], $field['fields'][0]);
 							}
 						}
-
+	
 						foreach ($field['fields'] as $repeater_group_key => $repeater_group) {
 							foreach ($repeater_group as $repeater_field_key => $repeater_field) {
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['value'] = isset($repeater_field['id']) && !empty($values[$field['name']][$repeater_group_key][$repeater_field['id']]) ? $values[$field['name']][$repeater_group_key][$repeater_field['id']] : '';
@@ -478,57 +485,65 @@ class TwthemeFieldBuilder
 		
 					// Check for headline or form field
 					if ($form_field_data['type'] == 'headline') {
-						$html_tabs_content .= '<tr class="headline">';
-						$html_tabs_content .= '<td colspan="2" style="padding: 0;"><hr /><h3>' . $form_field_data['label'] . '</h3></td>';
+						$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . ' class="headline">';
+						$html_tabs_content .= '<' . ($table ? 'td colspan="2"' : 'div') . ' style="padding: 0;"><hr /><h3>' . $form_field_data['label'] . '</h3></' . ($table ? 'td' : 'div') . '>';
+						$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
 					} else {
 						$form_field = TwthemeFieldBuilder::display_field($form_field_data);
+							
+						$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . ' class="form-field">';
 						
 						// Display Group Fields
 						if (is_array($form_field['label'])) {
-							$html_tabs_content .= '<tr><td colspan="2" class="repeater-groups-holder"><a class="add-block button btn">+</a><div class="drag-fields">';
+							$html_tabs_content .= '<' . ($table ? 'td colspan="2"' : 'div') . ' class="repeater-groups-holder"><a class="add-block button btn">+</a><div class="drag-fields">';
 							foreach ($form_field['label'] as $group_key => $group) {
-								$html_tabs_content .= '<div class="repeater-group"><div class="table-wrapper"><table data-repeatergroupkey="' . $group_key . '"><tr>';
+								$html_tabs_content .= '<div class="repeater-group"><div class="table-wrapper"><' . ($table ? 'table' : 'div') . ' data-repeatergroupkey="' . $group_key . '"><' . ($table ? 'tr' : 'div') . '>';
 								$group_count = count($group);
 								foreach ($group as $field_key => $field) {
 									if (!empty($form_field['label'][$group_key][$field_key])) {
-										$html_tabs_content .= '<th>';
+										$html_tabs_content .= '<' . ($table ? 'th' : 'div') . '>';
 										
 										if ($field_key == '0') {
 											$html_tabs_content .= '<div class="action-bar"><div class="action-bar-left"><span class="small drag dashicons dashicons-editor-insertmore"></span></div><div class="action-bar-right"><span class="small dashicons dashicons-trash"></span></div></div>';
 										}
 										
 										$html_tabs_content .= $form_field['label'][$group_key][$field_key];
-										$html_tabs_content .= '</th>';
+										$html_tabs_content .= '</' . ($table ? 'th' : 'div') . '>';
 									}
 									if (!empty($form_field['field'][$group_key][$field_key])) {
-										$html_tabs_content .= '<td>' . $form_field['field'][$group_key][$field_key] . '</td>';
+										$html_tabs_content .= '<' . ($table ? 'td' : 'div') . '>' . $form_field['field'][$group_key][$field_key] . '</' . ($table ? 'td' : 'div') . '>';
 									}
-									$html_tabs_content .= '</tr>';
+									$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
 									if (($field_key + 1) != $group_count) {
-										$html_tabs_content .= '<tr>';
+										$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . '>';
 									}
 								}
-								$html_tabs_content .= '</tr></table></div></div>';
+								$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '></' . ($table ? 'table' : 'div') . '></div></div>';
 							}
-							$html_tabs_content .= '</div></td></tr>';
+							$html_tabs_content .= '</div>';
+							$html_tabs_content .= '</' . ($table ? 'td' : 'div') . '>';
+							$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
 						} else {
 							if (!empty($form_field['label'])) {
-								$html_tabs_content .= '<th>' . $form_field['label'] . '</th>';
+								$html_tabs_content .= ($table ? '<th>' : '') . $form_field['label'] . ($table ? '</th>' : '');
 							}
 							if (!empty($form_field['field'])) {
-								$html_tabs_content .= '<td>' . $form_field['field'] . '</td>';
+								$html_tabs_content .= ($table ? '<td>' : '') . $form_field['field'] . ($table ? '</td>' : '');
 							}
 						}
+						
+						$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
 					}
-					$html_tabs_content .= '</tr>';
 				}
 			}
-			$html_tabs_content .= '</table>';
-			$html_tabs_content .= '</div>';
+			
+			$html_tabs_content .= '</' . ($table ? 'table' : 'div') . '>';
+			
+			$html_tabs_content .= '</div>'; // tabcontent
 		}
 		
 		
-		$html .= '<div class="tw-page-wrapper">';
+		$html .= '<div class="tw-page-wrapper ' . sanitize_title($pagenow) . '">';
 		
 		
 		if ($tabs === true) {
@@ -538,6 +553,7 @@ class TwthemeFieldBuilder
 		}
 		
 		$html .= $html_tabs_content;
+		
 		$html .= '</div>';
 		
 		return $html;

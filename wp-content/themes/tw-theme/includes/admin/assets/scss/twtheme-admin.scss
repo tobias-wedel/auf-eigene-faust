@@ -1,5 +1,14 @@
 .tw-page-wrapper {
 	margin-top: 10px;
+
+	&.edit-tags-php,
+	&.term-php {
+		label + div,
+		th + td > * {
+			max-width: 95%;
+		}
+	}
+
 	.tablink {
 		margin-right: 2px;
 		border: 0;
@@ -20,12 +29,12 @@
 	}
 
 	.form-table {
-		th {
+		&:not(.term-php) th {
 			width: 160px;
 			padding: 10px 10px 10px 0;
 		}
 
-		td {
+		&:not(.term-php) td {
 			padding: 5px;
 		}
 

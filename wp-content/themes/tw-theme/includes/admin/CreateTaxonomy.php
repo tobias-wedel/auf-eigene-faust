@@ -5,92 +5,68 @@ defined('ABSPATH') || exit;
 
 class TwthemeCreateTaxonomy
 {
-	public function __construct($post_type, $title, $args, $fields)
+	public function __construct($taxonomy_name, $posttype, $args, $fields)
 	{
-		$this->post_type = $post_type;
-		$this->title = $title;
+		$this->taxonomy_name = $taxonomy_name;
+		$this->posttype = $posttype;
 		$this->args = $args;
 		$this->fields = $fields;
 		
-		add_action('init', [$this, 'register_post_type']);
-		add_action('add_meta_boxes', [$this, 'add_meta_box']);
-		add_action('save_post', [$this, 'save_post']);
+		add_action('init', [$this, 'register_taxonomy']);
+		
+		if (!is_array($fields) || empty($fields)) {
+			return;
+		}
+		
+		// Add fields
+		add_action($taxonomy_name . '_add_form_fields', [$this, 'twtheme_add_form_fields']); // Add new
+		add_action($taxonomy_name . '_edit_form_fields', [$this, 'twtheme_edit_form_fields'], 10, 2); // Edit
+		
+		// Save fields
+		add_action('created_' . $taxonomy_name, [$this, 'save_term_fields']);
+		add_action('edited_' . $taxonomy_name, [$this, 'save_term_fields']);
 	}
 	
-	public function register_post_type()
+	public function register_taxonomy()
 	{
-		register_post_type($this->post_type, $this->args);
+		register_taxonomy($this->taxonomy_name, $this->posttype, $this->args);
 	}
 	
-	public function add_meta_box()
+	public function twtheme_add_form_fields($taxonomy)
 	{
-		add_meta_box('twtheme_' . $this->post_type . '_page_options', $this->title, [$this, 'metabox_fields'], $this->post_type, 'normal', 'high', null);
-	}
-	
-	public function metabox_fields($post)
-	{
-		$html = '';
-		$html_tabs_menu = '';
-		$html_tabs_content = '';
 		
 		// Add a nonce field so we can check for it later.
-		wp_nonce_field('twtheme_' . $this->post_type . '_data', '_twtheme_' . $this->post_type . '_data_nonce');
+		wp_nonce_field('twtheme_' . $this->taxonomy_name . '_data', '_twtheme_' . $this->taxonomy_name . '_data_nonce');
 		
-		echo TwthemeFieldBuilder::output($this->fields, $post->ID);
+		echo TwthemeFieldBuilder::output($this->fields, 'taxonomy', '', false, false);
 	}
 	
-	public function save_post($post_id)
+	public function twtheme_edit_form_fields($term, $taxonomy)
 	{
-		global $pagenow;
+		// Close default term table
+		echo '</table>';
 		
-		// Bail out on creating a new post
-		if ($pagenow === 'post-new.php') {
-			return;
-		}
+		// Add a nonce field so we can check for it later.
+		wp_nonce_field('twtheme_' . $this->taxonomy_name . '_data', '_twtheme_' . $this->taxonomy_name . '_data_nonce');
 		
-		// Bail out if this is an autosave
-		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-			return;
-		}
+		echo TwthemeFieldBuilder::output($this->fields, 'taxonomy', $term->term_id, false, true);
 		
-		if (isset($_POST['_inline_edit']) && wp_verify_nonce($_POST['_inline_edit'], 'inlineeditnonce')) {
-			return;
-		}
-		
-		// Bail out if this is not an harbor item
-		if (!isset($_REQUEST['post_type']) || $this->post_type !== $_REQUEST['post_type']) {
-			return;
-		}
-		
-		// Bail out on delete
-		if (isset($_GET['action']) && $_GET['action'] == 'trash') {
-			return;
-		}
-		
+		// Open the default term table (This will be empty)
+		echo '<table>';
+	}
+	
+	public function save_term_fields($term_id)
+	{
 		// Verify nonce
-		if (isset($_REQUEST['_twtheme_' . $this->post_type . '_data_nonce']) && !wp_verify_nonce($_REQUEST['_twtheme_' . $this->post_type . '_data_nonce'], 'twtheme_' . $this->post_type . '_data')) {
+		if (isset($_REQUEST['_twtheme_' . $this->taxonomy_name . '_data_nonce']) && !wp_verify_nonce($_REQUEST['_twtheme_' . $this->taxonomy_name . '_data_nonce'], 'twtheme_' . $this->taxonomy_name . '_data')) {
 			return;
 		}
 		
 		// Save into DB
 		foreach ($this->fields as $tab) {
 			if (!empty($tab['fields'])) {
-				update_post_meta($post_id, $tab['id'], $_POST[$tab['id']], false);
+				update_term_meta($term_id, $tab['id'], $_POST[$tab['id']]);
 			}
 		}
-	}
-	
-	public function create_taxonomy($name, $posttype, $args)
-	{
-		$this->taxonomy_name = $name;
-		$this->taxonomy_posttype = $posttype;
-		$this->taxonomy_args = $args;
-		
-		add_action('init', [$this, 'register_taxonomy']);
-	}
-	
-	public function register_taxonomy()
-	{
-		register_taxonomy($this->taxonomy_name, $this->taxonomy_posttype, $this->taxonomy_args);
 	}
 }

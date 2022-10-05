@@ -3,8 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-$harbor = new TwthemeCreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), harbor_fields());
-$harbor->create_taxonomy('destination', 'harbor', harbor_taxonomy_args());
+$harbor_posttype = new TwthemeCreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), harbor_fields());
 
 function harbor_register_post_type_args()
 {
@@ -33,30 +32,6 @@ function harbor_register_post_type_args()
 		'show_in_rest' => false,
 		'query_var'=> true,
 		'taxonomies' => array('post_tag'),
-	];
-}
-
-function harbor_taxonomy_args()
-{
-	return [
-		'hierarchical' => true,
-		'labels' => [
-			'name' => 'Destination',
-			'singular_name' => 'Destination',
-			'search_items' =>  'Suche Destination',
-			'all_items' => 'Alle Destinationen',
-			'parent_item' => 'Übergeordnete Destination',
-			'edit_item' => 'Destination bearbeiten',
-			'update_item' => 'Destination aktualisieren',
-			'add_new_item' => 'Neue Destination erstellen',
-			'new_item_name' => 'Neuer Titel',
-			'menu_name' => 'Destinationen',
-		],
-		'show_ui' => true,
-		'show_in_rest' => true,
-		'show_admin_column' => true,
-		'query_var' => true,
-		'rewrite' => array( 'slug' => 'destination' ),
 	];
 }
 

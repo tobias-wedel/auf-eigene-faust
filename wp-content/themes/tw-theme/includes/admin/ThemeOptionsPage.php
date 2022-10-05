@@ -165,14 +165,13 @@ class ThemeOptionsPage
 			echo '</div>';
 		}
 
-
 		echo '<div class="wrap">';
 		echo '	<h1>TW Theme Einstellungen</h1>';
 		echo '	<form method="post" action="options.php">';
 		echo '		<div id="poststuff">';
 		echo '			<div class="postbox">';
 		echo '				<div class="inside">';
-		echo TwthemeFieldBuilder::output($this->form_tabs(), 'twtheme');
+		echo TwthemeFieldBuilder::output($this->form_tabs(), 'twtheme', 'twtheme');
 		echo '				</div>';
 		echo '			</div>';
 		echo '		</div>';

@@ -6,6 +6,7 @@ defined('ABSPATH') || exit();
 include_theme_files(
 	[
 		'harbor',
+		'harbor-destination',
 	],
 	'includes/posttypes/'
 );

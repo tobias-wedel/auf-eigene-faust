@@ -29,14 +29,10 @@ class TwthemeCreatePostType
 	
 	public function metabox_fields($post)
 	{
-		$html = '';
-		$html_tabs_menu = '';
-		$html_tabs_content = '';
-		
 		// Add a nonce field so we can check for it later.
 		wp_nonce_field('twtheme_' . $this->post_type . '_data', '_twtheme_' . $this->post_type . '_data_nonce');
 		
-		echo TwthemeFieldBuilder::output($this->fields, $post->ID);
+		echo TwthemeFieldBuilder::output($this->fields, 'posttype', $post->ID);
 	}
 	
 	public function save_post($post_id)
@@ -78,19 +74,5 @@ class TwthemeCreatePostType
 				update_post_meta($post_id, $tab['id'], $_POST[$tab['id']], false);
 			}
 		}
-	}
-	
-	public function create_taxonomy($name, $posttype, $args)
-	{
-		$this->taxonomy_name = $name;
-		$this->taxonomy_posttype = $posttype;
-		$this->taxonomy_args = $args;
-		
-		add_action('init', [$this, 'register_taxonomy']);
-	}
-	
-	public function register_taxonomy()
-	{
-		register_taxonomy($this->taxonomy_name, $this->taxonomy_posttype, $this->taxonomy_args);
 	}
 }

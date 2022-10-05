@@ -35,6 +35,7 @@ include_theme_files(
 		'ThemeOptionsPage',
 		'FieldBuilder',
 		'CreatePostType',
+		'CreateTaxonomy',
 	],
 	'includes/admin/'
 );
