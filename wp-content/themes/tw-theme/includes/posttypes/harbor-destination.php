@@ -42,6 +42,15 @@ function harbor_destination_fields()
 					'type' => 'image',
 					'label' => 'Bild',
 				],
+				[
+					'id' => 'description',
+					'name' => 'description',
+					'type' => 'editor',
+					'label' => 'SEO Text',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
 			]
 		]
 	];
