@@ -3,14 +3,13 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-add_action('admin_enqueue_scripts', 'admin_scripts');
-function admin_scripts($hook)
+function twtheme_scripts($type)
 {
-	// Check allowed hooks and post_type
-	if ('toplevel_page_twtheme' != $hook && get_current_post_type() != 'harbor') {
-		return;
-	}
+	add_action('admin_enqueue_scripts', 'twtheme_admin_scripts');
+}
 
+function twtheme_admin_scripts($hook)
+{
 	wp_enqueue_style('twtheme-admin-css', TWTHEME__ENGINE_PATH . '/assets/css/twtheme-admin.css', [], TWTHEME__VERSION, 'all');
 	wp_enqueue_script('twtheme-sortable', TWTHEME__ENGINE_PATH . '/assets/js/sortable.min.js', [], TWTHEME__VERSION, true);
 	wp_enqueue_script('twtheme-admin', TWTHEME__ENGINE_PATH . '/assets/js/twtheme-admin.js', [], TWTHEME__VERSION, true);
@@ -32,7 +31,7 @@ function admin_scripts($hook)
 include_theme_files(
 	[
 		'helper/helper',
-		'ThemeOptionsPage',
+	//	'ThemeOptionsPage',
 		'FieldBuilder',
 		'CreatePostType',
 		'CreateTaxonomy',

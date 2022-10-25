@@ -15,14 +15,27 @@ class TwthemeCreateOptionsPage
 	
 	public function __construct($page_title, $menu_title, $capability, $menu_slug, $icon_url, $position, $fields)
 	{
-		$this->init();
+		$this->filter_post_data();
+		
+		$this->page_title = $page_title;
+		$this->menu_title = $menu_title;
+		$this->capability = $capability;
+		$this->menu_slug = $menu_slug;
+		$this->icon_url = $icon_url;
+		$this->position = $position;
+		$this->fields = $fields;
+		
 		add_action('admin_menu', [$this, 'add_theme_page']);
 		add_action('admin_init', [$this, 'page_init']);
 	}
 	
-	public function init($data)
+	public function filter_post_data($post_data = [])
 	{
-		return $data;
+		if (empty($_POST) || !is_admin() || !current_user_can('manage-options')) {
+			return;
+		}
+		
+		return apply_filters('twtheme_options_post_data', $_POST);
 	}
 	
 	/**
@@ -39,6 +52,9 @@ class TwthemeCreateOptionsPage
 	 */
 	public function create_option_page()
 	{
+		$fields = $this->fields;
+		$slug = $this->menu_slug;
+		
 		if (isset($_REQUEST['settings-updated']) && $_REQUEST['settings-updated'] === 'true') {
 			echo '<div class="updated fade">';
 			echo '	<p><strong>Einstellungen aktualisiert</strong></p>';
@@ -51,12 +67,12 @@ class TwthemeCreateOptionsPage
 		echo '		<div id="poststuff">';
 		echo '			<div class="postbox">';
 		echo '				<div class="inside">';
-		echo TwthemeFieldBuilder::output($this->$fields, 'option', $this->menu_slug);
+		echo TwthemeFieldBuilder::output($fields, 'option', $slug);
 		echo '				</div>';
 		echo '			</div>';
 		echo '		</div>';
-		settings_fields($this->menu_slug);
-		do_settings_sections($this->menu_slug);
+		settings_fields($slug);
+		do_settings_sections($slug);
 		submit_button();
 		echo '	</form>';
 		echo '</div>';

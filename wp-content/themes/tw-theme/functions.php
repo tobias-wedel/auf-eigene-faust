@@ -29,8 +29,8 @@ include_theme_files(
 		'shortcodes/shortcodes',
 		'livecanvas/livecanvas',
 		'engine/engine',
-		'admin/admin',
 		'posttypes/posttypes',
+		'options/options',
 	],
 	'includes/'
 );

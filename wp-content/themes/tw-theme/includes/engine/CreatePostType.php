@@ -15,6 +15,8 @@ class TwthemeCreatePostType
 		add_action('init', [$this, 'register_post_type']);
 		add_action('add_meta_boxes', [$this, 'add_meta_box']);
 		add_action('save_post', [$this, 'save_post']);
+		
+		twtheme_scripts($post_type);
 	}
 	
 	public function register_post_type()

@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class ThemeOptionsPage
+class TwthemeOptionsPage
 {
 	/**
 	 * Holds the values to be used in the fields callbacks
@@ -32,7 +32,7 @@ class ThemeOptionsPage
 	public function init()
 	{
 		// Optimize Post Data to make it valid for the slider JS
-		if (!empty($_POST) && is_admin() && isset($_GET['page']) && $_GET['page'] == 'twtheme-options') {
+		if (!empty($_POST) && is_admin() && isset($_GET['page']) && $_GET['page'] == 'twtheme') {
 			// Make int
 			$_POST['twtheme']['slider']['perPage'] = $_POST['twtheme']['slider']['perPage'] * 1;
 			$_POST['twtheme']['slider']['perMove'] = $_POST['twtheme']['slider']['perMove'] * 1;
@@ -192,3 +192,5 @@ class ThemeOptionsPage
 		);
 	}
 }
+
+new TwthemeOptionsPage();

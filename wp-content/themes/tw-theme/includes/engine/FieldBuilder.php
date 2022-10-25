@@ -61,7 +61,7 @@ class TwthemeFieldBuilder
 		if (isset($field['integration']['tool'])) {
 			$data_integration = json_encode($field['integration']);
 				
-			if ($field['integration']['tool'] == 'gmaps') {
+			if ($field['integration']['tool'] == 'gmaps' && !empty(TWTHEME__OPTIONS['integration']['gmaps-api-key'])) {
 				wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=weekly', '', '', true);
 				
 				if ($field['integration']['service'] == 'geocoding') {
@@ -373,7 +373,7 @@ class TwthemeFieldBuilder
 				$values = !empty($values_key) ? get_term_meta($values_key, $tab_id, true) : '';
 				break;
 			case 'option':
-				$values = get_option($values_key)[$tab_id];
+				$values = !empty($values_key) ? get_option($values_key)[$tab_id] : '';
 				break;
 		}
 		
@@ -404,6 +404,7 @@ class TwthemeFieldBuilder
 			}
 			
 			$values = TwthemeFieldBuilder::get_values($page_type, $values_key, $tab_id);
+			$tab_id = $page_type == 'option' ? $values_key . '['.$tab_id.']' : $tab_id;
 			
 			if (!empty($tab['fields'])) {
 				foreach ($tab['fields'] as $field) {

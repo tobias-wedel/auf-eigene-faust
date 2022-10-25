@@ -1,5 +1,8 @@
 <?php
 
+// Exit if accessed directly.
+defined('ABSPATH') || exit();
+
 function image_upload_meta_box($field_name = '', $value= '')
 {
 	$image_thumb = '';
