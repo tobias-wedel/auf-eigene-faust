@@ -154,7 +154,12 @@ function harbor_fields()
 					'label' => 'Anlegestellen',
 					'fields' => [
 						[
-							
+							[
+								'id' => 'name',
+								'name' => 'name',
+								'type' => 'text',
+								'label' => 'Name'
+							],
 							[
 								'id' => 'address',
 								'name' => 'address',
