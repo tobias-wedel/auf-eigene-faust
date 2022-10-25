@@ -106,7 +106,7 @@ function harbor_fields()
 			],
 		],
 		[
-			'title' => 'Über den Hafen',
+			'title' => 'Der Hafen',
 			'id' => 'about',
 			'fields' => [
 				[
@@ -115,6 +115,7 @@ function harbor_fields()
 					'type' => 'gallery',
 					'label' => 'Galerie',
 				],
+				
 				[
 					'id' => 'address',
 					'name' => 'address',
@@ -134,6 +135,45 @@ function harbor_fields()
 						'service' => 'geocoding',
 						'source' => 'address'
 					]
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Anlegestellen',
+				],
+				[
+					'id' => 'landing-stages',
+					'name' => 'landing-stages',
+					'type' => 'repeater',
+					'label' => 'Anlegestellen',
+					'fields' => [
+						[
+							
+							[
+								'id' => 'address',
+								'name' => 'address',
+								'type' => 'text',
+								'label' => 'Adresse'
+							],
+							[
+								'id' => 'address-coords',
+								'name' => 'address-coords',
+								'type' => 'text',
+								'readonly' => true,
+								'editable' => true,
+								'label' => 'Koordinaten',
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'source' => 'address'
+								]
+							],
+						]
+					]
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Beschreibungen',
 				],
 				[
 					'id' => 'text',

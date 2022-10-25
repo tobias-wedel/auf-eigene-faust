@@ -149,7 +149,6 @@ class ThemeOptionsPage
 				],
 			],
 		];
-		
 
 		return $form_data;
 	}
