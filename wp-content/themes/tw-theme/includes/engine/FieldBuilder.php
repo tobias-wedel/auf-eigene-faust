@@ -397,7 +397,11 @@ class TwthemeFieldBuilder
 			$html_tabs_content .= '<div id="' . $tab_id . '" class="tabcontent" style="' . $tab_content_style . '">';
 			
 			$html_tabs_content .= '<' . ($table ? 'table' : 'div') . ' class="form-table ' . sanitize_title($pagenow) . '">';
-			$html_tabs_content .= ($table ? '<tr><td colspan="2" style="padding: 0;">' : '') . '<h3>' . $tab['title'] . '</h3>' . ($table ? '</td></tr>' : '');
+			if (isset($tab['hide-title']) && $tab['hide-title'] === true) {
+				$html_tabs_content .= ($table ? '<tr><td colspan="2" style="padding-top: 15px;"></td></tr>' : '');
+			} else {
+				$html_tabs_content .= ($table ? '<tr><td colspan="2" style="padding: 0;">' : '') . '<h3>' . $tab['title'] . '</h3>' . ($table ? '</td></tr>' : '');
+			}
 			
 			$values = TwthemeFieldBuilder::get_values($page_type, $values_key, $tab_id);
 			

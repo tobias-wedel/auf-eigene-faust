@@ -108,6 +108,7 @@ function harbor_fields()
 		[
 			'title' => 'Der Hafen',
 			'id' => 'about',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -116,6 +117,10 @@ function harbor_fields()
 					'label' => 'Headline',
 					'placeholder' => 'Hafen %s',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Der Hafen',
 				],
 				[
 					'id' => 'gallery',
@@ -219,6 +224,7 @@ function harbor_fields()
 		[
 			'title' => 'Mobilität',
 			'id' => 'mobility',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -227,6 +233,10 @@ function harbor_fields()
 					'label' => 'Headline',
 					'placeholder' => 'Unterwegs in %s',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Mobilität'
 				],
 				[
 					'id' => 'intro',
@@ -323,6 +333,7 @@ function harbor_fields()
 		[
 			'title' => 'Highlights',
 			'id' => 'highlights',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -331,6 +342,10 @@ function harbor_fields()
 					'label' => 'Headline',
 					'placeholder' => '%s Seheswürdigkeiten',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Highlights'
 				],
 				[
 					'id' => 'list',
@@ -403,6 +418,7 @@ function harbor_fields()
 		[
 			'title' => 'Aktivitäten',
 			'id' => 'activity',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -414,7 +430,7 @@ function harbor_fields()
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Orte'
+					'label' => 'Aktiviäten'
 				],
 				[
 					'id' => 'list',
@@ -449,20 +465,21 @@ function harbor_fields()
 			],
 		],
 		[
-			'title' => 'Angebote',
+			'title' => 'Anbieter',
 			'id' => 'locals',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
 					'name' => 'headline',
 					'type' => 'text',
 					'label' => 'Headline',
-					'placeholder' => 'Lokale Angebote in %s',
+					'placeholder' => 'Lokale Anbieter in %s',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Lokale Angebote'
+					'label' => 'Lokale Anbieter'
 				],
 				[
 					'id' => 'list',
@@ -543,6 +560,7 @@ function harbor_fields()
 		[
 			'title' => 'FAQ',
 			'id' => 'faq',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -585,6 +603,7 @@ function harbor_fields()
 		[
 			'title' => 'Affiliates',
 			'id' => 'affiliates',
+			'hide-title' => true,
 			'fields' => [
 				[
 					'id' => 'headline',
@@ -593,6 +612,15 @@ function harbor_fields()
 					'label' => 'Headline',
 					'placeholder' => 'Jetzt in %s buchen',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+				],
+				[
+					'id' => 'intro',
+					'name' => 'intro',
+					'type' => 'editor',
+					'label' => 'Beschreibung',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
 				],
 				[
 					'type' => 'headline',
