@@ -115,7 +115,7 @@ function harbor_fields()
 					'name' => 'headline',
 					'type' => 'text',
 					'label' => 'Headline',
-					'placeholder' => 'Hafen %s',
+					'placeholder' => 'Der Kreuzfahrthafen %s',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[
@@ -231,7 +231,7 @@ function harbor_fields()
 					'name' => 'headline',
 					'type' => 'text',
 					'label' => 'Headline',
-					'placeholder' => 'Unterwegs in %s',
+					'placeholder' => 'Unterwegs in %s auf eigene Faust',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[
@@ -610,7 +610,7 @@ function harbor_fields()
 					'name' => 'headline',
 					'type' => 'text',
 					'label' => 'Headline',
-					'placeholder' => 'Jetzt in %s buchen',
+					'placeholder' => 'Landausflüge in %s buchen',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[
