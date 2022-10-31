@@ -311,6 +311,15 @@ function harbor_fields()
 					]
 				],
 				[
+					'id' => 'light-railroad',
+					'name' => 'light-railroad',
+					'type' => 'editor',
+					'label' => 'Bimmelbahn',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
 					'id' => 'metro',
 					'name' => 'metro',
 					'type' => 'editor',
