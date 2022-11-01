@@ -28,10 +28,9 @@ function twtheme_admin_scripts($hook)
 	]);
 }
 
-include_theme_files(
+twtheme_include_theme_files(
 	[
 		'helper/helper',
-	//	'ThemeOptionsPage',
 		'FieldBuilder',
 		'CreatePostType',
 		'CreateTaxonomy',

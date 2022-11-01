@@ -2,7 +2,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit();
 
-include_theme_files(
+twtheme_include_theme_files(
 	[
 		'support',
 		'livecanvas_custom_view',

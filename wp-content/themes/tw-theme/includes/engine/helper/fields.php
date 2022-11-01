@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit();
 
-function slider_config_fields()
+function twtheme_slider_config_fields()
 {
 	return [
 		[
