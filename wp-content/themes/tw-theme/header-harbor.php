@@ -41,13 +41,24 @@ $post_meta = $get_post_meta->get_post_meta();
 		</div>
 	</div>
 </header>
-<?php if ($prolog_data[0]) : ?>
+<?php
+$section_prolog = $get_post_meta->get_section('prolog');
+if ($section_prolog) : ?>
 <section id="einleitung">
 	<div class="container">
 		<?php if ($prolog_data[0]['prolog']) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
-				<?php echo wpautop($prolog_data[0]['prolog']); ?>
+				<?php
+				$gallery = '<div class="gallery">GALLERY</div>';
+				$prolog = wpautop($section_prolog['prolog']['value']);
+				
+				// Add gallery to prolog after first paragraph
+				if (!empty($section_prolog['gallery']['value'])) {
+					$prolog = preg_replace('/(.*?)\n/', '$1GALLERY', $prolog, 1);
+				}
+				
+				echo $prolog;?>
 			</div>
 		</div>
 		<?php endif; ?>

@@ -83,7 +83,13 @@ class TwthemeGetPostMeta
 			}
 		}
 		
-		//	print_rpre($data);
 		return $group_data;
+	}
+	
+	public function get_section($section_name)
+	{
+		$data = $this->full_post_meta;
+		
+		return $data['prolog'];
 	}
 }
