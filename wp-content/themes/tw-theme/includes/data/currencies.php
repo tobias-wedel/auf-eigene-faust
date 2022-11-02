@@ -1,4 +1,6 @@
 <?php
+// Exit if accessed directly.
+defined('ABSPATH') || exit();
 
 function data_currencies($key = null)
 {

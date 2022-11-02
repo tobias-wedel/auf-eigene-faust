@@ -13,7 +13,7 @@ class TwthemeFieldBuilder
 
 		$final_data = [];
 		
-		if ($field['type'] == 'repeater') {
+		if ($field['type'] == 'repeater' || $field['type'] == 'group') {
 			$final_data['full_html'] = [];
 			$final_data['label'] = [];
 			$final_data['field'] = [];

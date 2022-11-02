@@ -35,6 +35,7 @@ twtheme_include_theme_files(
 		'CreatePostType',
 		'CreateTaxonomy',
 		'CreateOptionsPage',
+		'GetData',
 	],
 	'includes/engine/'
 );

@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-$harbor_posttype = new TwthemeCreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), harbor_fields());
+$harbor_posttype = new TwthemeCreatePostType('harbor', 'Hafen Details', harbor_register_post_type_args(), twtheme_harbor_fields());
 
 function harbor_register_post_type_args()
 {
@@ -35,7 +35,7 @@ function harbor_register_post_type_args()
 	];
 }
 
-function harbor_fields()
+function twtheme_harbor_fields()
 {
 	return [
 		[
@@ -61,6 +61,7 @@ function harbor_fields()
 					'id' => 'country',
 					'name' => 'country',
 					'type' => 'select',
+					'group' => 'harbor-quick-infos',
 					'label' => 'Land',
 					'options' => [
 						[
@@ -74,6 +75,7 @@ function harbor_fields()
 					'id' => 'language',
 					'name' => 'language',
 					'type' => 'select',
+					'group' => 'harbor-quick-infos',
 					'multiple' => true,
 					'label' => 'Sprache(n)',
 					'options_from_data' => get_language_list()
@@ -82,6 +84,7 @@ function harbor_fields()
 					'id' => 'currency',
 					'name' => 'currency',
 					'type' => 'select',
+					'group' => 'harbor-quick-infos',
 					'label' => 'Währung',
 					'options' => [
 						[
@@ -95,12 +98,14 @@ function harbor_fields()
 					'id' => 'season',
 					'name' => 'season',
 					'type' => 'text',
+					'group' => 'harbor-quick-infos',
 					'label' => 'Beste Reisezeit'
 				],
 				[
 					'id' => 'visa',
 					'name' => 'visa',
 					'type' => 'text',
+					'group' => 'harbor-quick-infos',
 					'label' => 'Reisepass / Visum'
 				],
 			],
@@ -131,12 +136,14 @@ function harbor_fields()
 				[
 					'id' => 'address',
 					'name' => 'address',
+					'group' => 'gmaps',
 					'type' => 'text',
 					'label' => 'Adresse'
 				],
 				[
 					'id' => 'address-coords',
 					'name' => 'address-coords',
+					'group' => 'gmaps',
 					'type' => 'text',
 					'readonly' => true,
 					'editable' => true,
@@ -174,6 +181,7 @@ function harbor_fields()
 							[
 								'id' => 'address-coords',
 								'name' => 'address-coords',
+					'group' => 'gmaps',
 								'type' => 'text',
 								'readonly' => true,
 								'editable' => true,
@@ -393,6 +401,7 @@ function harbor_fields()
 							[
 								'id' => 'address-coords',
 								'name' => 'address-coords',
+					'group' => 'gmaps',
 								'type' => 'text',
 								'readonly' => true,
 								'editable' => true,
@@ -526,6 +535,7 @@ function harbor_fields()
 							[
 								'id' => 'address-coords',
 								'name' => 'address-coords',
+					'group' => 'gmaps',
 								'type' => 'text',
 								'readonly' => true,
 								'editable' => true,

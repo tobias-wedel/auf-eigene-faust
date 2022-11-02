@@ -1,4 +1,8 @@
-<?php function data_countries($key = null)
+<?php
+// Exit if accessed directly.
+defined('ABSPATH') || exit();
+
+function data_countries($key = null)
 {
 	$countries =  array(
 		'afg' => 'Afghanistan',
