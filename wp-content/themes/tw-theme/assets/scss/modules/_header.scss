@@ -1,0 +1,32 @@
+.cinematic {
+	height: 75vh;
+	min-height: 550px;
+	background-color: $primary;
+	display: flex;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
+
+	&::after {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 10;
+		background-color: rgba(0, 0, 0, 0.3);
+		content: '';
+	}
+
+	> img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		object-fit: cover;
+		object-position: center center;
+		z-index: -1;
+	}
+}

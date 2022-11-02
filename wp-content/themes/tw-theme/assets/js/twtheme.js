@@ -20,7 +20,7 @@ function set_current_viewport_on_body() {
 
 		// If the media_querie matches the current viewport set the data-size attr to body
 		if (media_querie.matches) {
-			$('body').setAttribute('data-size', breakpoint);
+			document.querySelector('body').setAttribute('data-size', breakpoint);
 		}
 	}
 }
@@ -98,12 +98,12 @@ smooth_anchor_scrolling();
  * Its useful for CSS calculating
  */
 function set_css_vars(element, name, breakpoint) {
-	let elements = document.querySelectorAll('[class*=calc_h]');
+	let elements = document.querySelectorAll('[class*=set-h]');
 
 	if (elements) {
 		elements.forEach(element => {
 			let element_classes = element.classList.value;
-			let calc_element = element_classes.match(/calc_h\[(.*?)\]/);
+			let calc_element = element_classes.match(/set-h\[(.*?)\]/);
 
 			calc_element = calc_element[1].split('|');
 
@@ -126,6 +126,54 @@ function set_css_vars(element, name, breakpoint) {
 		});
 	}
 }
+
+function scale_header() {
+	var scalable = document.querySelectorAll('.scale--js');
+	var margin = 40;
+	for (var i = 0; i < scalable.length; i++) {
+		var scalableContainer = scalable[i].parentNode;
+
+		console.log(scalable[i].getBoundingClientRect().width);
+		console.log(scalableContainer.getBoundingClientRect().width);
+
+		if (scalable[i].getBoundingClientRect().width < scalableContainer.getBoundingClientRect().width) {
+			return;
+		}
+
+		scalable[i].style.transform = 'scale(1)';
+		var scalableContainerWidth = scalableContainer.offsetWidth - margin;
+		var scalableWidth = scalable[i].offsetWidth;
+		scalable[i].style.transform = 'scale(' + scalableContainerWidth / scalableWidth + ')';
+		scalableContainer.style.height = scalable[i].getBoundingClientRect().height + 'px';
+	}
+}
+
+// Debounce by David Walsch
+// https://davidwalsh.name/javascript-debounce-function
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function () {
+		var context = this,
+			args = arguments;
+		var later = function () {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}
+
+var myScaleFunction = debounce(function () {
+	//scale_header();
+}, 100);
+
+//myScaleFunction();
+
+window.addEventListener('resize', myScaleFunction);
 
 document.addEventListener('DOMContentLoaded', function (event) {
 	set_current_viewport_on_body();

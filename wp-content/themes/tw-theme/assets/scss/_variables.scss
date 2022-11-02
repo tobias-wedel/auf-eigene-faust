@@ -1,14 +1,35 @@
 $white: #fff;
-$gray-100: #f8f9fa;
-$gray-200: #e9ecef;
-$gray-300: #dee2e6;
-$gray-400: #ced4da;
-$gray-500: #adb5bd;
-$gray-600: #6c757d;
-$gray-700: #495057;
-$gray-800: #343a40;
-$gray-900: #212529;
+$gray-100: #f7f6f0;
+$gray-200: #eaeae0;
+$gray-300: #dbdbd4;
+$gray-400: #9f9e9a;
+//$gray-500: #adb5bd;
+//$gray-600: #6c757d;
+//$gray-700: #495057;
+//$gray-800: #343a40;
+//$gray-900: #212529;
 $black: #000;
 
-$font-family-sans-serif: Barlow, Helvetica, sans-serif;
+$blue: #044559;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #d63384;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #198754;
+$teal: #20c997;
+$cyan: #3bd9d1;
+
+$display-font-sizes: (
+	1: 5rem,
+	2: 4.5rem,
+	3: 4rem,
+	4: 3.5rem,
+	5: 3rem,
+	6: 2.5rem,
+) !default;
+
+$font-family-sans-serif: 'Barlow', Helvetica, sans-serif;
 $headings-font-weight: 700;
+$display-font-weight: $headings-font-weight;

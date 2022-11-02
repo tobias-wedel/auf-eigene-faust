@@ -1,0 +1,26 @@
+h1 {
+	text-align: center;
+	max-width: 100%;
+	color: $white;
+	position: relative;
+	z-index: 20;
+
+	span:nth-child(1) {
+		display: inline-block;
+		font-size: clamp(5rem, 14vw, 16rem);
+		line-height: 1;
+
+		&.lg {
+			font-size: clamp(5rem, 10vw, 16rem);
+		}
+
+		&.xxl {
+			font-size: clamp(5rem, 8vw, 16rem);
+		}
+	}
+
+	span:nth-child(2) {
+		letter-spacing: 1rem;
+		display: block;
+	}
+}
