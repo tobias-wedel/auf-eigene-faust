@@ -1,0 +1,20 @@
+$utilities: map-merge(
+	$utilities,
+	(
+		'object-fit': (
+			responsive: true,
+			property: object-fit,
+			values: (
+				cover: cover,
+				contain: contain,
+			),
+		),
+		'object-position': (
+			responsive: true,
+			property: object-position,
+			values: (
+				center: center center,
+			),
+		),
+	)
+);

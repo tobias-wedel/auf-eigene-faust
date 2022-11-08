@@ -28,7 +28,13 @@ $display-font-sizes: (
 	4: 3.5rem,
 	5: 3rem,
 	6: 2.5rem,
-) !default;
+);
+
+$aspect-ratios: (
+	'1x1': 100%,
+	'16x9': calc(9 / 16 * 100%),
+	'16x11': calc(11 / 16 * 100%),
+);
 
 $font-family-sans-serif: 'Barlow', Helvetica, sans-serif;
 $headings-font-weight: 700;

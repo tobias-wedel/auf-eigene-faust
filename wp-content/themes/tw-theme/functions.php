@@ -31,6 +31,7 @@ twtheme_include_theme_files(
 		'engine/engine',
 		'posttypes/posttypes',
 		'options/options',
+		'plugins/plugins',
 	],
 	'includes/'
 );

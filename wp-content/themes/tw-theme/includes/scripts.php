@@ -28,11 +28,6 @@ function twtheme_wp_enqueue_scripts()
 	wp_add_inline_script('zenscroll-disable', "window.noZensmooth = true");
 	wp_enqueue_script('zenscroll', TWTHEME__PATH . '/assets/js/zenscroll-min.js', '', TWTHEME__VERSION);
 	
-	// SPLIDE
-	// If you use splide with shortcodes, it would be better to init the scripts from there!
-	wp_enqueue_style('splide', TWTHEME__PATH . '/assets/css/splide-core.min.css', '', TWTHEME__VERSION);
-	wp_enqueue_script('splide', TWTHEME__PATH . '/assets/js/splide.min.js', '', TWTHEME__VERSION);
-	
 	// FONT AWESOME
 	//wp_enqueue_script('fontawesome', TWTHEME__PATH.'/assets/fontawesome/js/fontawesome.min.js', '', TWTHEME__VERSION, true);
 	//wp_enqueue_script('fontawesome-thin', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/thin.min.js', '', TWTHEME__VERSION, true);

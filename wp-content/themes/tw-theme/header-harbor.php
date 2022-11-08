@@ -18,6 +18,8 @@ $affiliates_data = get_post_meta($post_id, 'affiliates');
 
 $get_post_meta = new TwthemeGetPostMeta($post_id);
 $post_meta = $get_post_meta->get_post_meta();
+
+$title = get_the_title($post_id);
 ?>
 
 <header class="cinematic">
@@ -36,7 +38,7 @@ $post_meta = $get_post_meta->get_post_meta();
 				}
 				
 				?>
-				<h1 class="text-uppercase display-1"><span class="<?= $title_class ?>"><?=get_the_title()?></span> <span class="display-5">auf eigene Faust</span></h1>
+				<h1 class="text-uppercase display-1"><span class="<?= $title_class ?>"><?= $title ?></span> <span class="display-5">auf eigene Faust</span></h1>
 			</div>
 		</div>
 	</div>
@@ -50,12 +52,12 @@ if ($section_prolog) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-				$gallery = '<div class="gallery">GALLERY</div>';
+				$gallery = do_shortcode('[splide images="' . $section_prolog['gallery']['value'] . '" thumbnails="true" title="Galerie über ' . $title . '" id="' . $title . '"]');
 				$prolog = wpautop($section_prolog['prolog']['value']);
 				
 				// Add gallery to prolog after first paragraph
 				if (!empty($section_prolog['gallery']['value'])) {
-					$prolog = preg_replace('/(.*?)\n/', '$1GALLERY', $prolog, 1);
+					$prolog = preg_replace('/(.*?)\n/', '$1' . $gallery, $prolog, 1);
 				}
 				
 				echo $prolog;?>
