@@ -328,6 +328,15 @@ function twtheme_harbor_fields()
 					]
 				],
 				[
+					'id' => 'tuk-tuk',
+					'name' => 'tuk-tuk',
+					'type' => 'editor',
+					'label' => 'Tuk-Tuk (Autorikscha)',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
+				[
 					'id' => 'metro',
 					'name' => 'metro',
 					'type' => 'editor',
