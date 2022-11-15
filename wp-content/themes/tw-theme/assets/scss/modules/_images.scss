@@ -1,0 +1,13 @@
+figure {
+	figcaption {
+		position: absolute;
+		top: auto !important;
+		bottom: 0 !important;
+		width: 100%;
+		height: auto !important;
+		padding: $spacer;
+		background-color: rgba(0, 0, 0, 0.6);
+		color: $white;
+		font-size: $font-size-sm;
+	}
+}

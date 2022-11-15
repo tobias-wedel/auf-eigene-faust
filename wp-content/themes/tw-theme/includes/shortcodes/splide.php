@@ -16,7 +16,8 @@ function twtheme_splide_shortcode($atts)
 		'class' => '',
 		'images' => '',
 		'thumbnails' => '',
-		'wrap' => '<div class="ratio ratio-16x11">%s</div>',
+		'caption' => 'false',
+		'wrap' => '<figure class="ratio ratio-16x11">%s</figure>',
 		'style' => 'fit',
 	), $atts);
 		
@@ -61,11 +62,23 @@ function twtheme_splide_slide($images, $attributes)
 	foreach (array_map('trim', explode(',', $images)) as $image_id) {
 		$image = wp_get_attachment_image($image_id, 'large', false, ['class' => $image_class]);
 		$html .= '<div class="splide__slide">';
+		$caption = '';
+		
+		if ($attributes['caption'] === 'true') {
+			$caption = wp_get_attachment_caption($image_id);
+			if ($caption) {
+				$caption = '<figcaption>' . $caption . '</figcaption>';
+			}
+		}
+		
+		$image = $image . $caption;
+		
 		if ($attributes['wrap']) {
 			$html .= sprintf($attributes['wrap'], $image);
 		} else {
 			$html .= $image;
 		}
+		
 		$html .= '</div>';
 	}
 	

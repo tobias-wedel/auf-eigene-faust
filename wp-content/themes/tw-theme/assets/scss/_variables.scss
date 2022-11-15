@@ -1,3 +1,5 @@
+$enable-negative-margins: true;
+
 $white: #fff;
 $gray-100: #f7f6f0;
 $gray-200: #eaeae0;
@@ -10,16 +12,32 @@ $gray-400: #9f9e9a;
 //$gray-900: #212529;
 $black: #000;
 
-$blue: #044559;
-$indigo: #6610f2;
-$purple: #6f42c1;
-$pink: #d63384;
-$red: #dc3545;
-$orange: #fd7e14;
-$yellow: #ffc107;
-$green: #198754;
-$teal: #20c997;
-$cyan: #3bd9d1;
+//$blue: #044559;
+//$indigo: #6610f2;
+//$purple: #6f42c1;
+//$pink: #d63384;
+//$red: #dc3545;
+//$orange: #fd7e14;
+//$yellow: #ffc107;
+//$green: #198754;
+$teal: #15adb7;
+//$cyan: #3bd9d1;
+
+$teal-100: tint-color($teal, 80%);
+$teal-200: tint-color($teal, 60%);
+$teal-300: tint-color($teal, 40%);
+$teal-400: #3bd9d1;
+$teal-500: $teal;
+$teal-600: shade-color($teal, 20%);
+$teal-700: shade-color($teal, 40%);
+$teal-800: shade-color($teal, 60%);
+$teal-900: #044559;
+
+$primary: $teal-900;
+
+$body-color: $primary;
+
+$font-size-base: 1.1rem; //
 
 $display-font-sizes: (
 	1: 5rem,
@@ -30,6 +48,18 @@ $display-font-sizes: (
 	6: 2.5rem,
 );
 
+$grid-gutter-width: 3rem !default;
+$spacer: 1rem !default;
+$spacers: (
+	0: 0,
+	1: $spacer * 0.25,
+	2: $spacer * 0.5,
+	3: $spacer,
+	4: $spacer * 1.5,
+	5: $spacer * 3,
+	gutter: $grid-gutter-width * 0.5,
+) !default;
+
 $aspect-ratios: (
 	'1x1': 100%,
 	'16x9': calc(9 / 16 * 100%),
@@ -39,3 +69,13 @@ $aspect-ratios: (
 $font-family-sans-serif: 'Barlow', Helvetica, sans-serif;
 $headings-font-weight: 700;
 $display-font-weight: $headings-font-weight;
+
+$font-weight-lighter: lighter;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-bolder: bolder;
+$font-weight-base: $font-weight-normal;
+
+$paragraph-margin-bottom: 2rem;

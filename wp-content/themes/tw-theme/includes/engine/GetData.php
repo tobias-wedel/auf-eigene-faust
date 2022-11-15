@@ -57,9 +57,9 @@ class TwthemeGetPostMeta
 						}
 					}
 				} else {
-					$new_array[$field_first_level['id']][$field_second_level['name']]['label'] = $field_data['label'];
+					$new_array[$field_first_level['id']][$field_second_level['name']]['label'] = !empty($field_data['label']) ? $field_data['label'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['group'] = !empty($field_data['group']) ? $field_data['group'] : '';
-					$new_array[$field_first_level['id']][$field_second_level['name']]['value'] = $post_meta_array[$field_second_level['id']];
+					$new_array[$field_first_level['id']][$field_second_level['name']]['value'] = !empty($post_meta_array[$field_second_level['id']]) ? $post_meta_array[$field_second_level['id']] : '';
 				}
 			}
 		}
