@@ -1,0 +1,7 @@
+body > section {
+	> .container > .row > div[class^='col-'] {
+		p:last-child {
+			margin-bottom: 0;
+		}
+	}
+}

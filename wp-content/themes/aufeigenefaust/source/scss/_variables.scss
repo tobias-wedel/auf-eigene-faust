@@ -48,8 +48,10 @@ $display-font-sizes: (
 	6: 2.5rem,
 );
 
-$grid-gutter-width: 3rem !default;
-$spacer: 1rem !default;
+$grid-gutter-width: 3rem;
+$grid-gutter-width-half: $grid-gutter-width * 0.5 !default;
+
+$spacer: 1rem;
 $spacers: (
 	0: 0,
 	1: $spacer * 0.25,
@@ -57,8 +59,10 @@ $spacers: (
 	3: $spacer,
 	4: $spacer * 1.5,
 	5: $spacer * 3,
+	6: $spacer * 5,
 	gutter: $grid-gutter-width * 0.5,
-) !default;
+	spacer: $spacer * 5,
+);
 
 $aspect-ratios: (
 	'1x1': 100%,

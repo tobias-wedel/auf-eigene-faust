@@ -1,0 +1,21 @@
+ul {
+	$column-spacer: $grid-gutter-width-half * 0.5;
+	--columns: 1;
+
+	&.icon-list {
+		display: flex;
+		flex-wrap: wrap;
+		list-style: none;
+		margin: -#{$grid-gutter-width-half - $column-spacer} -#{$grid-gutter-width-half - $column-spacer} 0 -#{$grid-gutter-width-half - $column-spacer};
+		padding: 0;
+		font-size: $font-size-sm;
+
+		> li {
+			padding: #{$column-spacer} #{$column-spacer} 0 #{$column-spacer};
+			width: calc(100% / var(--columns));
+		}
+	}
+
+	li {
+	}
+}

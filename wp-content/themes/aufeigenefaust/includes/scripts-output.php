@@ -26,7 +26,7 @@ function twtheme_wp_enqueue_scripts()
 	wp_register_script('zenscroll-disable', '');
 	wp_enqueue_script('zenscroll-disable');
 	wp_add_inline_script('zenscroll-disable', "window.noZensmooth = true");
-	wp_enqueue_script('zenscroll', TWTHEME__PATH . '/assets/js/zenscroll-min.js', '', TWTHEME__VERSION);
+	wp_enqueue_script('zenscroll', TWTHEME__PATH . '/assets/js/zenscroll.js', '', TWTHEME__VERSION);
 	
 	// FONT AWESOME
 	//wp_enqueue_script('fontawesome', TWTHEME__PATH.'/assets/fontawesome/js/fontawesome.min.js', '', TWTHEME__VERSION, true);
@@ -37,7 +37,7 @@ function twtheme_wp_enqueue_scripts()
 	// wp_enqueue_script('fontawesome-brands', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/brands.min.js', '', TWTHEME__VERSION, true);
 	
 	// BOOTSTRAP
-	wp_enqueue_script('bootstrap', TWTHEME__PATH . '/assets/js/bootstrap.min.js', '', TWTHEME__VERSION);
+	wp_enqueue_script('bootstrap', TWTHEME__PATH . '/assets/js/bootstrap.js', '', TWTHEME__VERSION);
 	
 	// THEME
 	wp_enqueue_style('twtheme', get_stylesheet_uri(), '', TWTHEME__VERSION, 'all');

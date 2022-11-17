@@ -46,7 +46,7 @@ $title = get_the_title($post_id);
 <?php
 $section_prolog = $get_post_meta->get_section('prolog');
 if ($section_prolog) : ?>
-<section id="einleitung">
+<section id="einleitung" class="py-spacer">
 	<div class="container">
 		<?php if ($prolog_data[0]['prolog']) : ?>
 		<div class="row">
@@ -70,34 +70,45 @@ if ($section_prolog) : ?>
 					$harbor_quickinfos = $get_post_meta->get_group('harbor-quick-infos');
 					
 					if ($harbor_quickinfos) : ?>
-				<div class="bg-gray-100 p-3 bg-light mx-ngutter">
-					<ul>
+				<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">
+					<ul class="icon-list columns-3" style="--columns: 3">
 						<?php
 					foreach ($harbor_quickinfos as $name => $quickinfo) {
 						if (!empty($quickinfo['value'])) {
-							echo '<li><strong>' . $quickinfo['label'] . '</strong><br>';
-							
+							$value = '';
 							switch ($name) {
 								case 'country':
-									echo data_countries($quickinfo['value']);
+									$icon = 'location-dot';
+									$value .= data_countries($quickinfo['value']);
 									break;
 								case 'language':
+									$icon = 'comments';
 									foreach ($quickinfo['value'] as $language) {
-										echo data_languages($language);
+										$value .= data_languages($language);
 									}
 									break;
 								case 'currency':
-									echo data_currencies($quickinfo['value']);
+									$icon = 'money-bill';
+									$value .= data_currencies($quickinfo['value']);
+									break;
+								case 'season':
+									$icon = 'calendar-range';
+									$value .= $quickinfo['value'];
+									break;
+								case 'visum':
+									$icon = 'passport';
+									$value .= $quickinfo['value'];
 									break;
 								default:
-									echo $quickinfo['value'];
+									$icon = 'circle-small';
+									$value .= $quickinfo['value'];
 									break;
 							}
 							
+							echo '<li><i class="fal fa-' . $icon .'"></i><strong class="d-block">' . $quickinfo['label'] . '</strong>' . $value;
 							echo '</li>';
 						}
 					}
-					
 					?>
 					</ul>
 				</div>

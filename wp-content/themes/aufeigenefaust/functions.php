@@ -22,7 +22,6 @@ twtheme_include_theme_files(
 		'helper',
 		'data/data',
 		'comments',
-		'menus',
 		'sidebars',
 		'theme',
 		'useragent',
