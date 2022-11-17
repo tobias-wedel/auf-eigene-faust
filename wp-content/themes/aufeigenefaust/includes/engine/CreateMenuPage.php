@@ -3,8 +3,9 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-class TwthemeCreateOptionsPage
+class TwthemeCreateMenuPage
 {
+	private $parent_slug;
 	private $page_title;
 	private $menu_title;
 	private $capability;
@@ -13,10 +14,11 @@ class TwthemeCreateOptionsPage
 	private $position;
 	private $fields;
 	
-	public function __construct($page_title, $menu_title, $capability, $menu_slug, $icon_url, $position, $fields)
+	public function __construct($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $icon_url, $position, $fields)
 	{
 		$this->filter_post_data();
 		
+		$this->parent_slug = $parent_slug;
 		$this->page_title = $page_title;
 		$this->menu_title = $menu_title;
 		$this->capability = $capability;
@@ -25,7 +27,12 @@ class TwthemeCreateOptionsPage
 		$this->position = $position;
 		$this->fields = $fields;
 		
-		add_action('admin_menu', [$this, 'add_theme_page']);
+		if (empty($parent_slug)) {
+			add_action('admin_menu', [$this, 'add_admin_menu_page']);
+		} else {
+			add_action('admin_menu', [$this, 'add_admin_submenu_page']);
+		}
+		
 		add_action('admin_init', [$this, 'page_init']);
 	}
 	
@@ -41,10 +48,16 @@ class TwthemeCreateOptionsPage
 	/**
 	 * Add options page
 	 */
-	public function add_theme_page()
+	public function add_admin_menu_page()
 	{
 		// This page will be under "Settings"
 		add_menu_page($this->page_title, $this->menu_title, $this->capability, $this->menu_slug, [$this, 'create_option_page'], $this->icon_url, $this->position);
+	}
+	
+	public function add_admin_submenu_page()
+	{
+		// This page will be under "Settings"
+		add_submenu_page($this->parent_slug, $this->page_title, $this->menu_title, $this->capability, $this->menu_slug, [$this, 'create_option_page'], $this->position);
 	}
 	
 	/**

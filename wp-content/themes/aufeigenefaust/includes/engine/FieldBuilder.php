@@ -129,6 +129,10 @@ class TwthemeFieldBuilder
 			case 'date':
 				$final_data['field'] .= '<div class="input-holder"><input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . ' ' . $required . ' ' . $validation . ' ' . $data_integration . ' ' . $disabled . ' ' . $readonly . ' ' . $field_args_attr . ' ' . $editable . '/>' . $editable_button . $preview_button . '</div>' . $description . "\n";
 				break;
+				
+			case 'color':
+				$final_data['field'] .= '	<input id="' . esc_attr($field['id']) . '" ' . 'class="' . $class . '"' . ' ' . $style . ' type="' . $field['type'] . '" ' . $name . ' ' . $placeholder . ' ' . $value . '" class="color" value="' . esc_attr($value) . '" />';
+				break;
 			case 'text-secret':
 				$final_data['field'] .= '<input id="' . esc_attr($field['id']) . '" ' . $style . ' type="text" ' . $name . ' placeholder="' . esc_attr($field['placeholder']) . '" value="" ' . $validation . ' ' . $disabled . '/>' . $description . "\n";
 				break;
@@ -265,13 +269,6 @@ class TwthemeFieldBuilder
 				$final_data['field'] .= '</ul>';
 				$final_data['field'] .= '<a id="' . $field['id'] . '_image_button" data-uploader_title="Bilder auswählen" data-uploader_button_text="Bilder wählen" ' . $multiple . ' class="image_upload_button button">Bild(er) wählen</a>';
 				$final_data['field'] .= '<input id="' . $field['id'] . '" class="image_data_field" type="hidden" ' . $name . ' value="' . $values . '">';
-				break;
-
-			case 'color':
-				$final_data['field'] .= '<div class="color-picker" style="position:relative;">';
-				$final_data['field'] .= '	<input type="text" ' . $name . '" class="color" value="' . esc_attr_e($value) . '" />';
-				$final_data['field'] .= '	<div style="position:absolute;background:#FFF;z-index:99;border-radius:100%;" class="colorpicker"></div>';
-				$final_data['field'] .= '</div>';
 				break;
 
 			case 'link':
@@ -425,6 +422,7 @@ class TwthemeFieldBuilder
 						'data-filter' => !empty($field['data-filter']) ? $field['data-filter'] : '',
 						'integration' => !empty($field['integration']) ? $field['integration'] : '',
 						'settings' => !empty($field['settings']) ? $field['settings'] : '',
+						'column' => !empty($field['column']) ? $field['column'] : '',
 					];
 					
 					// Check for field groups/repeater
@@ -448,6 +446,7 @@ class TwthemeFieldBuilder
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['type'] = !empty($repeater_field['type']) ? $repeater_field['type'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['description'] = !empty($repeater_field['description']) ? $repeater_field['description'] : '';
 								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration'] = !empty($repeater_field['integration']) ? $repeater_field['integration'] : '';
+								$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['column'] = !empty($repeater_field['column']) ? $repeater_field['column'] : '';
 								
 								if (!empty($form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration']['source'])) {
 									$form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration']['source'] = $tab_id . '[' . $field['name'] . '][' . $repeater_group_key . '][' . $form_field_data['fields'][$repeater_group_key][$repeater_field_key]['integration']['source'] . ']';
@@ -481,6 +480,7 @@ class TwthemeFieldBuilder
 						
 						$form_field_data['value'] = isset($field['id']) && !empty($value_key) ? $value_key : '';
 						$form_field_data['name'] = !empty($field['name']) ? $tab_id . $field['name'] : '';
+						$form_field_data['column'] = !empty($field['column']) ? $field['column'] : '';
 						$form_field_data['id'] = !empty($field['id']) ? $tab_id . '[' . $field['id'] . ']' : '';
 						if (isset($form_field_data['integration']['source'])) {
 							$form_field_data['integration']['source'] = $tab_id . '[' . $form_field_data['integration']['source'] . ']';
@@ -491,12 +491,14 @@ class TwthemeFieldBuilder
 					// Check for headline or form field
 					if ($form_field_data['type'] == 'headline') {
 						$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . ' class="headline">';
-						$html_tabs_content .= '<' . ($table ? 'td colspan="2"' : 'div') . ' style="padding: 0;"><hr /><h3>' . $form_field_data['label'] . '</h3></' . ($table ? 'td' : 'div') . '>';
+						$html_tabs_content .= '<' . ($table ? 'td colspan="12"' : 'div') . ' style="padding: 0;"><hr /><h3>' . $form_field_data['label'] . '</h3></' . ($table ? 'td' : 'div') . '>';
 						$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
 					} else {
 						$form_field = TwthemeFieldBuilder::display_field($form_field_data);
-							
-						$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . ' class="form-field">';
+						
+						if (empty($form_field_data['column']) || $form_field_data['column'] == 'first') {
+							$html_tabs_content .= '<' . ($table ? 'tr' : 'div') . ' class="form-field">';
+						}
 						
 						// Display Group Fields
 						if (is_array($form_field['label'])) {
@@ -537,7 +539,9 @@ class TwthemeFieldBuilder
 							}
 						}
 						
-						$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
+						if (empty($form_field_data['column']) || $form_field_data['column'] == 'last') {
+							$html_tabs_content .= '</' . ($table ? 'tr' : 'div') . '>';
+						}
 					}
 				}
 			}

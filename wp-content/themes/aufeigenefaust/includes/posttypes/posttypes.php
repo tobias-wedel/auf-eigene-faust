@@ -7,6 +7,7 @@ twtheme_include_theme_files(
 	[
 		'harbor',
 		'harbor-destination',
+		'harbor-options',
 	],
 	'includes/posttypes/'
 );

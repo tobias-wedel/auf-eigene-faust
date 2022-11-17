@@ -25,10 +25,10 @@ function twtheme_map($map_data, $args = [])
 		return false;
 	}
 	
-	wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=weekly', '', '', true);
+	wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=beta&libraries=marker', '', '', true);
 	wp_enqueue_script('google-maps-icons', TWTHEME__PATH . '/assets/js/gmaps-icons.js', '', TWTHEME__VERSION, true);
 
 	$id = !empty($args['id']) ? $args['id'] : 'map-' . get_custom_id();
 	
-	return "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' onclick='init_gmap(this)' style='height: 200px; background: red'></div>";
+	return "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' onclick='init_gmap(this)' style='background: red'></div>";
 }

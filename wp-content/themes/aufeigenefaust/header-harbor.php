@@ -9,7 +9,7 @@ $post_id = get_the_ID();
 
 $post_meta_data = new TwthemeGetPostMeta($post_id);
 $post_meta = $post_meta_data->get_post_meta();
-
+$options = get_option('twtheme_harbor_options');
 $title = get_the_title($post_id);
 ?>
 
@@ -126,14 +126,17 @@ if ($section_harbor) :
 	<div class="container">
 		<div class="row">
 			<div class="col-6 offset-lg-1 pe-lg-0">
-				<?=wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
+				<div class="ratio ratio-16x11">
+					<?=wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
+				</div>
 			</div>
 			<div class="col-4 ps-lg-0">
 				<?php
 				$harbor_map_data = [];
 				$harbor_map_data[0]['address'] = twtheme_get_value($section_harbor['address']);
 				$harbor_map_data[0]['coords'] = twtheme_get_value($section_harbor['address-coords']);
-				$harbor_map_data[0]['icon'] = 'anchor';
+				$harbor_map_data[0]['icon'] = $options['icons']['harbor-icon'];
+				$harbor_map_data[0]['color'] = $options['icons']['harbor-color'];
 				?>
 				<?= twtheme_map($harbor_map_data) ?>
 			</div>

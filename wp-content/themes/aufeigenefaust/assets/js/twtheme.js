@@ -1,1 +1,259 @@
-var basedomain=twtheme.basedomain,livedomain=twtheme.livedomain,ajax_url=twtheme.ajaxurl,themepath=twtheme.themepath,breakpoints={xs:"0",sm:"576px",md:"768px",lg:"992px",xl:"1200px",xxl:"1400px"};function set_current_viewport_on_body(){for(const[e,t]of Object.entries(breakpoints)){window.matchMedia("(min-width: "+t+")").matches&&document.querySelector("body").setAttribute("data-size",e)}}function media_query(e,t){return window.matchMedia("("+e+": "+breakpoints[t]+")").matches}function click_dummies(){const e=document.getElementsByClassName("click-dummy");for(let n=0;n<e.length;n++){let o=e[n].querySelector("a.click-dummy-trigger"),r=o||e[n].querySelector("a");if(null!==r){function t(e){if(e.preventDefault,o){let t=e.target;if("A"==t.tagName&&t!=o)return}window.location=r.href}e[n].style.cursor="pointer",e[n].addEventListener("click",(e=>{t(e)}))}}}function smooth_anchor_scrolling(){document.querySelectorAll('a[href*="#"]').forEach((function(e){e.addEventListener("click",(function(t){const n=t.target.getAttribute("href");if("#"==n)zenscroll.stop();else{t.preventDefault(),scrollToElement=document.querySelector(n);let o=e.dataset.zenoffset?e.dataset.zenoffset:50;zenscroll.setup(500,o),zenscroll.to(scrollToElement)}}),!1)}))}function set_css_vars(e,t,n){let o=document.querySelectorAll("[class*=set-h]");o&&o.forEach((e=>{let t=e.classList.value.match(/set-h\[(.*?)\]/);t=t[1].split("|");let n="self"==t[0]?e:e.querySelector(t[0]),o=t[1],r=t[2],i=n.getBoundingClientRect().height;r?mediaQuery("min-width",r)?document.documentElement.style.setProperty("--"+o+"-height",i+"px"):document.documentElement.style.removeProperty("--"+o+"-height"):document.documentElement.style.setProperty("--"+o+"-height",i+"px")}))}function scale_header(){for(var e=document.querySelectorAll(".scale--js"),t=0;t<e.length;t++){var n=e[t].parentNode;if(console.log(e[t].getBoundingClientRect().width),console.log(n.getBoundingClientRect().width),e[t].getBoundingClientRect().width<n.getBoundingClientRect().width)return;e[t].style.transform="scale(1)";var o=n.offsetWidth-40,r=e[t].offsetWidth;e[t].style.transform="scale("+o/r+")",n.style.height=e[t].getBoundingClientRect().height+"px"}}function debounce(e,t,n){var o;return function(){var r=this,i=arguments,l=function(){o=null,n||e.apply(r,i)},c=n&&!o;clearTimeout(o),o=setTimeout(l,t),c&&e.apply(r,i)}}smooth_anchor_scrolling();var myScaleFunction=debounce((function(){}),100);function init_gmap(e){if(e.classList.contains("loaded"))return;let t=e.id,n=JSON.parse(e.dataset.map);if(!n)return;e.classList.add("loaded");let o=n[0].coords.split(","),r={lat:parseFloat(o[0].trim()),lng:parseFloat(o[1].trim())};const i=new google.maps.Map(document.getElementById(t),{center:r,zoom:12});for(const[e,t]of Object.entries(n)){let e=t.coords.split(","),n={lat:parseFloat(e[0].trim()),lng:parseFloat(e[1].trim())};const o=document.createElement("div");o.className="price-tag",o.textContent="$2.5M",new google.maps.marker.AdvancedMarkerView({position:n,map:i,content:o})}return i}window.addEventListener("resize",myScaleFunction),document.addEventListener("DOMContentLoaded",(function(e){set_current_viewport_on_body(),set_css_vars(),click_dummies(),window.onresize=function(){set_current_viewport_on_body(),set_css_vars()}}));
+// Get localized vars from functions.php
+var basedomain = twtheme.basedomain,
+	livedomain = twtheme.livedomain,
+	ajax_url = twtheme.ajaxurl,
+	themepath = twtheme.themepath,
+	breakpoints = {
+		xs: '0',
+		sm: '576px',
+		md: '768px',
+		lg: '992px',
+		xl: '1200px',
+		xxl: '1400px',
+	};
+
+// Set the current viewport attr on body
+function set_current_viewport_on_body() {
+	// Iterate the breakpoints object
+	for (const [breakpoint, value] of Object.entries(breakpoints)) {
+		let media_querie = window.matchMedia('(min-width: ' + value + ')');
+
+		// If the media_querie matches the current viewport set the data-size attr to body
+		if (media_querie.matches) {
+			document.querySelector('body').setAttribute('data-size', breakpoint);
+		}
+	}
+}
+
+function media_query(direction, size) {
+	return window.matchMedia('(' + direction + ': ' + breakpoints[size] + ')').matches;
+}
+
+/**
+ * Click dummies
+ */
+function click_dummies() {
+	const click_dummies = document.getElementsByClassName('click-dummy');
+
+	for (let i = 0; i < click_dummies.length; i++) {
+		// Check if there's a dummy trigger first
+		// If true stop dummy action on <a> click thats not the dummy trigger
+		// If false get the first <a> that is found
+		let dummy_trigger = click_dummies[i].querySelector('a.click-dummy-trigger');
+		let link = dummy_trigger ? dummy_trigger : click_dummies[i].querySelector('a');
+
+		if (link !== null) {
+			click_dummies[i].style.cursor = 'pointer';
+			click_dummies[i].addEventListener('click', e => {
+				click_dummy_action(e);
+			});
+
+			function click_dummy_action(e) {
+				e.preventDefault;
+				if (dummy_trigger) {
+					let clicked_element = e.target;
+
+					if (clicked_element.tagName == 'A' && clicked_element != dummy_trigger) {
+						return;
+					}
+				}
+				window.location = link.href;
+			}
+		}
+	}
+}
+
+/**
+ * ZEN Scroll Stuff
+ */
+function smooth_anchor_scrolling() {
+	const links = document.querySelectorAll('a[href*="#"]');
+
+	links.forEach(function (link) {
+		link.addEventListener(
+			'click',
+			function (e) {
+				const href = e.target.getAttribute('href');
+
+				if (href == '#') {
+					zenscroll.stop();
+				} else {
+					e.preventDefault();
+					scrollToElement = document.querySelector(href);
+
+					let offset = link.dataset.zenoffset ? link.dataset.zenoffset : 50;
+
+					zenscroll.setup(500, offset);
+					zenscroll.to(scrollToElement);
+				}
+			},
+			false,
+		);
+	});
+}
+smooth_anchor_scrolling();
+
+/**
+ * This calcs the height of elements and set a css var into defined HTML elements
+ * Its useful for CSS calculating
+ */
+function set_css_vars(element, name, breakpoint) {
+	let elements = document.querySelectorAll('[class*=set-h]');
+
+	if (elements) {
+		elements.forEach(element => {
+			let element_classes = element.classList.value;
+			let calc_element = element_classes.match(/set-h\[(.*?)\]/);
+
+			calc_element = calc_element[1].split('|');
+
+			let calc_element_to_find = calc_element[0] == 'self' ? element : element.querySelector(calc_element[0]);
+			let calc_name_to_set = calc_element[1];
+			let calc_name_breakpoint = calc_element[2];
+
+			let calc_element_height = calc_element_to_find.getBoundingClientRect().height;
+
+			// Write it as css var into html tag
+			if (calc_name_breakpoint) {
+				if (mediaQuery('min-width', calc_name_breakpoint)) {
+					document.documentElement.style.setProperty('--' + calc_name_to_set + '-height', calc_element_height + 'px');
+				} else {
+					document.documentElement.style.removeProperty('--' + calc_name_to_set + '-height');
+				}
+			} else {
+				document.documentElement.style.setProperty('--' + calc_name_to_set + '-height', calc_element_height + 'px');
+			}
+		});
+	}
+}
+
+function scale_header() {
+	var scalable = document.querySelectorAll('.scale--js');
+	var margin = 40;
+	for (var i = 0; i < scalable.length; i++) {
+		var scalableContainer = scalable[i].parentNode;
+
+		console.log(scalable[i].getBoundingClientRect().width);
+		console.log(scalableContainer.getBoundingClientRect().width);
+
+		if (scalable[i].getBoundingClientRect().width < scalableContainer.getBoundingClientRect().width) {
+			return;
+		}
+
+		scalable[i].style.transform = 'scale(1)';
+		var scalableContainerWidth = scalableContainer.offsetWidth - margin;
+		var scalableWidth = scalable[i].offsetWidth;
+		scalable[i].style.transform = 'scale(' + scalableContainerWidth / scalableWidth + ')';
+		scalableContainer.style.height = scalable[i].getBoundingClientRect().height + 'px';
+	}
+}
+
+// Debounce by David Walsch
+// https://davidwalsh.name/javascript-debounce-function
+
+function debounce(func, wait, immediate) {
+	var timeout;
+	return function () {
+		var context = this,
+			args = arguments;
+		var later = function () {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+}
+
+var myScaleFunction = debounce(function () {
+	//scale_header();
+}, 100);
+
+//myScaleFunction();
+
+function init_gmap(el) {
+	if (el.classList.contains('loaded')) {
+		return;
+	}
+
+	let el_id = el.id;
+	let map_data = JSON.parse(el.dataset.map);
+
+	if (!map_data) {
+		return;
+	}
+
+	el.classList.add('loaded');
+
+	let first_el_coords = map_data[0].coords.split(','),
+		first_el_latlng = {lat: parseFloat(first_el_coords[0].trim()), lng: parseFloat(first_el_coords[1].trim())};
+
+	const map = new google.maps.Map(document.getElementById(el_id), {
+		center: first_el_latlng,
+		zoom: 12,
+		mapId: '8c92906b2ba3b6a3',
+	});
+
+	check_ready();
+
+	// Check if the marker library is ready
+	function check_ready() {
+		if (typeof google.maps.marker === 'undefined') {
+			setTimeout(() => {
+				check_ready();
+			}, 100);
+		} else {
+			run_map();
+		}
+	}
+
+	function run_map() {
+		for (const property of map_data) {
+			let coords = property.coords.split(','),
+				latlng = {lat: parseFloat(coords[0].trim()), lng: parseFloat(coords[1].trim())};
+
+			const advancedMarkerView = new google.maps.marker.AdvancedMarkerView({
+				map,
+				content: buildContent(property),
+				position: latlng,
+				//icon: {
+				//	path: SQUARE_ROUNDED,
+				//	fillColor: '#ffffff',
+				//	fillOpacity: 1,
+				//	strokeColor: '',
+				//	strokeWeight: 0,
+				//},
+				//map_icon_label: '<i class="fal fa-location-dot"></i>',
+			});
+
+			const element = advancedMarkerView.element;
+
+			function buildContent(property) {
+				const content = document.createElement('div');
+
+				content.classList.add('gmap-icon');
+				content.style.setProperty('--color', property.color);
+				content.innerHTML = '<div class="icon">' + property.icon + '</div>';
+				return content;
+			}
+		}
+
+		return map;
+	}
+}
+
+window.addEventListener('resize', myScaleFunction);
+
+document.addEventListener('DOMContentLoaded', function (event) {
+	set_current_viewport_on_body();
+	set_css_vars();
+	click_dummies();
+
+	// Window resize action
+	window.onresize = function () {
+		set_current_viewport_on_body();
+		set_css_vars();
+	};
+});

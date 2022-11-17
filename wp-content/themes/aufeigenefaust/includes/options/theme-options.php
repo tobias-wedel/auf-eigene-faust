@@ -3,7 +3,7 @@
 // Exit if accessed directly.
 defined('ABSPATH') || exit;
 
-$theme_options = new TwthemeCreateOptionsPage('Theme Einstellungen', 'TW Theme', 'manage_options', 'twtheme', TWTHEME__PATH . '/assets/images/favicons/favicon-16x16.png', 100, theme_options_fields());
+$theme_options = new TwthemeCreateMenuPage('', 'Theme Einstellungen', 'TW Theme', 'manage_options', 'twtheme', TWTHEME__PATH . '/assets/images/favicons/favicon-16x16.png', 100, theme_options_fields());
 
 add_filter('twtheme_options_post_data', 'twtheme_options_page_post_data', 10, 1);
 function twtheme_options_page_post_data($post_data)

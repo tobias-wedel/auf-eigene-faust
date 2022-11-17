@@ -34,7 +34,7 @@ twtheme_include_theme_files(
 		'FieldBuilder',
 		'CreatePostType',
 		'CreateTaxonomy',
-		'CreateOptionsPage',
+		'CreateMenuPage',
 		'GetData',
 	],
 	'includes/engine/'
