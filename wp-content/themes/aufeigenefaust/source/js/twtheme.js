@@ -173,6 +173,54 @@ var myScaleFunction = debounce(function () {
 
 //myScaleFunction();
 
+function init_gmap(el) {
+	if (el.classList.contains('loaded')) {
+		return;
+	}
+
+	let el_id = el.id;
+	let map_data = JSON.parse(el.dataset.map);
+
+	if (!map_data) {
+		return;
+	}
+
+	el.classList.add('loaded');
+
+	let first_el_coords = map_data[0].coords.split(','),
+		first_el_latlng = {lat: parseFloat(first_el_coords[0].trim()), lng: parseFloat(first_el_coords[1].trim())};
+
+	const map = new google.maps.Map(document.getElementById(el_id), {
+		center: first_el_latlng,
+		zoom: 12,
+	});
+
+	for (const [key, map_el] of Object.entries(map_data)) {
+		let coords = map_el.coords.split(','),
+			latlng = {lat: parseFloat(coords[0].trim()), lng: parseFloat(coords[1].trim())},
+			icon = themepath + '/assets/fontawesome/js/light.min.js';
+		const priceTag = document.createElement('div');
+
+		priceTag.className = 'price-tag';
+		priceTag.textContent = '$2.5M';
+		new google.maps.marker.AdvancedMarkerView({
+			position: latlng,
+			map,
+			content: priceTag,
+			//icon: {
+			//	path: SQUARE_ROUNDED,
+			//	fillColor: '#ffffff',
+			//	fillOpacity: 1,
+			//	strokeColor: '',
+			//	strokeWeight: 0,
+			//},
+			//map_icon_label: '<i class="fal fa-location-dot"></i>',
+		});
+	}
+
+	return map;
+}
+
 window.addEventListener('resize', myScaleFunction);
 
 document.addEventListener('DOMContentLoaded', function (event) {

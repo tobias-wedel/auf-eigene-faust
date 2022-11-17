@@ -7,17 +7,8 @@ get_header('base');
 
 $post_id = get_the_ID();
 
-$prolog_data = get_post_meta($post_id, 'prolog');
-$harbor_data = get_post_meta($post_id, 'about');
-$mobility_data = get_post_meta($post_id, 'mobility');
-$highlights_data = get_post_meta($post_id, 'highlights');
-$activity_data = get_post_meta($post_id, 'activity');
-$locals_data = get_post_meta($post_id, 'locals');
-$faq_data = get_post_meta($post_id, 'faq');
-$affiliates_data = get_post_meta($post_id, 'affiliates');
-
-$get_post_meta = new TwthemeGetPostMeta($post_id);
-$post_meta = $get_post_meta->get_post_meta();
+$post_meta_data = new TwthemeGetPostMeta($post_id);
+$post_meta = $post_meta_data->get_post_meta();
 
 $title = get_the_title($post_id);
 ?>
@@ -44,11 +35,12 @@ $title = get_the_title($post_id);
 	</div>
 </header>
 <?php
-$section_prolog = $get_post_meta->get_section('prolog');
-if ($section_prolog) : ?>
+$section_prolog = $post_meta_data->get_section('prolog');
+if ($section_prolog) :
+?>
 <section id="einleitung" class="py-spacer">
 	<div class="container">
-		<?php if ($prolog_data[0]['prolog']) : ?>
+		<?php if ($section_prolog['prolog']['value']) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
@@ -67,11 +59,11 @@ if ($section_prolog) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$harbor_quickinfos = $get_post_meta->get_group('harbor-quick-infos');
+					$harbor_quickinfos = $post_meta_data->get_group('harbor-quick-infos');
 					
 					if ($harbor_quickinfos) : ?>
 				<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">
-					<ul class="icon-list columns-3" style="--columns: 3">
+					<ul class="icon-list" style="--columns: 3">
 						<?php
 					foreach ($harbor_quickinfos as $name => $quickinfo) {
 						if (!empty($quickinfo['value'])) {
@@ -95,7 +87,7 @@ if ($section_prolog) : ?>
 									$icon = 'calendar-range';
 									$value .= $quickinfo['value'];
 									break;
-								case 'visum':
+								case 'visa':
 									$icon = 'passport';
 									$value .= $quickinfo['value'];
 									break;
@@ -105,7 +97,7 @@ if ($section_prolog) : ?>
 									break;
 							}
 							
-							echo '<li><i class="fal fa-' . $icon .'"></i><strong class="d-block">' . $quickinfo['label'] . '</strong>' . $value;
+							echo '<li class="' . $name . '"><i class="fal fa-' . $icon .'"></i><strong class="d-block">' . $quickinfo['label'] . '</strong>' . $value;
 							echo '</li>';
 						}
 					}
@@ -118,3 +110,35 @@ if ($section_prolog) : ?>
 	</div>
 </section>
 <?php endif; ?>
+<?php
+$section_harbor = $post_meta_data->get_section('about');
+if ($section_harbor) :
+?>
+<section id="einleitung" class="py-spacer">
+	<div class="container">
+		<div class="row">
+			<div class="col-6 m-auto">
+				<h2><?= sprintf(twtheme_get_value($section_harbor['headline']), $title) ?></h2>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="container">
+		<div class="row">
+			<div class="col-6 offset-lg-1 pe-lg-0">
+				<?=wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
+			</div>
+			<div class="col-4 ps-lg-0">
+				<?php
+				$harbor_map_data = [];
+				$harbor_map_data[0]['address'] = twtheme_get_value($section_harbor['address']);
+				$harbor_map_data[0]['coords'] = twtheme_get_value($section_harbor['address-coords']);
+				$harbor_map_data[0]['icon'] = 'anchor';
+				?>
+				<?= twtheme_map($harbor_map_data) ?>
+			</div>
+		</div>
+	</div>
+</section>
+<?php endif;
+print_rpre($section_harbor); ?>

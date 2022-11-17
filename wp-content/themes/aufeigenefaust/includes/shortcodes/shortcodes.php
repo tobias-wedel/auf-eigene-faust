@@ -7,6 +7,7 @@ twtheme_include_theme_files(
 		'icon',
 		'button',
 		'splide',
+		'map',
 	],
 	'includes/shortcodes/'
 );

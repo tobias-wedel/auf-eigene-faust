@@ -5,8 +5,6 @@ if (! defined('ABSPATH')) {
 	exit;
 }
 
-
-
 add_shortcode('splide', 'twtheme_splide_shortcode');
 function twtheme_splide_shortcode($atts)
 {

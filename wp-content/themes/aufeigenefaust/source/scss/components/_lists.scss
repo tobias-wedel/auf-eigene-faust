@@ -9,10 +9,21 @@ ul {
 		margin: -#{$grid-gutter-width-half - $column-spacer} -#{$grid-gutter-width-half - $column-spacer} 0 -#{$grid-gutter-width-half - $column-spacer};
 		padding: 0;
 		font-size: $font-size-sm;
+		line-height: $line-height-sm;
 
 		> li {
 			padding: #{$column-spacer} #{$column-spacer} 0 #{$column-spacer};
 			width: calc(100% / var(--columns));
+			position: relative;
+			padding-left: $spacer * 3;
+
+			svg {
+				position: absolute;
+				top: $column-spacer * 1.5;
+				left: $column-spacer;
+				font-size: $font-size-lg;
+				width: $column-spacer * 2;
+			}
 		}
 	}
 

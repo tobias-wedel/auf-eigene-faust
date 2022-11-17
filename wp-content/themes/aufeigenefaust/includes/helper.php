@@ -108,3 +108,8 @@ function get_language_list()
 		
 	return $options;
 }
+
+function get_custom_id(int $length = 6)
+{
+	return bin2hex(random_bytes(($length - ($length % 2)) / 2));
+}

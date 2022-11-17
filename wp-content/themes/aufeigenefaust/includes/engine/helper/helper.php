@@ -7,6 +7,7 @@ twtheme_include_theme_files(
 	[
 		'metabox',
 		'fields',
+		'display',
 	],
 	'includes/engine/helper/'
 );

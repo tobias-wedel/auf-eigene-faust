@@ -50,7 +50,8 @@ class TwthemeGetPostMeta
 						foreach ($field_second_level['fields'][0] as $repeater_field) {
 							foreach ($repeater_field as $field) {
 								$value = $post_meta_array[$field_second_level['name']][$i][$repeater_field['name']];
-								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = $repeater_field['label'];
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = !empty($field_data['label']) ? $repeater_field['label'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['placeholder'] = !empty($field_data['placeholder']) ? $repeater_field['placeholder'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group'] = !empty($repeater_field['group']) ? $repeater_field['group'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['value'] = $value;
 							}
@@ -58,6 +59,7 @@ class TwthemeGetPostMeta
 					}
 				} else {
 					$new_array[$field_first_level['id']][$field_second_level['name']]['label'] = !empty($field_data['label']) ? $field_data['label'] : '';
+					$new_array[$field_first_level['id']][$field_second_level['name']]['placeholder'] = !empty($field_data['placeholder']) ? $field_data['placeholder'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['group'] = !empty($field_data['group']) ? $field_data['group'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['value'] = !empty($post_meta_array[$field_second_level['id']]) ? $post_meta_array[$field_second_level['id']] : '';
 				}
@@ -90,6 +92,6 @@ class TwthemeGetPostMeta
 	{
 		$data = $this->full_post_meta;
 		
-		return $data['prolog'];
+		return $data[$section_name];
 	}
 }

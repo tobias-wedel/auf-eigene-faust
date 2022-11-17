@@ -37,7 +37,9 @@ $primary: $teal-900;
 
 $body-color: $primary;
 
-$font-size-base: 1.1rem; //
+$font-size-base: 1.1rem;
+$font-size-sm: $font-size-base * 0.75;
+$font-size-lg: $font-size-base * 1.2;
 
 $display-font-sizes: (
 	1: 5rem,
