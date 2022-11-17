@@ -40,8 +40,8 @@ function twtheme_splide_shortcode($atts)
 		new Splide("#' . $slider_id .'").mount();
 	';
 	
-	wp_enqueue_style('splide', TWTHEME__PATH . '/assets/css/splide.min.css', '', TWTHEME__VERSION);
-	wp_enqueue_script('splide', TWTHEME__PATH . '/assets/js/splide.min.js', '', TWTHEME__VERSION);
+	wp_enqueue_style('splide', TWTHEME__PATH . '/assets/css/splide.css', '', TWTHEME__VERSION);
+	wp_enqueue_script('splide', TWTHEME__PATH . '/assets/js/splide.js', '', TWTHEME__VERSION);
 	wp_add_inline_script('splide', $splide_javascript, 'after');
 
 	return $html;

@@ -22,16 +22,16 @@ function twtheme_wp_enqueue_scripts()
 	}
 	
 	// ZEN SCROLL
-	// Disable zenscroll. We'll init it manually in "themescript"
+	// Disable zenscroll. We'll init it manually
 	wp_register_script('zenscroll-disable', '');
 	wp_enqueue_script('zenscroll-disable');
 	wp_add_inline_script('zenscroll-disable', "window.noZensmooth = true");
 	wp_enqueue_script('zenscroll', TWTHEME__PATH . '/assets/js/zenscroll.js', '', TWTHEME__VERSION);
 	
 	// FONT AWESOME
-	//wp_enqueue_script('fontawesome', TWTHEME__PATH.'/assets/fontawesome/js/fontawesome.min.js', '', TWTHEME__VERSION, true);
+	wp_enqueue_script('fontawesome', TWTHEME__PATH.'/assets/fontawesome/js/fontawesome.min.js', '', TWTHEME__VERSION, true);
 	//wp_enqueue_script('fontawesome-thin', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/thin.min.js', '', TWTHEME__VERSION, true);
-	// wp_enqueue_script('fontawesome-light', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/light.min.js', '', TWTHEME__VERSION, true);
+	wp_enqueue_script('fontawesome-light', TWTHEME__PATH . '/assets/fontawesome/js/light.min.js', '', TWTHEME__VERSION, true);
 	// wp_enqueue_script('fontawesome-regular', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/regular.min.js', '', TWTHEME__VERSION, true);
 	// wp_enqueue_script('fontawesome-solid', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/solid.min.js', '', TWTHEME__VERSION, true);
 	// wp_enqueue_script('fontawesome-brands', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/brands.min.js', '', TWTHEME__VERSION, true);
