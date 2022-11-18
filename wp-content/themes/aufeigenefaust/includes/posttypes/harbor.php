@@ -133,28 +133,28 @@ function twtheme_harbor_fields()
 					'type' => 'gallery',
 					'label' => 'Galerie',
 				],
-				[
-					'id' => 'address',
-					'name' => 'address',
-					'group' => 'gmaps',
-					'type' => 'text',
-					'label' => 'Adresse'
-				],
-				[
-					'id' => 'address-coords',
-					'name' => 'address-coords',
-					'group' => 'gmaps',
-					'type' => 'text',
-					'readonly' => true,
-					'editable' => true,
-					'label' => 'Koordinaten',
-					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
-					'integration' => [
-						'tool' => 'gmaps',
-						'service' => 'geocoding',
-						'source' => 'address'
-					]
-				],
+				//[
+				//	'id' => 'address',
+				//	'name' => 'address',
+				//	'group' => 'gmaps',
+				//	'type' => 'text',
+				//	'label' => 'Adresse'
+				//],
+				//[
+				//	'id' => 'address-coords',
+				//	'name' => 'address-coords',
+				//	'group' => 'gmaps',
+				//	'type' => 'text',
+				//	'readonly' => true,
+				//	'editable' => true,
+				//	'label' => 'Koordinaten',
+				//	'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+				//	'integration' => [
+				//		'tool' => 'gmaps',
+				//		'service' => 'geocoding',
+				//		'source' => 'address'
+				//	]
+				//],
 				[
 					'type' => 'headline',
 					'label' => 'Anlegestellen',
@@ -175,7 +175,7 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'address',
 								'name' => 'address',
-								'type' => 'text',
+								'type' => 'textarea',
 								'label' => 'Adresse'
 							],
 							[
@@ -419,7 +419,7 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'address',
 								'name' => 'address',
-								'type' => 'text',
+								'type' => 'textarea',
 								'label' => 'Adresse'
 							],
 							[
@@ -553,7 +553,7 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'address',
 								'name' => 'address',
-								'type' => 'text',
+								'type' => 'textarea',
 								'label' => 'Adresse',
 							],
 							[

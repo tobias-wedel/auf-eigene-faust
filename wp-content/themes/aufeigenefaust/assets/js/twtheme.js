@@ -206,11 +206,13 @@ function init_gmap(el) {
 				check_ready();
 			}, 100);
 		} else {
-			run_map();
+			run_map(() => {
+				calc_heights();
+			});
 		}
 	}
 
-	function run_map() {
+	function run_map(callback) {
 		for (const property of map_data) {
 			if (property.coords == '') {
 				return;
@@ -228,17 +230,63 @@ function init_gmap(el) {
 
 			const element = advancedMarkerView.element;
 
+			['focus', 'pointerenter'].forEach(event => {
+				element.addEventListener(event, () => {
+					highlight(advancedMarkerView, property);
+				});
+			});
+			['blur', 'pointerleave'].forEach(event => {
+				element.addEventListener(event, () => {
+					unhighlight(advancedMarkerView, property);
+				});
+			});
+			advancedMarkerView.addListener('click', event => {
+				unhighlight(advancedMarkerView, property);
+			});
+
+			function highlight(markerView, property) {
+				markerView.content.classList.add('highlight');
+				markerView.element.style.zIndex = 1;
+			}
+
+			function unhighlight(markerView, property) {
+				markerView.content.classList.remove('highlight');
+				markerView.element.style.zIndex = '';
+			}
+
 			function buildContent(property) {
 				const content = document.createElement('div');
 
 				content.classList.add('gmap-icon');
 				content.style.setProperty('--color', property.color);
-				content.innerHTML = '<div class="icon">' + property.icon + '</div>';
+				content.innerHTML = `
+					<div class="icon-wrapper">
+						<div class="icon">${property.icon}</div>
+						<div class="details">
+							<div class="title">${property.title}</div>
+							<div class="address">${property.address}</div>
+						</div>
+					</div>`;
+
 				return content;
 			}
 		}
 
-		return map;
+		callback();
+	}
+
+	function calc_heights() {
+		let gmap_icons = el.querySelectorAll('.gmap-icon');
+
+		if (gmap_icons.length === 0) {
+			setTimeout(() => {
+				calc_heights();
+			}, 100);
+		}
+
+		gmap_icons.forEach((element, i) => {
+			element.style.setProperty('--height', element.querySelector('.details').getBoundingClientRect().height + 'px');
+		});
 	}
 }
 
