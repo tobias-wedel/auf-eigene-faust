@@ -39,7 +39,8 @@ function harbor_option_fields()
 					'type' => 'text',
 					'label' => 'Anlegestellen',
 					'description' => 'FontAwesome SVG Path',
-					'column' => 'first'
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
 				],
 				[
 					'id' => 'landing-stage-color',

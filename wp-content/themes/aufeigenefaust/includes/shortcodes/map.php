@@ -30,5 +30,5 @@ function twtheme_map($map_data, $args = [])
 
 	$id = !empty($args['id']) ? $args['id'] : 'map-' . get_custom_id();
 	
-	return "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' onclick='init_gmap(this)' style='background: red'></div>";
+	return "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' data-args='" . json_encode($args) . "' onclick='init_gmap(this)' style='background: red'></div>";
 }

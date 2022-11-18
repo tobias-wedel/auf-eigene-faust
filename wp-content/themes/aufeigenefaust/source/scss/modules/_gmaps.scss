@@ -5,6 +5,7 @@
 	text-align: center;
 	border-radius: 50%;
 	background-color: var(--color);
+	transform: translateY(-7px);
 
 	&::after {
 		border-left: 10px solid transparent;

@@ -11,6 +11,9 @@ $post_meta_data = new TwthemeGetPostMeta($post_id);
 $post_meta = $post_meta_data->get_post_meta();
 $options = get_option('twtheme_harbor_options');
 $title = get_the_title($post_id);
+$toc = [];
+$full_map = [];
+$html = '';
 ?>
 
 <header class="cinematic">
@@ -27,7 +30,6 @@ $title = get_the_title($post_id);
 				} elseif ($title_count_chars > 9) {
 					$title_class = 'lg';
 				}
-				
 				?>
 				<h1 class="text-uppercase display-1"><span class="<?= $title_class ?>"><?= $title ?></span> <span class="display-5">auf eigene Faust</span></h1>
 			</div>
@@ -96,7 +98,6 @@ if ($section_prolog) :
 									$value .= $quickinfo['value'];
 									break;
 							}
-							
 							echo '<li class="' . $name . '"><i class="fal fa-' . $icon .'"></i><strong class="d-block">' . $quickinfo['label'] . '</strong>' . $value;
 							echo '</li>';
 						}
@@ -110,38 +111,146 @@ if ($section_prolog) :
 	</div>
 </section>
 <?php endif; ?>
-<?php
-$section_harbor = $post_meta_data->get_section('about');
-if ($section_harbor) :
-?>
+<?php ob_start(); ?>
+<?php $section_harbor = $post_meta_data->get_section('about'); ?>
+<?php if ($section_harbor) : ?>
 <section id="einleitung" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
-				<h2><?= sprintf(twtheme_get_value($section_harbor['headline']), $title) ?></h2>
+				<?php
+					$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), $title);
+					$id = sanitize_title($harbor_headline);
+					
+					echo '<h2>' . $harbor_headline . '</h2>';
+				
+					$toc[] = [
+						'id' => $id,
+						'title' => $harbor_headline,
+					];
+				?>
 			</div>
 		</div>
 	</div>
 	<hr>
-	<div class="container">
+	<div class="container mb-spacer">
 		<div class="row">
 			<div class="col-6 offset-lg-1 pe-lg-0">
 				<div class="ratio ratio-16x11">
-					<?=wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
+					<?= wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
 				</div>
 			</div>
 			<div class="col-4 ps-lg-0">
 				<?php
 				$harbor_map_data = [];
-				$harbor_map_data[0]['address'] = twtheme_get_value($section_harbor['address']);
-				$harbor_map_data[0]['coords'] = twtheme_get_value($section_harbor['address-coords']);
-				$harbor_map_data[0]['icon'] = $options['icons']['harbor-icon'];
-				$harbor_map_data[0]['color'] = $options['icons']['harbor-color'];
+				
+				if (twtheme_get_value($section_harbor['address-coords'])) {
+					$harbor_map_data[] = [
+						'address' => twtheme_get_value($section_harbor['address']),
+						'coords' => twtheme_get_value($section_harbor['address-coords']),
+						'title' => $harbor_headline,
+						'icon' => $options['icons']['harbor-icon'],
+						'color' => $options['icons']['harbor-color'],
+					];
+				}
+				
+				foreach ($section_harbor['landing-stages'] as $landingstage) {
+					if (!twtheme_get_value($landingstage['address-coords'])) {
+						continue;
+					}
+					
+					$harbor_map_data[] = [
+						'address' => twtheme_get_value($landingstage['address']),
+						'coords' => twtheme_get_value($landingstage['address-coords']),
+						'title' => twtheme_get_value($landingstage['name']),
+						'icon' => $options['icons']['landing-stage-icon'],
+						'color' => $options['icons']['landing-stage-color'],
+					];
+				}
+				
+				$full_map[] = $harbor_map_data;
 				?>
-				<?= twtheme_map($harbor_map_data) ?>
+				<?= twtheme_map($harbor_map_data, ['zoom' => '14']) ?>
 			</div>
 		</div>
 	</div>
+
+	<?php $harbor_arrivals = $post_meta_data->get_group('harbor-arrivals'); ?>
+	<?php if ($harbor_arrivals) : ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-6 m-auto">
+				<?php
+				$toc_key = array_key_last($toc);
+				foreach ($harbor_arrivals as $arrival) {
+					if ($arrival['label'] != 'Text') {
+						$id = sanitize_title($arrival['label']);
+						echo '<h3>' . $arrival['label'] . '</h3>';
+						$toc[$toc_key]['childs'][] = [
+							'id' => $id,
+							'title' => $arrival['label'],
+						];
+					}
+					echo wpautop($arrival['value']);
+				}
+				?>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
+</section>
+<?php endif; ?>
+<?php $section_mobility = $post_meta_data->get_section('mobility'); ?>
+<?php if ($section_mobility) : ?>
+<section id="mobilitaet" class="py-spacer">
+	<div class="container">
+		<div class="row">
+			<div class="col-6 m-auto">
+				<?php
+					$mobility_headline = sprintf(twtheme_get_value($section_mobility['headline']), $title);
+					$id = sanitize_title($mobility_headline);
+				
+					echo '<h2 id="' . $id . '">' . $mobility_headline . '</h2>';
+				
+					$toc[] = [
+						'id' => $id,
+						'title' => $mobility_headline,
+					];
+				?>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<?php $mobilities = $post_meta_data->get_group('mobility'); ?>
+	<?php if ($mobilities) : ?>
+	<div class="container">
+		<div class="row">
+			<div class="col-6 m-auto">
+				<?php
+				$toc_key = array_key_last($toc);
+				foreach ($mobilities as $key => $mobility) {
+					if (!empty($mobility['value'])) {
+						$id = sanitize_title($mobility['label']);
+						if ($mobility['label'] != 'Introtext') {
+							echo '<h3 id="' . $id .'">' . $mobility['label'] . '</h3>';
+							$toc[$toc_key]['childs'][] = [
+								'id' => $id,
+								'title' => $mobility['label']
+							];
+						}
+						echo wpautop($mobility['value']);
+					}
+				} ?>
+			</div>
+		</div>
+	</div>
+	<?php endif; ?>
 </section>
 <?php endif;
-print_rpre($section_harbor); ?>
+$html .= ob_get_contents();
+ob_end_clean();
+echo $html;
+
+//print_rpre($toc);
+
+//print_rpre($section_harbor);?>

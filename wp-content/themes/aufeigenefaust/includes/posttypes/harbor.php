@@ -205,6 +205,7 @@ function twtheme_harbor_fields()
 					'name' => 'text',
 					'type' => 'editor',
 					'label' => 'Text',
+					'group' => 'harbor-arrivals',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -214,6 +215,7 @@ function twtheme_harbor_fields()
 					'name' => 'shuttle',
 					'type' => 'editor',
 					'label' => 'Hafenshuttle',
+					'group' => 'harbor-arrivals',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -223,6 +225,7 @@ function twtheme_harbor_fields()
 					'name' => 'arrival-airport',
 					'type' => 'editor',
 					'label' => 'Anfahrt Flughafen',
+					'group' => 'harbor-arrivals',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -251,6 +254,7 @@ function twtheme_harbor_fields()
 					'name' => 'intro',
 					'type' => 'editor',
 					'label' => 'Introtext',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -260,6 +264,7 @@ function twtheme_harbor_fields()
 					'name' => 'foot',
 					'type' => 'editor',
 					'label' => 'Zu Fuß',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -269,6 +274,7 @@ function twtheme_harbor_fields()
 					'name' => 'bicycle',
 					'type' => 'editor',
 					'label' => 'Fahrrad',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -278,6 +284,7 @@ function twtheme_harbor_fields()
 					'name' => 'e-scooter',
 					'type' => 'editor',
 					'label' => 'E-Scooter',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -287,6 +294,7 @@ function twtheme_harbor_fields()
 					'name' => 'taxi',
 					'type' => 'editor',
 					'label' => 'Taxi',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -296,6 +304,7 @@ function twtheme_harbor_fields()
 					'name' => 'rental-car',
 					'type' => 'editor',
 					'label' => 'Mietwagen',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -305,6 +314,7 @@ function twtheme_harbor_fields()
 					'name' => 'bus',
 					'type' => 'editor',
 					'label' => 'Bus',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -314,6 +324,7 @@ function twtheme_harbor_fields()
 					'name' => 'hop-on-bus',
 					'type' => 'editor',
 					'label' => 'Hop-On-Hop-Off Bus',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -323,6 +334,7 @@ function twtheme_harbor_fields()
 					'name' => 'light-railroad',
 					'type' => 'editor',
 					'label' => 'Bimmelbahn',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -332,6 +344,7 @@ function twtheme_harbor_fields()
 					'name' => 'tuk-tuk',
 					'type' => 'editor',
 					'label' => 'Tuk-Tuk (Autorikscha)',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -341,6 +354,7 @@ function twtheme_harbor_fields()
 					'name' => 'metro',
 					'type' => 'editor',
 					'label' => 'Metro / U-Bahn',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -350,6 +364,7 @@ function twtheme_harbor_fields()
 					'name' => 'train',
 					'type' => 'editor',
 					'label' => 'Zug',
+					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
