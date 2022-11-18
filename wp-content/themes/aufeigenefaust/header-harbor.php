@@ -144,15 +144,15 @@ if ($section_prolog) :
 				<?php
 				$harbor_map_data = [];
 				
-				if (twtheme_get_value($section_harbor['address-coords'])) {
-					$harbor_map_data[] = [
-						'address' => twtheme_get_value($section_harbor['address']),
-						'coords' => twtheme_get_value($section_harbor['address-coords']),
-						'title' => $harbor_headline,
-						'icon' => $options['icons']['harbor-icon'],
-						'color' => $options['icons']['harbor-color'],
-					];
-				}
+				//if (twtheme_get_value($section_harbor['address-coords'])) {
+				//	$harbor_map_data[] = [
+				//		'address' => twtheme_get_value($section_harbor['address']),
+				//		'coords' => twtheme_get_value($section_harbor['address-coords']),
+				//		'title' => $harbor_headline,
+				//		'icon' => $options['icons']['harbor-icon'],
+				//		'color' => $options['icons']['harbor-color'],
+				//	];
+				//}
 				
 				foreach ($section_harbor['landing-stages'] as $landingstage) {
 					if (!twtheme_get_value($landingstage['address-coords'])) {
