@@ -246,10 +246,6 @@ function twtheme_harbor_fields()
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[
-					'type' => 'headline',
-					'label' => 'Mobilität'
-				],
-				[
 					'id' => 'intro',
 					'name' => 'intro',
 					'type' => 'editor',
@@ -260,114 +256,466 @@ function twtheme_harbor_fields()
 					]
 				],
 				[
+					'type' => 'headline',
+					'label' => 'Zu Fuß'
+				],
+				[
 					'id' => 'foot',
 					'name' => 'foot',
 					'type' => 'editor',
-					'label' => 'Zu Fuß',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'foot-address',
+					'name' => 'foot-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'foot-address-coords',
+					'name' => 'foot-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'foot-address'
 					]
+				],
+				[
+					'id' => 'foot-image',
+					'name' => 'foot-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Fahrrad'
 				],
 				[
 					'id' => 'bicycle',
 					'name' => 'bicycle',
 					'type' => 'editor',
-					'label' => 'Fahrrad',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'bicycle-address',
+					'name' => 'bicycle-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'bicycle-address-coords',
+					'name' => 'bicycle-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'bicycle-address'
 					]
+				],
+				[
+					'id' => 'bicycle-image',
+					'name' => 'bicycle-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'E-Scooter'
 				],
 				[
 					'id' => 'e-scooter',
 					'name' => 'e-scooter',
 					'type' => 'editor',
-					'label' => 'E-Scooter',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'e-scooter-address',
+					'name' => 'e-scooter-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'e-scooter-address-coords',
+					'name' => 'e-scooter-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'e-scooter-address'
 					]
+				],
+				[
+					'id' => 'e-scooter-image',
+					'name' => 'e-scooter-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Taxi'
 				],
 				[
 					'id' => 'taxi',
 					'name' => 'taxi',
 					'type' => 'editor',
-					'label' => 'Taxi',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'taxi-address',
+					'name' => 'taxi-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'taxi-address-coords',
+					'name' => 'taxi-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'taxi-address'
 					]
+				],
+				[
+					'id' => 'taxi-image',
+					'name' => 'taxi-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Mietwagen'
 				],
 				[
 					'id' => 'rental-car',
 					'name' => 'rental-car',
 					'type' => 'editor',
-					'label' => 'Mietwagen',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'rental-car-address',
+					'name' => 'rental-car-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'rental-car-address-coords',
+					'name' => 'rental-car-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'rental-car-address'
 					]
+				],
+				[
+					'id' => 'rental-car-image',
+					'name' => 'rental-car-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Bus'
 				],
 				[
 					'id' => 'bus',
 					'name' => 'bus',
 					'type' => 'editor',
-					'label' => 'Bus',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'bus-address',
+					'name' => 'bus-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'bus-address-coords',
+					'name' => 'bus-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'bus-address'
 					]
+				],
+				[
+					'id' => 'bus-image',
+					'name' => 'bus-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Hop-On-Hop-Off Bus'
 				],
 				[
 					'id' => 'hop-on-bus',
 					'name' => 'hop-on-bus',
 					'type' => 'editor',
-					'label' => 'Hop-On-Hop-Off Bus',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'hop-on-bus-address',
+					'name' => 'hop-on-bus-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'hop-on-bus-address-coords',
+					'name' => 'hop-on-bus-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'hop-on-bus-address'
 					]
+				],
+				[
+					'id' => 'hop-on-bus-image',
+					'name' => 'hop-on-bus-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Bimmelbahn'
 				],
 				[
 					'id' => 'light-railroad',
 					'name' => 'light-railroad',
 					'type' => 'editor',
-					'label' => 'Bimmelbahn',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'light-railroad-address',
+					'name' => 'light-railroad-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'light-railroad-address-coords',
+					'name' => 'light-railroad-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'light-railroad-address'
 					]
+				],
+				[
+					'id' => 'light-railroad-image',
+					'name' => 'light-railroad-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Tuk Tuk (Autorikscha)'
 				],
 				[
 					'id' => 'tuk-tuk',
 					'name' => 'tuk-tuk',
 					'type' => 'editor',
-					'label' => 'Tuk-Tuk (Autorikscha)',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'tuk-tuk-address',
+					'name' => 'tuk-tuk-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'tuk-tuk-address-coords',
+					'name' => 'tuk-tuk-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'tuk-tuk-address'
 					]
+				],
+				[
+					'id' => 'tuk-tuk-image',
+					'name' => 'tuk-tuk-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Metro / U-Bahn'
 				],
 				[
 					'id' => 'metro',
 					'name' => 'metro',
 					'type' => 'editor',
-					'label' => 'Metro / U-Bahn',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'metro-address',
+					'name' => 'metro-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'metro-address-coords',
+					'name' => 'metro-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'metro-address'
 					]
+				],
+				[
+					'id' => 'metro-image',
+					'name' => 'metro-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Zug'
 				],
 				[
 					'id' => 'train',
 					'name' => 'train',
 					'type' => 'editor',
-					'label' => 'Zug',
+					'label' => 'Text',
 					'group' => 'mobility',
 					'settings' => [
 						'textarea_rows' => '6',
+					],
+				],
+				[
+					'id' => 'train-address',
+					'name' => 'train-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'train-address-coords',
+					'name' => 'train-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'train-address'
 					]
+				],
+				[
+					'id' => 'train-image',
+					'name' => 'train-image',
+					'type' => 'image',
+					'label' => 'Bild',
+					'group' => 'mobility',
 				],
 			],
 		],
