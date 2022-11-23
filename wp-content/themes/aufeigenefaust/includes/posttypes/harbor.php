@@ -133,6 +133,16 @@ function twtheme_harbor_fields()
 					'type' => 'gallery',
 					'label' => 'Galerie',
 				],
+				[
+					'id' => 'text',
+					'name' => 'text',
+					'type' => 'editor',
+					'label' => 'Text',
+					'group' => 'harbor-arrivals',
+					'settings' => [
+						'textarea_rows' => '6',
+					]
+				],
 				//[
 				//	'id' => 'address',
 				//	'name' => 'address',
@@ -198,11 +208,11 @@ function twtheme_harbor_fields()
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Beschreibungen',
+					'label' => 'Hafenshuttle',
 				],
 				[
-					'id' => 'text',
-					'name' => 'text',
+					'id' => 'shuttle',
+					'name' => 'shuttle',
 					'type' => 'editor',
 					'label' => 'Text',
 					'group' => 'harbor-arrivals',
@@ -211,14 +221,29 @@ function twtheme_harbor_fields()
 					]
 				],
 				[
-					'id' => 'shuttle',
-					'name' => 'shuttle',
-					'type' => 'editor',
-					'label' => 'Hafenshuttle',
-					'group' => 'harbor-arrivals',
-					'settings' => [
-						'textarea_rows' => '6',
+					'id' => 'shuttle-address',
+					'name' => 'shuttle-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'shuttle-address-coords',
+					'name' => 'shuttle-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'shuttle-address'
 					]
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Anfahrt Flughafen',
 				],
 				[
 					'id' => 'arrival-airport',
@@ -228,6 +253,27 @@ function twtheme_harbor_fields()
 					'group' => 'harbor-arrivals',
 					'settings' => [
 						'textarea_rows' => '6',
+					]
+				],
+				[
+					'id' => 'arrival-airport-address',
+					'name' => 'arrival-airport-address',
+					'type' => 'textarea',
+					'label' => 'Adresse'
+				],
+				[
+					'id' => 'arrival-airport-address-coords',
+					'name' => 'arrival-airport-address-coords',
+					'group' => 'gmaps',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'arrival-airport-address'
 					]
 				],
 			],
