@@ -53,6 +53,10 @@ class TwthemeGetPostMeta
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = !empty($field_data['label']) ? $repeater_field['label'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['placeholder'] = !empty($field_data['placeholder']) ? $repeater_field['placeholder'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group'] = !empty($repeater_field['group']) ? $repeater_field['group'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group-child'] = !empty($repeater_field['group-child']) ? $repeater_field['group-child'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['id'] = !empty($repeater_field['id']) ? $repeater_field['id'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['type'] = !empty($repeater_field['type']) ? $repeater_field['type'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['title'] = !empty($repeater_field['title']) ? $repeater_field['title'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['value'] = $value;
 							}
 						}
@@ -61,6 +65,10 @@ class TwthemeGetPostMeta
 					$new_array[$field_first_level['id']][$field_second_level['name']]['label'] = !empty($field_data['label']) ? $field_data['label'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['placeholder'] = !empty($field_data['placeholder']) ? $field_data['placeholder'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['group'] = !empty($field_data['group']) ? $field_data['group'] : '';
+					$new_array[$field_first_level['id']][$field_second_level['name']]['group-child'] = !empty($field_data['group-child']) ? $field_data['group-child'] : '';
+					$new_array[$field_first_level['id']][$field_second_level['name']]['id'] = !empty($field_data['id']) ? $field_data['id'] : '';
+					$new_array[$field_first_level['id']][$field_second_level['name']]['type'] = !empty($field_data['type']) ? $field_data['type'] : '';
+					$new_array[$field_first_level['id']][$field_second_level['name']]['title'] = !empty($field_data['title']) ? $field_data['title'] : '';
 					$new_array[$field_first_level['id']][$field_second_level['name']]['value'] = !empty($post_meta_array[$field_second_level['id']]) ? $post_meta_array[$field_second_level['id']] : '';
 				}
 			}
@@ -74,17 +82,20 @@ class TwthemeGetPostMeta
 		$data = $this->full_post_meta;
 		
 		$group_data = [];
-		
 		foreach ($data as $key_first_level => $data_first_level) {
 			foreach ($data_first_level as $key_second_level => $data_second_level) {
 				if (!array_search($group_name, $data_second_level)) {
 					continue;
 				}
 				
-				$group_data[$key_second_level] = $data_second_level;
+				// Check for a group child and make it sublevel
+				if (!empty($data_second_level['group-child'])) {
+					$group_data[$data_second_level['group-child']][$data_second_level['id']] = $data_second_level;
+				} else {
+					$group_data[$key_second_level] = $data_second_level;
+				}
 			}
 		}
-		
 		return $group_data;
 	}
 	

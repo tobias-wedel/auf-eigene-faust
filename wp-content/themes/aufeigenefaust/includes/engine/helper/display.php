@@ -15,3 +15,17 @@ function twtheme_get_value($data = [])
 		return $data['placeholder'];
 	}
 }
+
+
+function twtheme_get_title($data = [])
+{
+	if (!is_array($data)) {
+		return;
+	}
+	
+	if (!empty($data['title'])) {
+		return $data['title'];
+	} else {
+		return $data['label'];
+	}
+}

@@ -122,7 +122,7 @@ if ($section_prolog) :
 					$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), $title);
 					$id = sanitize_title($harbor_headline);
 					
-					echo '<h2>' . $harbor_headline . '</h2>';
+					echo '<h2 id="' . $id . '">' . $harbor_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
@@ -229,28 +229,80 @@ if ($section_prolog) :
 				<?php
 				$toc_key = array_key_last($toc);
 				foreach ($mobilities as $key => $mobility) {
-					if (!empty($mobility['value'])) {
-						$id = sanitize_title($mobility['label']);
-						if ($mobility['label'] != 'Introtext') {
-							echo '<h3 id="' . $id .'">' . $mobility['label'] . '</h3>';
-							$toc[$toc_key]['childs'][] = [
-								'id' => $id,
-								'title' => $mobility['label']
-							];
-						}
-						echo wpautop($mobility['value']);
+					if (empty($mobility[$key]['value'])) {
+						continue;
 					}
-				} ?>
+					
+					$mobility_child_headline = twtheme_get_title($mobility[$key]);
+					$id = sanitize_title($mobility_child_headline);
+					
+					$toc[$toc_key]['childs'][] = [
+						'id' => $id,
+						'title' => $mobility_child_headline,
+					];
+					
+					echo '<h3 id="' . $id .'">' . $mobility_child_headline . '</h3>';
+					
+					echo wpautop($mobility[$key]['value']);
+					
+					if (!empty($mobility[$key . '-image']['value'])) {
+						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image($mobility[$key . '-image']['value']) . '</div>';
+					}
+					
+					if (!empty($mobility[$key . '-address-coords']['value'])) {
+						$mobility_map_data = [];
+						$mobility_map_data[] = [
+							'address' => twtheme_get_value($mobility[$key . '-address']),
+							'coords' => twtheme_get_value($mobility[$key . '-address-coords']),
+							'title' => twtheme_get_title($mobility[$key . '-address']),
+							'icon' => $options['icons'][$key . '-icon'],
+							'color' => $options['icons'][$key . '-color'],
+						];
+						
+						$full_map[] = $mobility_map_data;
+						echo twtheme_map($mobility_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+					}
+				}
+				
+				?>
 			</div>
 		</div>
 	</div>
 	<?php endif; ?>
 </section>
 <?php endif;
+
+
 $html .= ob_get_contents();
 ob_end_clean();
-echo $html;
+// TOC
+?>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9 mx-auto">
+				<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">
+					<ol>
+						<?php
+						foreach ($toc as $chapter) {
+							echo '<li><a href="#' . $chapter['id'] . '">' . $chapter['title'] . '</a></li>';
+							
+							if (isset($chapter['childs'])) {
+								echo '<ol>';
+								
+								foreach ($chapter['childs'] as $child_chapter) {
+									echo '<li><a href="#' . $child_chapter['id'] . '">' . $child_chapter['title'] . '</a></li>';
+								}
+								
+								echo '</ol>';
+							}
+						}
+						?>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-//print_rpre($toc);
-
-//print_rpre($section_harbor);?>
+<?php echo $html;?>
