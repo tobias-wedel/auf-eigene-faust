@@ -246,7 +246,7 @@ if ($section_prolog) :
 					echo wpautop($mobility[$key]['value']);
 					
 					if (!empty($mobility[$key . '-image']['value'])) {
-						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image($mobility[$key . '-image']['value']) . '</div>';
+						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image($mobility[$key . '-image']['value'], 'medium-large') . '</div>';
 					}
 					
 					if (!empty($mobility[$key . '-address-coords']['value'])) {

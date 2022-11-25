@@ -11,3 +11,7 @@ figure {
 		font-size: $font-size-sm;
 	}
 }
+
+.ratio img {
+	object-fit: cover;
+}
