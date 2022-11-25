@@ -22,6 +22,7 @@ function twtheme_map_shortcode($atts = [])
 function twtheme_map($map_data, $args = [])
 {
 	$wrapper_type = isset($args['wrapper']) ? $args['wrapper'] : 'div';
+	$wrapper = '%s';
 	
 	if (empty(TWTHEME__OPTIONS['integration']['gmaps-api-key']) || !is_array($map_data)) {
 		return false;
@@ -32,7 +33,9 @@ function twtheme_map($map_data, $args = [])
 
 	$id = !empty($args['id']) ? $args['id'] : 'map-' . get_custom_id();
 	
-	$wrapper = '<' . $wrapper_type . ' ' . (isset($args['wrapper-class']) ? ' class="' . $args['wrapper-class'] . '">' : '') . '%s</' . $wrapper_type . '>';
+	if ($wrapper_type !== false) {
+		$wrapper = '<' . $wrapper_type . ' ' . (isset($args['wrapper-class']) ? ' class="' . $args['wrapper-class'] . '"' : '') . '>%s</' . $wrapper_type . '>';
+	}
 	
 	return sprintf($wrapper, "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' data-args='" . json_encode($args) . "' onclick='init_gmap(this)' style='background: red'></div>");
 }

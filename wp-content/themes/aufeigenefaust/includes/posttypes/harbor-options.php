@@ -18,22 +18,6 @@ function harbor_option_fields()
 					'label' => 'Hafen',
 				],
 				[
-					'id' => 'harbor-icon',
-					'name' => 'harbor-icon',
-					'type' => 'text',
-					'label' => 'Hafen',
-					'description' => 'FontAwesome SVG Path',
-					'column' => 'first',
-					'data-filter' => 'htmlentities',
-				],
-				[
-					'id' => 'harbor-color',
-					'name' => 'harbor-color',
-					'type' => 'color',
-					'label' => false,
-					'column' => 'last'
-				],
-				[
 					'id' => 'landing-stage-icon',
 					'name' => 'landing-stage-icon',
 					'type' => 'text',
@@ -45,6 +29,38 @@ function harbor_option_fields()
 				[
 					'id' => 'landing-stage-color',
 					'name' => 'landing-stage-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
+				[
+					'id' => 'shuttle-icon',
+					'name' => 'shuttle-icon',
+					'type' => 'text',
+					'label' => 'Hafenshuttle',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'shuttle-color',
+					'name' => 'shuttle-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
+				[
+					'id' => 'arrival-airport-icon',
+					'name' => 'arrival-airport-icon',
+					'type' => 'text',
+					'label' => 'Flughafen',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'arrival-airport-color',
+					'name' => 'arrival-airport-color',
 					'type' => 'color',
 					'label' => false,
 					'column' => 'last'

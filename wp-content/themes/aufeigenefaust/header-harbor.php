@@ -144,16 +144,6 @@ if ($section_prolog) :
 				<?php
 				$harbor_map_data = [];
 				
-				//if (twtheme_get_value($section_harbor['address-coords'])) {
-				//	$harbor_map_data[] = [
-				//		'address' => twtheme_get_value($section_harbor['address']),
-				//		'coords' => twtheme_get_value($section_harbor['address-coords']),
-				//		'title' => $harbor_headline,
-				//		'icon' => $options['icons']['harbor-icon'],
-				//		'color' => $options['icons']['harbor-color'],
-				//	];
-				//}
-				
 				foreach ($section_harbor['landing-stages'] as $landingstage) {
 					if (!twtheme_get_value($landingstage['address-coords'])) {
 						continue;
@@ -169,35 +159,49 @@ if ($section_prolog) :
 				}
 				
 				$full_map[] = $harbor_map_data;
+				echo twtheme_map($harbor_map_data, ['zoom' => '14', 'wrapper' => false]);
 				?>
-				<?= twtheme_map($harbor_map_data, ['zoom' => '14']) ?>
 			</div>
 		</div>
-	</div>
-
-	<?php $harbor_arrivals = $post_meta_data->get_group('harbor-arrivals'); ?>
-	<?php if ($harbor_arrivals) : ?>
-	<div class="container">
-		<div class="row">
+		<div class="row mt-5">
 			<div class="col-6 m-auto">
 				<?php
-				$toc_key = array_key_last($toc);
-				foreach ($harbor_arrivals as $arrival) {
-					if ($arrival['label'] != 'Text') {
-						$id = sanitize_title($arrival['label']);
-						echo '<h3>' . $arrival['label'] . '</h3>';
-						$toc[$toc_key]['childs'][] = [
-							'id' => $id,
-							'title' => $arrival['label'],
-						];
+				echo wpautop(twtheme_get_value($section_harbor['text']));
+				$harbor_arrivals = $post_meta_data->get_group('harbor-arrivals');
+				if ($harbor_arrivals) {
+					$toc_key = array_key_last($toc);
+					foreach ($harbor_arrivals as $key => $arrival) {
+						if (!empty($arrival[$key]['value'])) {
+							$harbor_arrivals_child_headline = twtheme_get_title($arrival[$key]);
+							$id = sanitize_title($harbor_arrivals_child_headline);
+							echo '<h3 id="' . $id . '">' . $harbor_arrivals_child_headline . '</h3>';
+							
+							echo wpautop(twtheme_get_value($arrival[$key]));
+							
+							if (!empty($arrival[$key . '-address-coords']['value'])) {
+								$arrival_map_data = [];
+								$arrival_map_data[] = [
+									'address' => twtheme_get_value($arrival[$key . '-address']),
+									'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
+									'title' => twtheme_get_title($arrival[$key . '-address']),
+									'icon' => $options['icons'][$key . '-icon'],
+									'color' => $options['icons'][$key . '-color'],
+								];
+								
+								$full_map[] = $arrival_map_data;
+								echo twtheme_map($arrival_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+							}
+														
+							$toc[$toc_key]['childs'][] = [
+								'id' => $id,
+								'title' => $harbor_arrivals_child_headline,
+							];
+						}
 					}
-					echo wpautop($arrival['value']);
-				}
-				?>
+				} ?>
 			</div>
+
 		</div>
-	</div>
-	<?php endif; ?>
 </section>
 <?php endif; ?>
 <?php $section_mobility = $post_meta_data->get_section('mobility'); ?>
@@ -263,7 +267,6 @@ if ($section_prolog) :
 						echo twtheme_map($mobility_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
 					}
 				}
-				
 				?>
 			</div>
 		</div>

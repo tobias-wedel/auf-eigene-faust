@@ -138,33 +138,10 @@ function twtheme_harbor_fields()
 					'name' => 'text',
 					'type' => 'editor',
 					'label' => 'Text',
-					'group' => 'harbor-arrivals',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
 				],
-				//[
-				//	'id' => 'address',
-				//	'name' => 'address',
-				//	'group' => 'gmaps',
-				//	'type' => 'text',
-				//	'label' => 'Adresse'
-				//],
-				//[
-				//	'id' => 'address-coords',
-				//	'name' => 'address-coords',
-				//	'group' => 'gmaps',
-				//	'type' => 'text',
-				//	'readonly' => true,
-				//	'editable' => true,
-				//	'label' => 'Koordinaten',
-				//	'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
-				//	'integration' => [
-				//		'tool' => 'gmaps',
-				//		'service' => 'geocoding',
-				//		'source' => 'address'
-				//	]
-				//],
 				[
 					'type' => 'headline',
 					'label' => 'Anlegestellen',
@@ -215,7 +192,9 @@ function twtheme_harbor_fields()
 					'name' => 'shuttle',
 					'type' => 'editor',
 					'label' => 'Text',
+					'title' => 'Hafenshuttle',
 					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -224,12 +203,15 @@ function twtheme_harbor_fields()
 					'id' => 'shuttle-address',
 					'name' => 'shuttle-address',
 					'type' => 'textarea',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
 					'label' => 'Adresse'
 				],
 				[
 					'id' => 'shuttle-address-coords',
 					'name' => 'shuttle-address-coords',
-					'group' => 'gmaps',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
 					'type' => 'text',
 					'readonly' => true,
 					'editable' => true,
@@ -249,8 +231,10 @@ function twtheme_harbor_fields()
 					'id' => 'arrival-airport',
 					'name' => 'arrival-airport',
 					'type' => 'editor',
-					'label' => 'Anfahrt Flughafen',
+					'label' => 'Text',
+					'title' => 'Anfahrt Flughafen',
 					'group' => 'harbor-arrivals',
+					'group-child' => 'arrival-airport',
 					'settings' => [
 						'textarea_rows' => '6',
 					]
@@ -259,12 +243,16 @@ function twtheme_harbor_fields()
 					'id' => 'arrival-airport-address',
 					'name' => 'arrival-airport-address',
 					'type' => 'textarea',
+					'group' => 'harbor-arrivals',
+					'title' => 'Flughafen',
+					'group-child' => 'arrival-airport',
 					'label' => 'Adresse'
 				],
 				[
 					'id' => 'arrival-airport-address-coords',
 					'name' => 'arrival-airport-address-coords',
-					'group' => 'gmaps',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'arrival-airport',
 					'type' => 'text',
 					'readonly' => true,
 					'editable' => true,
