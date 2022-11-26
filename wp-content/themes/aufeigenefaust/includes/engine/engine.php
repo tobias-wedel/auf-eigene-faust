@@ -28,7 +28,7 @@ function twtheme_admin_scripts($hook)
 	]);
 }
 
-twtheme_include_theme_files(
+twtheme_include_files(
 	[
 		'helper/helper',
 		'FieldBuilder',

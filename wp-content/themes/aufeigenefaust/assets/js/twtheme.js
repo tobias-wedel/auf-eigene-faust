@@ -192,10 +192,12 @@ function init_gmap(el) {
 		first_el_latlng = {lat: parseFloat(first_el_coords[0].trim()), lng: parseFloat(first_el_coords[1].trim())};
 
 	const map = new google.maps.Map(document.getElementById(el_id), {
-		center: first_el_latlng,
+		//	center: first_el_latlng,
 		zoom: args_data.zoom ? parseFloat(args_data.zoom) : 12,
 		mapId: '8c92906b2ba3b6a3',
 	});
+
+	let bounds = new google.maps.LatLngBounds();
 
 	check_ready();
 
@@ -227,6 +229,8 @@ function init_gmap(el) {
 				position: latlng,
 				title: property.title,
 			});
+
+			bounds.extend(advancedMarkerView.position);
 
 			const element = advancedMarkerView.element;
 
@@ -271,6 +275,18 @@ function init_gmap(el) {
 				return content;
 			}
 		}
+
+		map.fitBounds(bounds);
+
+		var listener = google.maps.event.addListener(map, 'idle', function () {
+			const current_zoom = map.zoom;
+
+			if (args_data.zoom && args_data.zoom < current_zoom) {
+				map.setZoom(parseFloat(args_data.zoom));
+			}
+
+			google.maps.event.removeListener(listener);
+		});
 
 		callback();
 	}

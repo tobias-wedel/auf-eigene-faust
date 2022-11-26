@@ -8,7 +8,7 @@ define('TWTHEME__ENGINE_PATH', TWTHEME__PATH . '/includes/engine');
 define('TWTHEME__OPTIONS', get_option('twtheme'));
 
 if (!function_exists('include_theme_files')) {
-	function twtheme_include_theme_files($files, $path)
+	function twtheme_include_files($files, $path)
 	{
 		foreach ($files as $file) {
 			require_once TWTHEME__DIR . '/' . $path . $file . '.php';
@@ -16,7 +16,7 @@ if (!function_exists('include_theme_files')) {
 	}
 }
 
-twtheme_include_theme_files(
+twtheme_include_files(
 	[
 		'scripts',
 		'helper',
