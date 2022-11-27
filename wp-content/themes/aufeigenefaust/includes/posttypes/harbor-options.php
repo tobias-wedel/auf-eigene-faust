@@ -15,7 +15,7 @@ function harbor_option_fields()
 			'fields' => [
 				[
 					'type' => 'headline',
-					'label' => 'Hafen',
+					'label' => 'Allgemein',
 				],
 				[
 					'id' => 'landing-stage-icon',
@@ -61,6 +61,22 @@ function harbor_option_fields()
 				[
 					'id' => 'arrival-airport-color',
 					'name' => 'arrival-airport-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
+				[
+					'id' => 'highlights-icon',
+					'name' => 'highlights-icon',
+					'type' => 'text',
+					'label' => 'Highlights',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'highlights-color',
+					'name' => 'highlights-color',
 					'type' => 'color',
 					'label' => false,
 					'column' => 'last'

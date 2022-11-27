@@ -118,6 +118,7 @@ ob_start();
 
 get_template_part('template-parts/harbor/about', '', $post_meta_data);
 get_template_part('template-parts/harbor/mobility', '', $post_meta_data);
+get_template_part('template-parts/harbor/highlights', '', $post_meta_data);
 
 $template_parts .= ob_get_contents();
 ob_end_clean();

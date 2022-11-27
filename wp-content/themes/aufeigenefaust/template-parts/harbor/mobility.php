@@ -16,7 +16,7 @@ if ($section_mobility) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$mobility_headline = sprintf(twtheme_get_value($section_mobility['headline']), $title);
+					$mobility_headline = sprintf(twtheme_get_value($section_mobility['headline']), get_the_title());
 					$id = sanitize_title($mobility_headline);
 				
 					echo '<h2 id="' . $id . '">' . $mobility_headline . '</h2>';

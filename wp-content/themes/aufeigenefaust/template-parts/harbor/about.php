@@ -16,7 +16,7 @@ if (!empty($section_harbor)) : ?>
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), $title);
+					$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), get_the_title());
 					$id = sanitize_title($harbor_headline);
 					
 					echo '<h2 id="' . $id . '">' . $harbor_headline . '</h2>';
