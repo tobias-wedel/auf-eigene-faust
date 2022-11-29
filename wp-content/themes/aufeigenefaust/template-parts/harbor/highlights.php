@@ -73,6 +73,19 @@ if ($section_highlights) : ?>
 						$map = array_merge($map, $highlight_map_data);
 						echo twtheme_map($highlight_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
 					}
+					
+					if (!empty(twtheme_get_value($highlight['direction'])) || !empty(twtheme_get_value($highlight['tickets']))) {
+						echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">';
+						echo '<ul class="icon-list" style="--columns: 1">';
+						if (!empty(twtheme_get_value($highlight['direction']))) {
+							echo '<li class="direction"><i class="fal fa-location-dot"></i><strong class="d-block">' . $highlight['direction']['label'] . '</strong>' . twtheme_get_value($highlight['direction']) . '</li>';
+						}
+						if (!empty(twtheme_get_value($highlight['tickets']))) {
+							echo '<li class="direction"><i class="fal fa-ticket"></i><strong class="d-block">' . $highlight['tickets']['label'] . '</strong>' . twtheme_get_value($highlight['tickets']) . '</li>';
+						}
+						echo '</ul>';
+						echo '</div>';
+					}
 				}
 				?>
 			</div>

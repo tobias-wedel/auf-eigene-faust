@@ -8,9 +8,9 @@ class TwthemeGetPostMeta
 	public function __construct($post_id)
 	{
 		$post_type = get_current_post_type();
-		$post_meta = get_post_meta($post_id);
-		$post_fields = $this->get_post_type_fields($post_type);
-		$this->full_post_meta = $this->merge_arrays($post_meta, $post_fields);
+		$this->post_meta = get_post_meta($post_id);
+		$this->post_fields = $this->get_post_type_fields($post_type);
+		$this->full_post_meta = $this->merge_arrays();
 	}
 	
 	public function get_post_meta()
@@ -31,9 +31,12 @@ class TwthemeGetPostMeta
 		return $fields;
 	}
 	
-	private function merge_arrays($post_meta, $fields)
+	private function merge_arrays()
 	{
 		$new_array = [];
+		
+		$fields = $this->post_fields;
+		$post_meta = $this->post_meta;
 		
 		foreach ($fields as $first_level_key => $field_first_level) {
 			foreach ($field_first_level['fields'] as $second_level_key => $field_second_level) {
@@ -50,8 +53,8 @@ class TwthemeGetPostMeta
 						foreach ($field_second_level['fields'][0] as $repeater_field) {
 							foreach ($repeater_field as $field) {
 								$value = $post_meta_array[$field_second_level['name']][$i][$repeater_field['name']];
-								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = !empty($field_data['label']) ? $repeater_field['label'] : '';
-								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['placeholder'] = !empty($field_data['placeholder']) ? $repeater_field['placeholder'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = !empty($repeater_field['label']) ? $repeater_field['label'] : '';
+								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['placeholder'] = !empty($repeater_field['placeholder']) ? $repeater_field['placeholder'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group'] = !empty($repeater_field['group']) ? $repeater_field['group'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group-child'] = !empty($repeater_field['group-child']) ? $repeater_field['group-child'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['id'] = !empty($repeater_field['id']) ? $repeater_field['id'] : '';
@@ -81,22 +84,42 @@ class TwthemeGetPostMeta
 	{
 		$data = $this->full_post_meta;
 		
+		
 		$group_data = [];
 		foreach ($data as $key_first_level => $data_first_level) {
 			foreach ($data_first_level as $key_second_level => $data_second_level) {
-				if (!array_search($group_name, $data_second_level)) {
-					continue;
-				}
-				
-				// Check for a group child and make it sublevel
-				if (!empty($data_second_level['group-child'])) {
-					$group_data[$data_second_level['group-child']][$data_second_level['id']] = $data_second_level;
+				// Check for deeper elements (repeater)
+				if (isset($data_second_level[0])) {
+					foreach ($data_second_level as $key_third_level => $data_third_level) {
+						foreach ($data_third_level as $key_fourth_level => $data_fourth_level) {
+							if (!array_search($group_name, $data_fourth_level)) {
+								continue;
+							}
+						
+							// Check for a group child and make it sublevel
+							if (!empty($data_fourth_level['group-child'])) {
+								$group_data[$key_third_level][$data_fourth_level['group-child']][$data_fourth_level['id']] = $data_fourth_level;
+							} else {
+								$group_data[$key_third_level][$key_fourth_level] = $data_fourth_level;
+							}
+						}
+					}
 				} else {
-					$group_data[$key_second_level] = $data_second_level;
+					if (!array_search($group_name, $data_second_level)) {
+						continue;
+					}
+					
+					// Check for a group child and make it sublevel
+					if (!empty($data_second_level['group-child'])) {
+						$group_data[$data_second_level['group-child']][$data_second_level['id']] = $data_second_level;
+					} else {
+						$group_data[$key_second_level] = $data_second_level;
+					}
 				}
 			}
 		}
 		return $group_data;
+		print_rpre($group_data);
 	}
 	
 	public function get_section($section_name)

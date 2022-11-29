@@ -82,6 +82,22 @@ function harbor_option_fields()
 					'column' => 'last'
 				],
 				[
+					'id' => 'locals-icon',
+					'name' => 'locals-icon',
+					'type' => 'text',
+					'label' => 'Lokale Anbieter',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'locals-color',
+					'name' => 'locals-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
+				[
 					'type' => 'headline',
 					'label' => 'Mobilität',
 				],

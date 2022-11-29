@@ -1019,7 +1019,6 @@ function twtheme_harbor_fields()
 							[
 								'id' => 'address-coords',
 								'name' => 'address-coords',
-					'group' => 'gmaps',
 								'type' => 'text',
 								'readonly' => true,
 								'editable' => true,
@@ -1036,24 +1035,28 @@ function twtheme_harbor_fields()
 								'name' => 'facebook',
 								'type' => 'text',
 								'label' => 'Facebook',
+								'group' => 'local-urls',
 							],
 							[
 								'id' => 'instagram',
 								'name' => 'instagram',
 								'type' => 'text',
 								'label' => 'Instagram',
+								'group' => 'local-urls',
 							],
 							[
 								'id' => 'website',
 								'name' => 'website',
 								'type' => 'text',
 								'label' => 'Website',
+								'group' => 'local-urls',
 							],
 							[
 								'id' => 'booking',
 								'name' => 'booking',
 								'type' => 'text',
 								'label' => 'Buchen URL',
+								'group' => 'local-urls',
 							],
 						]
 					],

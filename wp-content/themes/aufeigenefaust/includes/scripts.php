@@ -32,9 +32,9 @@ function twtheme_wp_enqueue_scripts()
 	wp_enqueue_script('fontawesome', TWTHEME__PATH.'/assets/fontawesome/js/fontawesome.min.js', '', TWTHEME__VERSION, true);
 	//wp_enqueue_script('fontawesome-thin', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/thin.min.js', '', TWTHEME__VERSION, true);
 	wp_enqueue_script('fontawesome-light', TWTHEME__PATH . '/assets/fontawesome/js/light.min.js', '', TWTHEME__VERSION, true);
+	wp_enqueue_script('fontawesome-brands', TWTHEME__PATH . '/assets/fontawesome/js/brands.min.js', '', TWTHEME__VERSION, true);
 	// wp_enqueue_script('fontawesome-regular', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/regular.min.js', '', TWTHEME__VERSION, true);
 	// wp_enqueue_script('fontawesome-solid', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/solid.min.js', '', TWTHEME__VERSION, true);
-	// wp_enqueue_script('fontawesome-brands', TWTHEME__PATH . '/node_modules/@fontawesome/fontawesome-pro/js/brands.min.js', '', TWTHEME__VERSION, true);
 	
 	// BOOTSTRAP
 	wp_enqueue_script('bootstrap', TWTHEME__PATH . '/assets/js/bootstrap.js', '', TWTHEME__VERSION);

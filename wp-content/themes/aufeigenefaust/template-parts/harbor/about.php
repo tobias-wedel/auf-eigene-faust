@@ -80,7 +80,7 @@ if (!empty($section_harbor)) : ?>
 								$arrival_map_data[] = [
 									'address' => twtheme_get_value($arrival[$key . '-address']),
 									'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
-									'title' => twtheme_get_title($arrival[$key . '-address']),
+									'title' => twtheme_get_title($arrival[$key]),
 									'icon' => $options['icons'][$key . '-icon'],
 									'color' => $options['icons'][$key . '-color'],
 								];
