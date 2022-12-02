@@ -30,3 +30,48 @@ ul {
 	li {
 	}
 }
+
+ol.toc,
+ol.toc ol {
+	counter-reset: section;
+	list-style-type: none;
+}
+
+ol.toc {
+	padding: 0;
+
+	li {
+		padding-left: 1.3rem;
+		position: relative;
+		margin: 0.5rem 0;
+		line-height: 1.2;
+
+		ol {
+			padding-left: 1rem;
+		}
+
+		li {
+			padding-left: 2rem;
+		}
+
+		&::before {
+			position: absolute;
+			left: 0;
+			counter-increment: section;
+			content: counters(section, '.') '. ';
+		}
+	}
+
+	a {
+		text-decoration: none;
+		display: block;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	> li > a {
+		font-weight: bold;
+	}
+}

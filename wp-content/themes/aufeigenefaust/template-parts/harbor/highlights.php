@@ -11,7 +11,7 @@ $section_highlights = $args->get_section('highlights');
 $options = get_option('twtheme_harbor_options');
 
 if ($section_highlights) : ?>
-<section id="mobilitaet" class="py-spacer">
+<section id="highlights" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
@@ -71,11 +71,14 @@ if ($section_highlights) : ?>
 						];
 						
 						$map = array_merge($map, $highlight_map_data);
+						
+						echo '<div class="mx-ngutter">';
 						echo twtheme_map($highlight_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+						echo '</div>';
 					}
 					
 					if (!empty(twtheme_get_value($highlight['direction'])) || !empty(twtheme_get_value($highlight['tickets']))) {
-						echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">';
+						echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter">';
 						echo '<ul class="icon-list" style="--columns: 1">';
 						if (!empty(twtheme_get_value($highlight['direction']))) {
 							echo '<li class="direction"><i class="fal fa-location-dot"></i><strong class="d-block">' . $highlight['direction']['label'] . '</strong>' . twtheme_get_value($highlight['direction']) . '</li>';

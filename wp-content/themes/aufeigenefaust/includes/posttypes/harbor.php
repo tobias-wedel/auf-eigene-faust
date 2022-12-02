@@ -841,7 +841,7 @@ function twtheme_harbor_fields()
 					'name' => 'headline',
 					'type' => 'text',
 					'label' => 'Headline',
-					'placeholder' => '%s Seheswürdigkeiten',
+					'placeholder' => '%s Sehens&shy;würdigkeiten',
 					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
 				],
 				[

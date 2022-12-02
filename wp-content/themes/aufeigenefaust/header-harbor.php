@@ -121,6 +121,8 @@ get_template_part('template-parts/harbor/mobility', '', $post_meta_data);
 get_template_part('template-parts/harbor/highlights', '', $post_meta_data);
 get_template_part('template-parts/harbor/activity', '', $post_meta_data);
 get_template_part('template-parts/harbor/locals', '', $post_meta_data);
+get_template_part('template-parts/harbor/faq', '', $post_meta_data);
+get_template_part('template-parts/harbor/affiliates', '', $post_meta_data);
 
 $template_parts .= ob_get_contents();
 ob_end_clean();
@@ -134,26 +136,37 @@ set_query_var('toc', false);
 <section>
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-9 mx-auto">
-				<?php echo twtheme_map($map, ['zoom' => '16', 'wrapper-class' => 'ratio ratio-16x9']); ?>
-				<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">
-					<ol>
-						<?php
-						foreach ($toc as $chapter) {
-							echo '<li><a href="#' . $chapter['id'] . '">' . $chapter['title'] . '</a></li>';
-							
-							if (isset($chapter['childs'])) {
-								echo '<ol>';
-								
-								foreach ($chapter['childs'] as $child_chapter) {
-									echo '<li><a href="#' . $child_chapter['id'] . '">' . $child_chapter['title'] . '</a></li>';
-								}
-								
-								echo '</ol>';
-							}
-						}
-						?>
-					</ol>
+			<div class="col-lg-10 mx-auto">
+				<?php
+				echo twtheme_map($map, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+				?>
+				<div class="bg-gray-100 p-gutter bg-light mt-spacer">
+					<div class="row">
+						<div class="col-8 mx-auto">
+							<div class="py-6 px-gutter ">
+								<h2>Inhaltsverzeichnis</h2>
+								<ol class="toc">
+									<?php
+									foreach ($toc as $chapter) {
+										echo '<li><a href="#' . $chapter['id'] . '">' . $chapter['title'] . '</a>';
+										
+										if (isset($chapter['childs'])) {
+											echo '<ol>';
+											
+											foreach ($chapter['childs'] as $child_chapter) {
+												echo '<li><a href="#' . $child_chapter['id'] . '">' . $child_chapter['title'] . '</a></li>';
+											}
+											
+											echo '</ol>';
+										}
+										echo '</li>';
+									}
+									?>
+								</ol>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>

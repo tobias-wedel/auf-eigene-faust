@@ -11,7 +11,7 @@ $section_activity = $args->get_section('activity');
 $options = get_option('twtheme_harbor_options');
 
 if (!empty($section_activity['list'][0]['title']['value'])) : ?>
-<section id="mobilitaet" class="py-spacer">
+<section id="aktivitaeten" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">

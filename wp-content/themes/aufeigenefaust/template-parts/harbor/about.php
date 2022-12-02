@@ -11,7 +11,7 @@ $section_harbor = $args->get_section('about');
 $options = get_option('twtheme_harbor_options');
 
 if (!empty($section_harbor)) : ?>
-<section id="einleitung" class="py-spacer">
+<section id="hafen" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
@@ -86,7 +86,9 @@ if (!empty($section_harbor)) : ?>
 								];
 								
 								$map = array_merge($map, $arrival_map_data);
+								echo '<div class="mx-ngutter">';
 								echo twtheme_map($arrival_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+								echo '</div>';
 							}
 														
 							$toc[$toc_key]['childs'][] = [

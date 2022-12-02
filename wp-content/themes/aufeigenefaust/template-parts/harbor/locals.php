@@ -11,7 +11,7 @@ $section_locals = $args->get_section('locals');
 $options = get_option('twtheme_harbor_options');
 
 if (!empty($section_locals['list'][0]['title']['value'])) : ?>
-<section id="mobilitaet" class="py-spacer">
+<section id="lokales" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
@@ -71,7 +71,9 @@ if (!empty($section_locals['list'][0]['title']['value'])) : ?>
 						];
 						
 						$map = array_merge($map, $local_map_data);
+						echo '<div class="mx-ngutter">';
 						echo twtheme_map($local_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+						echo '</div>';
 					}
 					$local_urls = $args->get_group('local-urls');
 

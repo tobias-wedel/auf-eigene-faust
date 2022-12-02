@@ -69,7 +69,9 @@ if ($section_mobility) : ?>
 						];
 						
 						$map = array_merge($map, $mobility_map_data);
+						echo '<div class="mx-ngutter">';
 						echo twtheme_map($mobility_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+						echo '</div>';
 					}
 				}
 				?>

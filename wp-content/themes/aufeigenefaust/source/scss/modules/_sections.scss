@@ -1,0 +1,13 @@
+section {
+	> hr {
+		margin: ($spacer * 3) 0;
+	}
+
+	h3 {
+		&:not(:first-child) {
+			margin-top: $spacer * 3;
+		}
+
+		margin-bottom: $spacer * 2;
+	}
+}
