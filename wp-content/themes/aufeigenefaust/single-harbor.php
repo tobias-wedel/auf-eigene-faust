@@ -55,15 +55,18 @@ if ($section_prolog) :
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
-				$gallery = do_shortcode('[splide images="' . $section_prolog['gallery']['value'] . '" thumbnails="true" title="Galerie über ' . $title . '" id="' . $title . '" caption="true" class="mx-ngutter"]');
-				$prolog = wpautop($section_prolog['prolog']['value']);
-				
-				// Add gallery to prolog after first paragraph
-				if (!empty($section_prolog['gallery']['value'])) {
-					$prolog = preg_replace('/(.*?)\n/', '$1' . $gallery, $prolog, 1);
-				}
-				
-				echo $prolog;?>
+					$gallery = '<div class="mx-ngutter">';
+					$gallery .= do_shortcode('[splide images="' . $section_prolog['gallery']['value'] . '" thumbnails="true" title="Galerie über ' . $title . '" id="' . $title . '" caption="true" class="mx-ngutter"]');
+					$gallery .= '</div>';
+					$prolog = wpautop($section_prolog['prolog']['value']);
+					
+					// Add gallery to prolog after first paragraph
+					if (!empty($section_prolog['gallery']['value'])) {
+						$prolog = preg_replace('/(.*?)\n/', '$1' . $gallery, $prolog, 1);
+					}
+					
+					echo $prolog;
+					?>
 			</div>
 		</div>
 		<?php endif; ?>

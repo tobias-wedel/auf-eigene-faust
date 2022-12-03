@@ -54,11 +54,10 @@ function twtheme_splide_shortcode($atts)
 		$html .= '</div>';
 		$html .= '</div>';
 		
-		$splide_javascript .= '
-			var ' . $slider_id . '_slider_nav = new Splide("#' . $slider_id .'-nav", {
+		$splide_javascript .= '			
+			let splide_nav_options = {
 				isNavigation: true,
 				gap: 10,
-				focus: "center",
 				pagination: false,
 				perPage: 5,
 				arrows: false,
@@ -73,7 +72,15 @@ function twtheme_splide_shortcode($atts)
 						fixedHeight : 38,
 					},
 				},
-			});
+			};
+			
+			if(document.querySelectorAll("#' . $slider_id .'-nav .splide__slide").length > 5) {
+				splide_nav_options.focus = "center";
+			} else {
+				splide_nav_options.focus = "left";
+			}
+			
+			var ' . $slider_id . '_slider_nav = new Splide("#' . $slider_id .'-nav", splide_nav_options);
 			
 			' . $slider_id . '_slider.sync( ' . $slider_id . '_slider_nav );
 			' . $slider_id . '_slider.mount();
