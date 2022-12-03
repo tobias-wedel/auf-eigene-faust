@@ -24,6 +24,10 @@ ul {
 				font-size: $font-size-lg;
 				width: $column-spacer * 2;
 			}
+
+			a {
+				word-break: break-all;
+			}
 		}
 	}
 

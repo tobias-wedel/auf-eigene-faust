@@ -35,11 +35,11 @@ set_query_var('toc', false);
 ?>
 <nav id="toc-scroller" class="navbar navbar-expand bg-white sticky-top justify-content-center border-bottom p-0">
 	<ul class="nav navbar-nav">
-		<li class="nav-item"><a class="nav-link active" href="#einleitung">Einleitung</a></li>
-		<li class="nav-item"><a class="nav-link" href="#inhaltsverzeichnis">Inhalt</a></li>
+		<li class="nav-item"><a class="nav-link active" href="#einleitung"><span>Einleitung</span></a></li>
+		<li class="nav-item"><a class="nav-link" href="#inhaltsverzeichnis"><span>Inhalt</span></a></li>
 		<?php
 			foreach ($toc as $chapter) {
-				echo '<li class="nav-item"><a class="nav-link" href="#' . $chapter['id'] . '">' . $chapter['short'] . '</a></li>';
+				echo '<li class="nav-item"><a class="nav-link" href="#' . $chapter['id'] . '"><span>' . $chapter['short'] . '</span></a></li>';
 			}
 		?>
 	</ul>
@@ -53,7 +53,7 @@ if ($section_prolog) :
 	<div class="container">
 		<?php if ($section_prolog['prolog']['value']) : ?>
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				$gallery = do_shortcode('[splide images="' . $section_prolog['gallery']['value'] . '" thumbnails="true" title="Galerie über ' . $title . '" id="' . $title . '" caption="true" class="mx-ngutter"]');
 				$prolog = wpautop($section_prolog['prolog']['value']);
@@ -68,7 +68,7 @@ if ($section_prolog) :
 		</div>
 		<?php endif; ?>
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 					$harbor_quickinfos = $post_meta_data->get_group('harbor-quick-infos');
 					

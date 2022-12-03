@@ -17,7 +17,7 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 <section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				
 					echo '<h2>' . $locals_headline . '</h2>';
@@ -36,7 +36,7 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 	<?php if ($locals) : ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				$toc_key = array_key_last($toc);
 				foreach ($locals as $key => $local) {
@@ -80,9 +80,13 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 					$local_urls = $args->get_group('local-urls');
 
 					echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">';
-					echo '<ul class="icon-list" style="--columns: 4">';
+					echo '<ul class="icon-list" style="--columns: 3">';
 					
 					foreach ($local_urls[$key] as $local_url_key => $url_data) {
+						if (!twtheme_get_value($url_data)) {
+							continue;
+						}
+						
 						switch ($url_data['id']) {
 							case 'facebook':
 								$icon = 'fab fa-facebook';
@@ -98,7 +102,7 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 								break;
 						}
 						
-						echo '<li class="direction ' . $url_data['id'] . '"><i class="' . $icon . '"></i><strong class="d-block">' . $url_data['label'] . '</strong>' . twtheme_get_value($url_data) . '</li>';
+						echo '<li class="direction ' . $url_data['id'] . '"><i class="' . $icon . '"></i><strong class="d-block">' . $url_data['label'] . '</strong>' . get_hyperlink(twtheme_get_value($url_data)) . '</li>';
 					}
 					
 					echo '</ul>';

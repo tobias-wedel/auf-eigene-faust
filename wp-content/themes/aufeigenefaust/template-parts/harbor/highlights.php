@@ -9,15 +9,14 @@ $toc = get_query_var('toc');
 $section_highlights = $args->get_section('highlights');
 
 $options = get_option('twtheme_harbor_options');
-
-if ($section_highlights) :
+if ($section_highlights['list'][0]['title']['value']) :
 	$highlights_headline = sprintf(twtheme_get_value($section_highlights['headline']), get_the_title());
 	$id = sanitize_title($highlights_headline);
 ?>
 <section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 					echo '<h2>' . $highlights_headline . '</h2>';
 				
@@ -32,10 +31,9 @@ if ($section_highlights) :
 	</div>
 	<hr>
 	<?php $highlights = $section_highlights['list']; ?>
-	<?php if ($highlights) : ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				$toc_key = array_key_last($toc);
 				foreach ($highlights as $key => $highlight) {
@@ -87,10 +85,7 @@ if ($section_highlights) :
 							echo '<li class="direction"><i class="fal fa-location-dot"></i><strong class="d-block">' . $highlight['direction']['label'] . '</strong>' . twtheme_get_value($highlight['direction']) . '</li>';
 						}
 						if (!empty(twtheme_get_value($highlight['tickets']))) {
-							$value = twtheme_get_value($highlight['tickets']);
-							$value = filter_var($value, FILTER_VALIDATE_URL) !== false ? '<a href="' . $value . '" target="_blank" rel="noopener nofollow noreferrer">' . parse_url($value, PHP_URL_HOST) . '</a>' : $value;
-							
-							echo '<li class="direction"><i class="fal fa-ticket"></i><strong class="d-block">' . $highlight['tickets']['label'] . '</strong>' . $value . '</li>';
+							echo '<li class="direction"><i class="fal fa-ticket"></i><strong class="d-block">' . $highlight['tickets']['label'] . '</strong>' . get_hyperlink(twtheme_get_value($highlight['tickets'])) . '</li>';
 						}
 						echo '</ul>';
 						echo '</div>';
@@ -100,7 +95,6 @@ if ($section_highlights) :
 			</div>
 		</div>
 	</div>
-	<?php endif; ?>
 </section>
 <?php endif;
 

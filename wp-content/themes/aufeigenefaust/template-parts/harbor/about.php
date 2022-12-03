@@ -17,7 +17,7 @@ if (!empty($section_harbor)) :
 <section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 					
 					echo '<h2>' . $harbor_headline . '</h2>';
@@ -34,6 +34,7 @@ if (!empty($section_harbor)) :
 	<hr>
 	<div class="container mb-spacer">
 		<div class="row">
+			<?php if (twtheme_get_value($section_harbor['gallery'])) : ?>
 			<div class="col-6 offset-lg-1 pe-lg-0">
 				<div class="ratio ratio-16x11">
 					<?= wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
@@ -61,9 +62,37 @@ if (!empty($section_harbor)) :
 				echo twtheme_map($harbor_map_data, ['zoom' => '14', 'wrapper' => false]);
 				?>
 			</div>
+			<?php else : ?>
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
+				<?php
+					$harbor_map_data = [];
+					
+					foreach ($section_harbor['landing-stages'] as $landingstage) {
+						if (!twtheme_get_value($landingstage['address-coords'])) {
+							continue;
+						}
+						
+						$harbor_map_data[] = [
+							'address' => twtheme_get_value($landingstage['address']),
+							'coords' => twtheme_get_value($landingstage['address-coords']),
+							'title' => twtheme_get_value($landingstage['name']),
+							'icon' => $options['icons']['landing-stage-icon'],
+							'color' => $options['icons']['landing-stage-color'],
+						];
+					}
+					
+					$map = array_merge($map, $harbor_map_data);
+					
+					echo '<div class="mx-ngutter">';
+					echo twtheme_map($harbor_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+					echo '</div>';
+				?>
+			</div>
+			<?php endif; ?>
+
 		</div>
 		<div class="row mt-5">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				echo wpautop(twtheme_get_value($section_harbor['text']));
 				$harbor_arrivals = $args->get_group('harbor-arrivals');

@@ -1,14 +1,19 @@
 #toc-scroller {
 	a {
-		padding: ($spacer) ($spacer * 0.75);
+		padding: 0 ($spacer * 0.75);
 		color: $gray-400;
-		position: relative;
+		font-weight: 500;
+
+		span {
+			padding: $spacer 0;
+			display: block;
+			position: relative;
+		}
 
 		&.active {
-			font-weight: 500;
 			color: $primary;
 
-			&::after {
+			span::after {
 				content: '';
 				height: 3px;
 				width: 100%;
@@ -17,6 +22,10 @@
 				left: 0;
 				background: $teal-400;
 			}
+		}
+
+		&:hover {
+			color: $primary;
 		}
 	}
 }

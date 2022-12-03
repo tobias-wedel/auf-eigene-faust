@@ -113,3 +113,16 @@ function get_custom_id(int $length = 6)
 {
 	return bin2hex(random_bytes(($length - ($length % 2)) / 2));
 }
+
+function get_hyperlink($url, $title = '')
+{
+	if (filter_var($url, FILTER_VALIDATE_URL) !== false) {
+		if (empty($title)) {
+			$title = parse_url($url, PHP_URL_HOST);
+		}
+		
+		return '<a href="' . $url . '" target="_blank" rel="noopener nofollow noreferrer">' . $title . '</a>';
+	} else {
+		return $url;
+	}
+}

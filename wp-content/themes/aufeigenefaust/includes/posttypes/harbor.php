@@ -1060,7 +1060,7 @@ function twtheme_harbor_fields()
 								'id' => 'booking',
 								'name' => 'booking',
 								'type' => 'text',
-								'label' => 'Buchen URL',
+								'label' => 'Buchen',
 								'group' => 'local-urls',
 							],
 						]

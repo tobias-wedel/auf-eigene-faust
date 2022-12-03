@@ -17,7 +17,7 @@ if (!empty($section_activity['list'][0]['title']['value'])) :
 <section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 					echo '<h2>' . $activity_headline . '</h2>';
 				
@@ -35,7 +35,7 @@ if (!empty($section_activity['list'][0]['title']['value'])) :
 	<?php if ($activitiys) : ?>
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				$toc_key = array_key_last($toc);
 				foreach ($activitiys as $key => $activitiy) {
