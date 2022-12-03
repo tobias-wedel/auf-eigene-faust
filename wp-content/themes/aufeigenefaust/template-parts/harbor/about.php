@@ -10,20 +10,22 @@ $section_harbor = $args->get_section('about');
 
 $options = get_option('twtheme_harbor_options');
 
-if (!empty($section_harbor)) : ?>
-<section id="hafen" class="py-spacer">
+if (!empty($section_harbor)) :
+	$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), get_the_title());
+	$id = sanitize_title($harbor_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), get_the_title());
-					$id = sanitize_title($harbor_headline);
 					
-					echo '<h2 id="' . $id . '">' . $harbor_headline . '</h2>';
+					echo '<h2>' . $harbor_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $harbor_headline,
+						'short' => $section_harbor['headline']['title'],
 					];
 				?>
 			</div>

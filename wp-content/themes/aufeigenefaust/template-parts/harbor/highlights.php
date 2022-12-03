@@ -10,20 +10,21 @@ $section_highlights = $args->get_section('highlights');
 
 $options = get_option('twtheme_harbor_options');
 
-if ($section_highlights) : ?>
-<section id="highlights" class="py-spacer">
+if ($section_highlights) :
+	$highlights_headline = sprintf(twtheme_get_value($section_highlights['headline']), get_the_title());
+	$id = sanitize_title($highlights_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$highlights_headline = sprintf(twtheme_get_value($section_highlights['headline']), get_the_title());
-					$id = sanitize_title($highlights_headline);
-				
-					echo '<h2 id="' . $id . '">' . $highlights_headline . '</h2>';
+					echo '<h2>' . $highlights_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $highlights_headline,
+						'short' => $section_highlights['headline']['title'],
 					];
 				?>
 			</div>

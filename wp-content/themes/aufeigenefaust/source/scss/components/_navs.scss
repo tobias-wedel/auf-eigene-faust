@@ -1,0 +1,22 @@
+#toc-scroller {
+	a {
+		padding: ($spacer) ($spacer * 0.75);
+		color: $gray-400;
+		position: relative;
+
+		&.active {
+			font-weight: 500;
+			color: $primary;
+
+			&::after {
+				content: '';
+				height: 3px;
+				width: 100%;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				background: $teal-400;
+			}
+		}
+	}
+}

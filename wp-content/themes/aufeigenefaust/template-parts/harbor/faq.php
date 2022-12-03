@@ -10,20 +10,21 @@ $section_faq = $args->get_section('faq');
 
 $options = get_option('twtheme_harbor_options');
 
-if (!empty($section_faq['faqs'][0]['question']['value'])) : ?>
-<section id="faqs" class="py-spacer">
+if (!empty($section_faq['faqs'][0]['question']['value'])) :
+	$faqs_headline = sprintf(twtheme_get_value($section_faq['headline']), get_the_title());
+	$id = sanitize_title($faqs_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$faqs_headline = sprintf(twtheme_get_value($section_faq['headline']), get_the_title());
-					$id = sanitize_title($faqs_headline);
-				
-					echo '<h2 id="' . $id . '">' . $faqs_headline . '</h2>';
+					echo '<h2>' . $faqs_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $faqs_headline,
+						'short' => $section_faq['headline']['title'],
 					];
 				?>
 			</div>

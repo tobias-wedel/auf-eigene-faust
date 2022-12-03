@@ -10,20 +10,22 @@ $section_mobility = $args->get_section('mobility');
 
 $options = get_option('twtheme_harbor_options');
 
-if ($section_mobility) : ?>
-<section id="mobilitaet" class="py-spacer">
+if ($section_mobility) :
+	$mobility_headline = sprintf(twtheme_get_value($section_mobility['headline']), get_the_title());
+	$id = sanitize_title($mobility_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$mobility_headline = sprintf(twtheme_get_value($section_mobility['headline']), get_the_title());
-					$id = sanitize_title($mobility_headline);
 				
-					echo '<h2 id="' . $id . '">' . $mobility_headline . '</h2>';
+					echo '<h2>' . $mobility_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $mobility_headline,
+						'short' => $section_mobility['headline']['title'],
 					];
 				?>
 			</div>

@@ -121,7 +121,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Der Kreuzfahrthafen %s',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Der Hafen'
 				],
 				[
 					'type' => 'headline',
@@ -277,7 +278,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Unterwegs in %s auf eigene Faust',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Mobilität'
 				],
 				[
 					'id' => 'intro',
@@ -842,7 +844,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => '%s Sehens&shy;würdigkeiten',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Sehenswürdigkeiten'
 				],
 				[
 					'type' => 'headline',
@@ -928,7 +931,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Aktivitäten in %s',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Aktivitäten'
 				],
 				[
 					'type' => 'headline',
@@ -977,7 +981,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Lokale Anbieter in %s',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Lokale Anbieter'
 				],
 				[
 					'type' => 'headline',
@@ -1074,7 +1079,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Häufige Fragen zu %s',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'FAQ'
 				],
 				[
 					'type' => 'headline',
@@ -1117,7 +1123,8 @@ function twtheme_harbor_fields()
 					'type' => 'text',
 					'label' => 'Headline',
 					'placeholder' => 'Landausflüge in %s buchen',
-					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.'
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Buchen'
 				],
 				[
 					'id' => 'intro',

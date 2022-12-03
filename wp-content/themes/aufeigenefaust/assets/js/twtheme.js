@@ -313,6 +313,9 @@ document.addEventListener('DOMContentLoaded', function (event) {
 	set_current_viewport_on_body();
 	set_css_vars();
 	click_dummies();
+	var scrollSpy = new bootstrap.ScrollSpy(document.body, {
+		target: '#toc-scroller',
+	});
 
 	// Window resize action
 	window.onresize = function () {

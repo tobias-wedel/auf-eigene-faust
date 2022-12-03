@@ -10,20 +10,22 @@ $section_affiliates = $args->get_section('affiliates');
 
 $options = get_option('twtheme_harbor_options');
 
-if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_get_value($section_affiliates['affiliates'][0]['title']))) : ?>
-<section id="buchen" class="py-spacer">
+if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_get_value($section_affiliates['affiliates'][0]['title']))) :
+	$affiliates_headline = sprintf(twtheme_get_value($section_affiliates['headline']), get_the_title());
+	$id = sanitize_title($affiliates_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$affiliates_headline = sprintf(twtheme_get_value($section_affiliates['headline']), get_the_title());
-					$id = sanitize_title($affiliates_headline);
 				
-					echo '<h2 id="' . $id . '">' . $affiliates_headline . '</h2>';
+					echo '<h2>' . $affiliates_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $affiliates_headline,
+						'short' => $section_affiliates['headline']['title'],
 					];
 				?>
 			</div>
@@ -32,7 +34,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 	<hr>
 	<div class="container">
 		<div class="row">
-			<div class="col-6 m-auto">
+			<div class="col-lg-12 m-auto">
 				<?php echo wpautop(twtheme_get_value($section_affiliates['intro'])); ?>
 
 				<?php

@@ -58,7 +58,7 @@ function twtheme_splide_shortcode($atts)
 			var ' . $slider_id . '_slider_nav = new Splide("#' . $slider_id .'-nav", {
 				isNavigation: true,
 				gap: 10,
-				focus: "left",
+				focus: "center",
 				pagination: false,
 				perPage: 5,
 				arrows: false,

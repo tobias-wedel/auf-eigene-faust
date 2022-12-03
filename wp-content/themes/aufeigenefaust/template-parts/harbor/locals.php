@@ -10,20 +10,22 @@ $section_locals = $args->get_section('locals');
 
 $options = get_option('twtheme_harbor_options');
 
-if (!empty($section_locals['list'][0]['title']['value'])) : ?>
-<section id="lokales" class="py-spacer">
+if (!empty($section_locals['list'][0]['title']['value'])) :
+	$locals_headline = sprintf(twtheme_get_value($section_locals['headline']), get_the_title());
+	$id = sanitize_title($locals_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$locals_headline = sprintf(twtheme_get_value($section_locals['headline']), get_the_title());
-					$id = sanitize_title($locals_headline);
 				
-					echo '<h2 id="' . $id . '">' . $locals_headline . '</h2>';
+					echo '<h2>' . $locals_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $locals_headline,
+						'short' => $section_locals['headline']['title'],
 					];
 				?>
 			</div>

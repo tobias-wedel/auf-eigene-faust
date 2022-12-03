@@ -10,20 +10,21 @@ $section_activity = $args->get_section('activity');
 
 $options = get_option('twtheme_harbor_options');
 
-if (!empty($section_activity['list'][0]['title']['value'])) : ?>
-<section id="aktivitaeten" class="py-spacer">
+if (!empty($section_activity['list'][0]['title']['value'])) :
+	$activity_headline = sprintf(twtheme_get_value($section_activity['headline']), get_the_title());
+	$id = sanitize_title($activity_headline);
+?>
+<section id="<?= $id ?>" class="py-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-6 m-auto">
 				<?php
-					$activity_headline = sprintf(twtheme_get_value($section_activity['headline']), get_the_title());
-					$id = sanitize_title($activity_headline);
-				
-					echo '<h2 id="' . $id . '">' . $activity_headline . '</h2>';
+					echo '<h2>' . $activity_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
 						'title' => $activity_headline,
+						'short' => $section_activity['headline']['title'],
 					];
 				?>
 			</div>
