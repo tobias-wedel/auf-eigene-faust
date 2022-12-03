@@ -37,5 +37,5 @@ function twtheme_map($map_data, $args = [])
 		$wrapper = '<' . $wrapper_type . ' ' . (isset($args['wrapper-class']) ? ' class="' . $args['wrapper-class'] . '"' : '') . '>%s</' . $wrapper_type . '>';
 	}
 	
-	return sprintf($wrapper, "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' data-args='" . json_encode($args) . "' onclick='init_gmap(this)' style='background: red'></div>");
+	return sprintf($wrapper, "<div id='" . $id . "' class='twtheme-map' data-map='" . json_encode($map_data) . "' data-args='" . json_encode($args) . "' onclick='init_gmap(this)' style='background-image: url(\"" . wp_get_attachment_url(TWTHEME__OPTIONS['integration']['gmaps-image-placeholder']) .  "\")'><div><i class='fal fa-map-location-dot'></i><strong>Karte laden</strong></div></div>");
 }

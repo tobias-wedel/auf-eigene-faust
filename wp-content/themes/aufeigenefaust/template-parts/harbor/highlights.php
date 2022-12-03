@@ -57,7 +57,9 @@ if ($section_highlights) : ?>
 					}
 					
 					if (!empty(twtheme_get_value($highlight['gallery']))) {
+						echo '<div class="mx-ngutter">';
 						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($highlight['gallery']), 'medium-large') . '</div>';
+						echo '</div>';
 					}
 					
 					if (!empty(twtheme_get_value($highlight['address-coords']))) {
@@ -84,7 +86,10 @@ if ($section_highlights) : ?>
 							echo '<li class="direction"><i class="fal fa-location-dot"></i><strong class="d-block">' . $highlight['direction']['label'] . '</strong>' . twtheme_get_value($highlight['direction']) . '</li>';
 						}
 						if (!empty(twtheme_get_value($highlight['tickets']))) {
-							echo '<li class="direction"><i class="fal fa-ticket"></i><strong class="d-block">' . $highlight['tickets']['label'] . '</strong>' . twtheme_get_value($highlight['tickets']) . '</li>';
+							$value = twtheme_get_value($highlight['tickets']);
+							$value = filter_var($value, FILTER_VALIDATE_URL) !== false ? '<a href="' . $value . '" target="_blank" rel="noopener nofollow noreferrer">' . parse_url($value, PHP_URL_HOST) . '</a>' : $value;
+							
+							echo '<li class="direction"><i class="fal fa-ticket"></i><strong class="d-block">' . $highlight['tickets']['label'] . '</strong>' . $value . '</li>';
 						}
 						echo '</ul>';
 						echo '</div>';

@@ -125,6 +125,12 @@ function theme_options_fields()
 					'type' => 'text',
 					'label' => 'API-Schlüssel',
 				],
+				[
+					'id' => 'gmaps-image-placeholder',
+					'name' => 'gmaps-image-placeholder',
+					'type' => 'image',
+					'label' => 'Platzhalter Bild',
+				],
 			],
 		],
 	];

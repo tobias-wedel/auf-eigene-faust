@@ -140,7 +140,7 @@ set_query_var('toc', false);
 				<?php
 				echo twtheme_map($map, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
 				?>
-				<div class="bg-gray-100 p-gutter bg-light mt-spacer">
+				<div class="bg-gray-100 p-gutter bg-light mb-spacer">
 					<div class="row">
 						<div class="col-8 mx-auto">
 							<div class="py-6 px-gutter ">

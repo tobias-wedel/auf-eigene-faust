@@ -55,7 +55,9 @@ if ($section_mobility) : ?>
 					echo wpautop($mobility[$key]['value']);
 					
 					if (!empty($mobility[$key . '-image']['value'])) {
+						echo '<div class="mx-ngutter">';
 						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image($mobility[$key . '-image']['value'], 'medium-large') . '</div>';
+						echo '</div>';
 					}
 					
 					if (!empty($mobility[$key . '-address-coords']['value'])) {
