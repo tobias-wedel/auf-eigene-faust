@@ -54,7 +54,7 @@ if (!empty($section_activity['list'][0]['title']['value'])) :
 					echo '<h3 id="' . $id .'">' . $activitiy_child_headline . '</h3>';
 					
 					if (!empty(twtheme_get_value($activitiy['text']))) {
-						echo wpautop(twtheme_get_value($activitiy['text']));
+						echo wpautop(check_hyperlinks(twtheme_get_value($activitiy['text'])));
 					}
 					
 					if (!empty(twtheme_get_value($activitiy['gallery']))) {

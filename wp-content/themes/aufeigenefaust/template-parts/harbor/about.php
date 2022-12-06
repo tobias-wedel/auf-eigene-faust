@@ -76,7 +76,7 @@ if (!empty($section_harbor)) :
 						$harbor_map_data[] = [
 							'address' => twtheme_get_value($landingstage['address']),
 							'coords' => twtheme_get_value($landingstage['address-coords']),
-							'title' => twtheme_get_value($landingstage['name']),
+							'title' => 'Anlegestelle: ' . twtheme_get_value($landingstage['name']),
 							'icon' => $options['icons']['landing-stage-icon'],
 							'color' => $options['icons']['landing-stage-color'],
 						];
@@ -95,7 +95,7 @@ if (!empty($section_harbor)) :
 		<div class="row mt-5">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
-				echo wpautop(twtheme_get_value($section_harbor['text']));
+				echo wpautop(check_hyperlinks(twtheme_get_value($section_harbor['text'])));
 				$harbor_arrivals = $args->get_group('harbor-arrivals');
 				if ($harbor_arrivals) {
 					$toc_key = array_key_last($toc);
@@ -105,7 +105,7 @@ if (!empty($section_harbor)) :
 							$id = sanitize_title($harbor_arrivals_child_headline);
 							echo '<h3 id="' . $id . '">' . sprintf($harbor_arrivals_child_headline, $page_title) . '</h3>';
 							
-							echo wpautop(twtheme_get_value($arrival[$key]));
+							echo wpautop(check_hyperlinks(twtheme_get_value($arrival[$key])));
 							
 							if (!empty($arrival[$key . '-address-coords']['value'])) {
 								$arrival_map_data = [];

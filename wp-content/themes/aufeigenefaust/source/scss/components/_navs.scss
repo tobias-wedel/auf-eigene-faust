@@ -1,8 +1,17 @@
 #toc-scroller {
+	overflow-y: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
 	a {
 		padding: 0 ($spacer * 0.75);
 		color: $gray-400;
 		font-weight: 500;
+		white-space: nowrap;
 
 		span {
 			padding: $spacer 0;

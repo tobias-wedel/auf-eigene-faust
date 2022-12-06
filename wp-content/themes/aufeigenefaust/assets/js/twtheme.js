@@ -25,6 +25,29 @@ function set_current_viewport_on_body() {
 	}
 }
 
+// Get the scroll position from defined element
+function is_in_viewport(element, correction) {
+	if (!correction) {
+		correction = 0;
+	}
+
+	let position;
+	let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+	if (element.nodeType === 1) {
+		let element_client = element.getBoundingClientRect();
+		let element_height = element_client.height;
+		position_start = element_client.top + scrollTop + correction;
+		position_end = element_client.top + scrollTop + element_height + correction;
+
+		return scrollTop >= position_start && scrollTop < position_end ? true : false;
+	} else if (!isNaN(element)) {
+		position = element;
+
+		return scrollTop >= position ? true : false;
+	}
+}
+
 function media_query(direction, size) {
 	return window.matchMedia('(' + direction + ': ' + breakpoints[size] + ')').matches;
 }
@@ -68,20 +91,19 @@ function click_dummies() {
  */
 function smooth_anchor_scrolling() {
 	const links = document.querySelectorAll('a[href*="#"]');
-
 	links.forEach(function (link) {
 		link.addEventListener(
 			'click',
 			function (e) {
-				const href = e.target.getAttribute('href');
+				const href = e.target.getAttribute('href') || e.target.closest('a').getAttribute('href');
 
-				if (href == '#') {
+				if (href === '#') {
 					zenscroll.stop();
 				} else {
 					e.preventDefault();
 					scrollToElement = document.querySelector(href);
 
-					let offset = link.dataset.zenoffset ? link.dataset.zenoffset : 50;
+					let offset = link.dataset.zenoffset ? link.dataset.zenoffset : getComputedStyle(document.documentElement).getPropertyValue('--toc-slider-height').replace('px', '');
 
 					zenscroll.setup(500, offset);
 					zenscroll.to(scrollToElement);
@@ -91,7 +113,6 @@ function smooth_anchor_scrolling() {
 		);
 	});
 }
-smooth_anchor_scrolling();
 
 /**
  * This calcs the height of elements and set a css var into defined HTML elements
@@ -132,9 +153,6 @@ function scale_header() {
 	var margin = 40;
 	for (var i = 0; i < scalable.length; i++) {
 		var scalableContainer = scalable[i].parentNode;
-
-		console.log(scalable[i].getBoundingClientRect().width);
-		console.log(scalableContainer.getBoundingClientRect().width);
 
 		if (scalable[i].getBoundingClientRect().width < scalableContainer.getBoundingClientRect().width) {
 			return;
@@ -352,6 +370,30 @@ function do_fullscreen() {
 	);
 }
 
+function toc_scroller() {
+	let toc_scroller = document.querySelector('#toc-scroller');
+	let window_width = window.innerWidth;
+
+	// Menu item action
+	toc_scroller.querySelectorAll('.nav-link').forEach(nav_link => {
+		let margin = window.innerHeight * 0.5;
+		if (is_in_viewport(document.querySelector(nav_link.hash), -margin)) {
+			//	current_scroller_id = nav_link.hash;
+			nav_link.classList.add('active');
+			nav_link_offset_left = nav_link.scrollLeft + nav_link.offsetLeft;
+			nav_link_width = nav_link.offsetWidth;
+
+			// prettier-ignore
+			let scroll_pos = nav_link_offset_left - (window_width / 2) + (nav_link_width / 2);
+			toc_scroller.scrollTo({left: scroll_pos, behavior: 'smooth'});
+
+			// Center the current nav-link
+		} else {
+			nav_link.classList.remove('active');
+		}
+	});
+}
+
 window.addEventListener('resize', myScaleFunction);
 
 document.addEventListener('DOMContentLoaded', function (event) {
@@ -359,13 +401,17 @@ document.addEventListener('DOMContentLoaded', function (event) {
 	set_css_vars();
 	click_dummies();
 	do_fullscreen();
-	var scrollSpy = new bootstrap.ScrollSpy(document.body, {
-		target: '#toc-scroller',
+	toc_scroller();
+	smooth_anchor_scrolling();
+
+	window.addEventListener('scroll', () => {
+		toc_scroller();
 	});
 
 	// Window resize action
 	window.onresize = function () {
 		set_current_viewport_on_body();
 		set_css_vars();
+		toc_scroller();
 	};
 });

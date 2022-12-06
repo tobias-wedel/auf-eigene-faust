@@ -33,8 +33,8 @@ $toc = get_query_var('toc', $toc);
 set_query_var('map', false);
 set_query_var('toc', false);
 ?>
-<nav id="toc-scroller" class="navbar navbar-expand bg-white sticky-top justify-content-center border-bottom p-0">
-	<ul class="nav navbar-nav">
+<nav id="toc-scroller" class="navbar navbar-expand bg-white sticky-top justify-content-lg-center border-bottom p-0  set-h[self|toc-slider]">
+	<ul class="nav navbar-nav flex-nowrap">
 		<li class="nav-item"><a class="nav-link active" href="#einleitung"><span>Einleitung</span></a></li>
 		<li class="nav-item"><a class="nav-link" href="#inhaltsverzeichnis"><span>Inhalt</span></a></li>
 		<?php
@@ -55,6 +55,7 @@ if ($section_prolog) :
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
+				if (!empty($section_prolog['gallery']['value'])) {
 					$gallery = '<div class="mx-ngutter">';
 					$gallery .= do_shortcode('[splide images="' . $section_prolog['gallery']['value'] . '" thumbnails="true" title="Galerie über ' . $title . '" id="' . $title . '" caption="true" class="mx-ngutter"]');
 					$gallery .= '</div>';
@@ -64,9 +65,10 @@ if ($section_prolog) :
 					if (!empty($section_prolog['gallery']['value'])) {
 						$prolog = preg_replace('/(.*?)\n/', '$1' . $gallery, $prolog, 1);
 					}
+				}
 					
-					echo $prolog;
-					?>
+				echo $prolog;
+				?>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -75,7 +77,8 @@ if ($section_prolog) :
 				<?php
 					$harbor_quickinfos = $post_meta_data->get_group('harbor-quick-infos');
 					
-					if ($harbor_quickinfos) : ?>
+					if ($harbor_quickinfos) :
+				?>
 				<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">
 					<ul class="icon-list" style="--columns: 3">
 						<?php

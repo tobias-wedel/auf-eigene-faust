@@ -20,7 +20,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
 				
-					echo '<h2>' . $affiliates_headline . '</h2>';
+					echo '<h2>' . $affiliates_headline . '&#185;</h2>';
 				
 					$toc[] = [
 						'id' => $id,
@@ -31,13 +31,14 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 			</div>
 		</div>
 	</div>
-	<hr>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12 m-auto">
-				<?php echo wpautop(twtheme_get_value($section_affiliates['intro'])); ?>
+	<hr class="mb-0">
+	<div class="pt-5 bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 m-auto">
+					<?php echo wpautop(check_hyperlinks(twtheme_get_value($section_affiliates['intro']))); ?>
 
-				<?php
+					<?php
 				$toc_key = array_key_last($toc);
 				foreach ($section_affiliates['affiliates'] as $key => $affiliates) {
 					if (empty($affiliates['widget']['value'])) {
@@ -55,12 +56,14 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 					echo '<h3 id="' . $id .'">' . $affiliates_child_headline . '</h3>';
 					
 					if (!empty(twtheme_get_value($affiliates['widget']))) {
-						echo wpautop(twtheme_get_value($affiliates['widget']));
+						echo wpautop(check_hyperlinks(twtheme_get_value($affiliates['widget'])));
 					}
 				}
 				?>
+				</div>
 			</div>
 		</div>
+
 	</div>
 </section>
 <?php endif;

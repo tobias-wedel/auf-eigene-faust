@@ -126,3 +126,18 @@ function get_hyperlink($url, $title = '')
 		return $url;
 	}
 }
+
+function check_hyperlinks($content)
+{
+	preg_match_all('/\<a.*?<\/a>/', $content, $hyperlinks);
+	
+	foreach ($hyperlinks[0] as $hyperlink) {
+		$url = preg_replace('/(<a.*?href=")(.*?)(".*?<.*a>)/', '$2', $hyperlink);
+		$title = preg_replace('/(<a.*?>)(.*?)(<.*a>)/', '$2', $hyperlink);
+		$new_url = get_hyperlink($url, $title);
+
+		$content = str_replace($hyperlink, $new_url, $content);
+	}
+
+	return $content;
+}

@@ -10,7 +10,7 @@ $title = get_the_title($post_id);
 
 ?>
 
-<body <?php body_class('position-relative'); ?> data-spy="scroll" data-target="#toc-scroller" data-offset="0">
+<body <?php body_class('position-relative'); ?> data-offset="0">
 	<header class="cinematic set-h[self|header]">
 		<?php the_post_thumbnail() ?>
 		<div class="container-fluid">

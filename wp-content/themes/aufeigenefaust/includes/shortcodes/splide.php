@@ -25,7 +25,7 @@ function twtheme_splide_shortcode($atts)
 	wp_enqueue_script('splide', TWTHEME__PATH . '/assets/js/splide.js', '', TWTHEME__VERSION);
 	wp_enqueue_script('splide-intersection', TWTHEME__PATH . '/assets/js/splide-extension-intersection.min.js', ['splide'], TWTHEME__VERSION);
 	
-	$slider_id = 'slider_' . sanitize_title($attributes['id']);
+	$slider_id = 'slider_' . str_replace('-', '_', sanitize_title($attributes['id']));
 		
 	$html = '';
 	$html .= '<section id="' . $slider_id . '-slider-wrapper" class="' . $slider_id . '-slider-wrapper slider-wrapper" class="' . $attributes['class'] . '" aria-label="' . $attributes['title'] . '">';

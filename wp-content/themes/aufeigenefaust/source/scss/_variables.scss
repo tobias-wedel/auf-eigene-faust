@@ -1,4 +1,5 @@
 $enable-negative-margins: true;
+$enable-smooth-scroll: false;
 
 $white: #fff;
 $gray-100: #f7f6f0;
@@ -64,6 +65,7 @@ $spacers: (
 	6: $spacer * 5,
 	gutter: $grid-gutter-width * 0.5,
 	spacer: $spacer * 5,
+	spacer-2x: $spacer * 10,
 );
 
 $aspect-ratios: (
