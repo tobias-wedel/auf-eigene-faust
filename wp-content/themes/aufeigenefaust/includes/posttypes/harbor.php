@@ -969,6 +969,120 @@ function twtheme_harbor_fields()
 						]
 					],
 				],
+				[
+					'type' => 'headline',
+					'label' => 'Strände'
+				],
+				[
+					'id' => 'beaches-headline',
+					'name' => 'beaches-headline',
+					'type' => 'text',
+					'label' => 'Headline',
+					'placeholder' => 'Strände in %s',
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Aktivitäten'
+				],
+				[
+					'id' => 'beaches',
+					'name' => 'beaches',
+					'type' => 'repeater',
+					'fields' => [
+						[
+							[
+								'id' => 'title',
+								'name' => 'title',
+								'type' => 'text',
+								'label' => 'Titel',
+							],
+							[
+								'id' => 'text',
+								'name' => 'text',
+								'type' => 'editor',
+								'label' => 'Beschreibung',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
+							],
+							[
+								'id' => 'address',
+								'name' => 'address',
+								'type' => 'textarea',
+								'label' => 'Adresse',
+							],
+							[
+								'id' => 'address-coords',
+								'name' => 'address-coords',
+								'type' => 'text',
+								'readonly' => true,
+								'editable' => true,
+								'label' => 'Koordinaten',
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'source' => 'address'
+								]
+							],
+						]
+					],
+				],
+				[
+					'type' => 'headline',
+					'label' => 'Restaurants'
+				],
+				[
+					'id' => 'restaurants-headline',
+					'name' => 'restaurants-headline',
+					'type' => 'text',
+					'label' => 'Headline',
+					'placeholder' => 'Restaurants in %s',
+					'description' => 'Verwende %s als Titel (Hafenname) Platzhalter.',
+					'title' => 'Aktivitäten'
+				],
+				[
+					'id' => 'restaurants',
+					'name' => 'restaurants',
+					'type' => 'repeater',
+					'fields' => [
+						[
+							[
+								'id' => 'title',
+								'name' => 'title',
+								'type' => 'text',
+								'label' => 'Titel',
+							],
+							[
+								'id' => 'text',
+								'name' => 'text',
+								'type' => 'editor',
+								'label' => 'Beschreibung',
+								'settings' => [
+									'textarea_rows' => '6',
+								]
+							],
+							[
+								'id' => 'address',
+								'name' => 'address',
+								'type' => 'textarea',
+								'label' => 'Adresse',
+							],
+							[
+								'id' => 'address-coords',
+								'name' => 'address-coords',
+								'type' => 'text',
+								'readonly' => true,
+								'editable' => true,
+								'label' => 'Koordinaten',
+								'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+								'integration' => [
+									'tool' => 'gmaps',
+									'service' => 'geocoding',
+									'source' => 'address'
+								]
+							],
+						]
+					],
+				],
 			],
 		],
 		[

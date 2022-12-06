@@ -45,7 +45,7 @@ class TwthemeGetPostMeta
 				
 				if ($field_second_level['type'] == 'headline') {
 					continue;
-				} elseif ($field_second_level['type'] == 'repeater') {
+				} elseif ($field_second_level['type'] == 'repeater' && !empty($post_meta_array[$field_second_level['name']])) {
 					$count_entries = count($post_meta_array[$field_second_level['name']]);
 					
 					// Iterate over all post meta repeater entries

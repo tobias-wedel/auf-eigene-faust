@@ -33,8 +33,8 @@ $toc = get_query_var('toc', $toc);
 set_query_var('map', false);
 set_query_var('toc', false);
 ?>
-<nav id="toc-scroller" class="navbar navbar-expand bg-white sticky-top justify-content-lg-center border-bottom p-0  set-h[self|toc-slider]">
-	<ul class="nav navbar-nav flex-nowrap">
+<nav id="toc-scroller" class="navbar navbar-expand bg-white sticky-top border-bottom p-0  set-h[self|toc-slider]">
+	<ul class="nav navbar-nav m-auto flex-nowrap">
 		<li class="nav-item"><a class="nav-link active" href="#einleitung"><span>Einleitung</span></a></li>
 		<li class="nav-item"><a class="nav-link" href="#inhaltsverzeichnis"><span>Inhalt</span></a></li>
 		<?php

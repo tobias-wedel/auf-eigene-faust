@@ -12,6 +12,18 @@ $title = get_the_title($post_id);
 
 <body <?php body_class('position-relative'); ?> data-offset="0">
 	<header class="cinematic set-h[self|header]">
+		<div class="top-bar">
+			<div class="container-fluid mt-4">
+				<div class="row">
+					<div class="col-auto">
+						<?php echo wp_get_attachment_image(TWTHEME__OPTIONS['general']['logo'], 'full', '', ['class' => 'logo']); ?>
+					</div>
+					<div class="col-auto">
+						<?php echo get_search_form(); ?>
+					</div>
+				</div>
+			</div>
+		</div>
 		<?php the_post_thumbnail() ?>
 		<div class="container-fluid">
 			<div class="row">
