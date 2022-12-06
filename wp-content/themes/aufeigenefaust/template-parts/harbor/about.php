@@ -11,7 +11,8 @@ $section_harbor = $args->get_section('about');
 $options = get_option('twtheme_harbor_options');
 
 if (!empty($section_harbor)) :
-	$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), get_the_title());
+	$page_title = get_the_title();
+	$harbor_headline = sprintf(twtheme_get_value($section_harbor['headline']), $page_title);
 	$id = sanitize_title($harbor_headline);
 ?>
 <section id="<?= $id ?>" class="py-spacer">
@@ -52,7 +53,7 @@ if (!empty($section_harbor)) :
 					$harbor_map_data[] = [
 						'address' => twtheme_get_value($landingstage['address']),
 						'coords' => twtheme_get_value($landingstage['address-coords']),
-						'title' => twtheme_get_value($landingstage['name']),
+						'title' => 'Anlegestelle: ' . twtheme_get_value($landingstage['name']),
 						'icon' => $options['icons']['landing-stage-icon'],
 						'color' => $options['icons']['landing-stage-color'],
 					];
@@ -100,9 +101,9 @@ if (!empty($section_harbor)) :
 					$toc_key = array_key_last($toc);
 					foreach ($harbor_arrivals as $key => $arrival) {
 						if (!empty($arrival[$key]['value'])) {
-							$harbor_arrivals_child_headline = twtheme_get_title($arrival[$key]);
+							$harbor_arrivals_child_headline = sprintf(twtheme_get_title($arrival[$key]), $page_title);
 							$id = sanitize_title($harbor_arrivals_child_headline);
-							echo '<h3 id="' . $id . '">' . $harbor_arrivals_child_headline . '</h3>';
+							echo '<h3 id="' . $id . '">' . sprintf($harbor_arrivals_child_headline, $page_title) . '</h3>';
 							
 							echo wpautop(twtheme_get_value($arrival[$key]));
 							
@@ -111,7 +112,7 @@ if (!empty($section_harbor)) :
 								$arrival_map_data[] = [
 									'address' => twtheme_get_value($arrival[$key . '-address']),
 									'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
-									'title' => twtheme_get_title($arrival[$key]),
+									'title' => twtheme_get_title($arrival[$key . '-address']),
 									'icon' => $options['icons'][$key . '-icon'],
 									'color' => $options['icons'][$key . '-color'],
 								];

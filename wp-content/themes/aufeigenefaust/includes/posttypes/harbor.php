@@ -186,14 +186,14 @@ function twtheme_harbor_fields()
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Hafenshuttle',
+					'label' => 'Vom Hafen in die Stadt',
 				],
 				[
 					'id' => 'shuttle',
 					'name' => 'shuttle',
 					'type' => 'editor',
 					'label' => 'Text',
-					'title' => 'Hafenshuttle',
+					'title' => 'Vom Hafen %s in die Stadt',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
 					'settings' => [
@@ -204,6 +204,7 @@ function twtheme_harbor_fields()
 					'id' => 'shuttle-address',
 					'name' => 'shuttle-address',
 					'type' => 'textarea',
+					'title' => 'Shuttlebus',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
 					'label' => 'Adresse'
@@ -226,14 +227,14 @@ function twtheme_harbor_fields()
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Anfahrt Flughafen',
+					'label' => 'Vom Flughafen zum Hafen',
 				],
 				[
 					'id' => 'arrival-airport',
 					'name' => 'arrival-airport',
 					'type' => 'editor',
 					'label' => 'Text',
-					'title' => 'Anfahrt Flughafen',
+					'title' => 'Vom Flughafen %s zum Hafen',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'arrival-airport',
 					'settings' => [
@@ -735,14 +736,14 @@ function twtheme_harbor_fields()
 				],
 				[
 					'type' => 'headline',
-					'label' => 'Metro / U-Bahn'
+					'label' => 'Metro / U-Bahn / Staßenbahn'
 				],
 				[
 					'id' => 'metro',
 					'name' => 'metro',
 					'type' => 'editor',
 					'label' => 'Text',
-					'title' => 'Metro / U-Bahn',
+					'title' => 'Metro / U-Bahn / Staßenbahn',
 					'group' => 'mobility',
 					'group-child' => 'metro',
 					'settings' => [

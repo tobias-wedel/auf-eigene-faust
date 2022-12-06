@@ -67,7 +67,10 @@
 
 		.title {
 			font-weight: bold;
-			font-size: 1rem;
+		}
+
+		.address:not(:empty) {
+			margin-top: 5px;
 		}
 	}
 
