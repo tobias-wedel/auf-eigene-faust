@@ -307,12 +307,58 @@ function init_gmap(el) {
 	}
 }
 
+function getreqfullscreen() {
+	var root = document.documentElement;
+	return root.requestFullscreen || root.webkitRequestFullscreen || root.mozRequestFullScreen || root.msRequestFullscreen;
+}
+
+function do_fullscreen() {
+	var globalreqfullscreen = getreqfullscreen(); // get supported version of requestFullscreen()
+	document.addEventListener(
+		'click',
+		function (e) {
+			var target = e.target;
+			let trigger_button = '';
+
+			if (target.classList.contains('fullscreen-trigger')) {
+				trigger_button = target;
+			} else if (target.closest('.fullscreen-trigger')) {
+				trigger_button = target.closest('.fullscreen-trigger');
+			}
+
+			if (trigger_button) {
+				let fullscreen_id = trigger_button.dataset.fullscreen;
+				let fullscreen_element = document.querySelector('#' + fullscreen_id);
+
+				if (trigger_button.classList.contains('active')) {
+					if (document.fullscreenElement) {
+						document.exitFullscreen().then(() => {
+							trigger_button.classList.remove('active');
+							trigger_button.querySelector('.expand').style.display = 'block';
+							trigger_button.querySelector('.compress').style.display = 'none';
+							fullscreen_element.classList.remove('is_fullscreen');
+						});
+					}
+				} else {
+					trigger_button.classList.add('active');
+					trigger_button.querySelector('.expand').style.display = 'none';
+					trigger_button.querySelector('.compress').style.display = 'block';
+					fullscreen_element.classList.add('is_fullscreen');
+					globalreqfullscreen.call(fullscreen_element);
+				}
+			}
+		},
+		false,
+	);
+}
+
 window.addEventListener('resize', myScaleFunction);
 
 document.addEventListener('DOMContentLoaded', function (event) {
 	set_current_viewport_on_body();
 	set_css_vars();
 	click_dummies();
+	do_fullscreen();
 	var scrollSpy = new bootstrap.ScrollSpy(document.body, {
 		target: '#toc-scroller',
 	});

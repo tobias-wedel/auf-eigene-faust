@@ -26,9 +26,47 @@
 }
 
 .slider-wrapper {
+	position: relative;
 	margin-bottom: $spacer * 2;
 
 	.slider:not(:last-child) {
 		margin-bottom: 10px;
+	}
+
+	&.is_fullscreen {
+		.slider-main,
+		.slider-main .splide__track,
+		.slider-main .splide__slide > * {
+			height: 100vh;
+		}
+
+		.slider-nav {
+			top: -100vh;
+			max-width: 600px;
+			margin: auto;
+		}
+	}
+
+	div.fullscreen-trigger {
+		position: absolute;
+		z-index: 100;
+		right: $spacer;
+		top: $spacer;
+		display: flex;
+		background: $white;
+		padding: 6px;
+		cursor: pointer;
+
+		svg {
+			width: 24px;
+			color: rgba($black, 0.4);
+			height: 24px;
+		}
+
+		&:hover {
+			svg {
+				color: $black;
+			}
+		}
 	}
 }
