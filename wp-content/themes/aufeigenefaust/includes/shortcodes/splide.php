@@ -44,12 +44,10 @@ function twtheme_splide_shortcode($atts)
 			lazyLoad: "nearby",
 			rewind: true,
 			intersection: {
-				rootMargin: "200px",
 				inView: {
-				  keyboard: true,
+					keyboard: true,
 				},
 				outView: {
-				  keyboard: false,
 				},
 			  },
 		});

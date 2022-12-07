@@ -350,12 +350,7 @@ function do_fullscreen() {
 
 				if (trigger_button.classList.contains('active')) {
 					if (document.fullscreenElement) {
-						document.exitFullscreen().then(() => {
-							trigger_button.classList.remove('active');
-							trigger_button.querySelector('.expand').style.display = 'block';
-							trigger_button.querySelector('.compress').style.display = 'none';
-							fullscreen_element.classList.remove('is_fullscreen');
-						});
+						document.exitFullscreen();
 					}
 				} else {
 					trigger_button.classList.add('active');
@@ -363,6 +358,25 @@ function do_fullscreen() {
 					trigger_button.querySelector('.compress').style.display = 'block';
 					fullscreen_element.classList.add('is_fullscreen');
 					globalreqfullscreen.call(fullscreen_element);
+				}
+
+				document.addEventListener('fullscreenchange', exitHandler);
+				document.addEventListener('webkitfullscreenchange', exitHandler);
+				document.addEventListener('mozfullscreenchange', exitHandler);
+				document.addEventListener('MSFullscreenChange', exitHandler);
+
+				function exitHandler() {
+					if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+						trigger_button.classList.remove('active');
+						trigger_button.querySelector('.expand').style.display = 'block';
+						trigger_button.querySelector('.compress').style.display = 'none';
+						fullscreen_element.classList.remove('is_fullscreen');
+
+						document.removeEventListener('fullscreenchange', exitHandler);
+						document.removeEventListener('webkitfullscreenchange', exitHandler);
+						document.removeEventListener('mozfullscreenchange', exitHandler);
+						document.removeEventListener('MSFullscreenChange', exitHandler);
+					}
 				}
 			}
 		},
