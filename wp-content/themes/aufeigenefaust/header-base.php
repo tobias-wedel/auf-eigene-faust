@@ -18,6 +18,8 @@ defined('ABSPATH') || exit(); ?>
 	<link rel="icon" type="image/png" sizes="16x16" href="<?= TWTHEME__PATH ?>/assets/images/favicons/favicon-16x16.png">
 	<link rel="manifest" href="<?= TWTHEME__PATH ?>/assets/images/favicons/site.webmanifest">
 	<link rel="mask-icon" href="<?= TWTHEME__PATH ?>/assets/images/favicons/safari-pinned-tab.svg" color="#000000">
+	<script async defer src="https://widget.getyourguide.com/dist/pa.umd.production.min.js" data-gyg-partner-id="LGWQAKM"></script>
+
 	<meta name="msapplication-TileColor" content="#ffc40d">
 	<meta name="theme-color" content="#ffffff">
 	<?php wp_head(); ?>

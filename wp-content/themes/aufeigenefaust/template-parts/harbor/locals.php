@@ -58,8 +58,42 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 						echo wpautop(check_hyperlinks(twtheme_get_value($local['text'])));
 					}
 					
+					$local_urls = $args->get_group('local-urls');
+					
+					if ($local_urls) {
+						echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter">';
+						echo '<ul class="icon-list" style="--columns: 3">';
+						foreach ($local_urls[$key] as $local_url_key => $url_data) {
+							if (!twtheme_get_value($url_data)) {
+								continue;
+							}
+						
+							switch ($url_data['id']) {
+							case 'facebook':
+								$icon = 'fab fa-facebook';
+								break;
+							case 'instagram':
+								$icon = 'fab fa-instagram';
+								break;
+							case 'website':
+								$icon = 'fal fa-arrow-pointer';
+								break;
+							case 'booking':
+								$icon = 'fal fa-ticket';
+								break;
+						}
+						
+							echo '<li class="direction ' . $url_data['id'] . '"><i class="' . $icon . '"></i><strong class="d-block">' . $url_data['label'] . '</strong>' . get_hyperlink(twtheme_get_value($url_data)) . '</li>';
+						}
+					
+						echo '</ul>';
+						echo '</div>';
+					}
+					
 					if (!empty(twtheme_get_value($local['gallery']))) {
+						echo '<div class="mx-ngutter">';
 						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($local['gallery']), 'medium-large') . '</div>';
+						echo '</div>';
 					}
 					
 					if (!empty(twtheme_get_value($local['address-coords']))) {
@@ -77,36 +111,6 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 						echo twtheme_map($local_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
 						echo '</div>';
 					}
-					$local_urls = $args->get_group('local-urls');
-
-					echo '<div class="bg-gray-100 p-gutter bg-light mx-ngutter mt-spacer">';
-					echo '<ul class="icon-list" style="--columns: 3">';
-					
-					foreach ($local_urls[$key] as $local_url_key => $url_data) {
-						if (!twtheme_get_value($url_data)) {
-							continue;
-						}
-						
-						switch ($url_data['id']) {
-							case 'facebook':
-								$icon = 'fab fa-facebook';
-								break;
-							case 'instagram':
-								$icon = 'fab fa-instagram';
-								break;
-							case 'website':
-								$icon = 'fal fa-arrow-pointer';
-								break;
-							case 'booking':
-								$icon = 'fal fa-ticket';
-								break;
-						}
-						
-						echo '<li class="direction ' . $url_data['id'] . '"><i class="' . $icon . '"></i><strong class="d-block">' . $url_data['label'] . '</strong>' . get_hyperlink(twtheme_get_value($url_data)) . '</li>';
-					}
-					
-					echo '</ul>';
-					echo '</div>';
 				}
 				?>
 			</div>

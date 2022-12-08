@@ -126,6 +126,12 @@ function theme_options_fields()
 					'label' => 'API-Schlüssel',
 				],
 				[
+					'id' => 'gmaps-id',
+					'name' => 'gmaps-id',
+					'type' => 'text',
+					'label' => 'Map ID',
+				],
+				[
 					'id' => 'gmaps-image-placeholder',
 					'name' => 'gmaps-image-placeholder',
 					'type' => 'image',

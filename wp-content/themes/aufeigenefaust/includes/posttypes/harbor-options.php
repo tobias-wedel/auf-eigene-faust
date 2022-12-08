@@ -277,6 +277,42 @@ function harbor_option_fields()
 					'label' => false,
 					'column' => 'last'
 				],
+				[
+					'type' => 'headline',
+					'label' => 'Aktivitäten',
+				],
+				[
+					'id' => 'beach-icon',
+					'name' => 'beach-icon',
+					'type' => 'text',
+					'label' => 'Strand',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'beach-color',
+					'name' => 'beach-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
+				[
+					'id' => 'restaurant-icon',
+					'name' => 'restaurant-icon',
+					'type' => 'text',
+					'label' => 'Restaurant',
+					'description' => 'FontAwesome SVG Path',
+					'column' => 'first',
+					'data-filter' => 'htmlentities',
+				],
+				[
+					'id' => 'restaurant-color',
+					'name' => 'restaurant-color',
+					'type' => 'color',
+					'label' => false,
+					'column' => 'last'
+				],
 			],
 		],
 	];

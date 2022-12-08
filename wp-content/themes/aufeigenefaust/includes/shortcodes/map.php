@@ -29,7 +29,7 @@ function twtheme_map($map_data, $args = [])
 	}
 	
 	wp_enqueue_script('google-maps-api', 'https://maps.googleapis.com/maps/api/js?key=' . TWTHEME__OPTIONS['integration']['gmaps-api-key'] . '&v=beta&libraries=marker', '', '', true);
-	wp_enqueue_script('google-maps-icons', TWTHEME__PATH . '/assets/js/gmaps-icons.js', '', TWTHEME__VERSION, true);
+	wp_enqueue_script('map', TWTHEME__PATH . '/assets/js/map.js', '', TWTHEME__VERSION, true);
 
 	$id = !empty($args['id']) ? $args['id'] : 'map-' . get_custom_id();
 	
