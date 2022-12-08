@@ -1,0 +1,6 @@
+body.single-harbor {
+	iframe {
+		margin: 0 -#{$grid-gutter-width-half} !important;
+		width: calc(100% + #{$grid-gutter-width}) !important;
+	}
+}

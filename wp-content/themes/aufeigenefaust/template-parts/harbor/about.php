@@ -20,7 +20,6 @@ if (!empty($section_harbor)) :
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
-					
 					echo '<h2>' . $harbor_headline . '</h2>';
 				
 					$toc[] = [
@@ -33,7 +32,7 @@ if (!empty($section_harbor)) :
 		</div>
 	</div>
 	<hr>
-	<div class="container mb-spacer">
+	<div class="container mb-spacer mt-5">
 		<div class="row">
 			<?php if (twtheme_get_value($section_harbor['gallery'])) : ?>
 			<div class="col-6 offset-lg-1 pe-lg-0">

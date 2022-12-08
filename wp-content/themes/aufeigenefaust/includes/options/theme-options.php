@@ -112,6 +112,28 @@ function theme_options_fields()
 		//	'fields' => slider_config_fields(),
 		//],
 		[
+			'title' => 'Affiliate Links',
+			'id' => 'affiliate',
+			'fields' => [
+				[
+					'id' => 'list',
+					'name' => 'list',
+					'type' => 'repeater',
+					'fields' => [
+						[
+							[
+								'id' => 'domain',
+								'name' => 'domain',
+								'type' => 'text',
+								'label' => 'Domain',
+								'description' => 'Beispiel: www.check24.de'
+							],
+						]
+					]
+				],
+			],
+		],
+		[
 			'title' => 'Integration',
 			'id' => 'integration',
 			'fields' => [

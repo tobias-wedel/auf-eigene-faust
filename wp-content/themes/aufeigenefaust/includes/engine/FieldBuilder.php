@@ -370,7 +370,7 @@ class TwthemeFieldBuilder
 				$values = !empty($values_key) ? get_term_meta($values_key, $tab_id, true) : '';
 				break;
 			case 'option':
-				$values = !empty($values_key) ? get_option($values_key)[$tab_id] : '';
+				$values = !empty($values_key) && isset(get_option($values_key)[$tab_id]) ? get_option($values_key)[$tab_id] : '';
 				break;
 		}
 		

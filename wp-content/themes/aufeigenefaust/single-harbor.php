@@ -143,7 +143,7 @@ if ($section_prolog) :
 					<div class="row">
 						<div class="col-lg-8 m-auto">
 							<div class="py-6 px-gutter">
-								<h2>Inhaltsverzeichnis</h2>
+								<h2 class="mb-gutter">Inhaltsverzeichnis</h2>
 								<ol class="toc">
 									<?php
 								foreach ($toc as $chapter) {
