@@ -120,6 +120,11 @@
 			}
 		}
 	}
+
+	div[role='dialog'],
+	div[role='dialog'] + div {
+		display: none;
+	}
 }
 
 .ratio > .twtheme-map {

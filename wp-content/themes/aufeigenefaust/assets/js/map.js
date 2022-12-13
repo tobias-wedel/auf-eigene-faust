@@ -58,16 +58,18 @@ function init_gmap(el) {
 
 			const element = advancedMarkerView.element;
 
-			['focus', 'pointerenter'].forEach(event => {
+			['focus', 'pointerenter', 'touchstart'].forEach(event => {
 				element.addEventListener(event, () => {
 					highlight(advancedMarkerView, property);
 				});
 			});
-			['blur', 'pointerleave'].forEach(event => {
+
+			['blur', 'pointerleave', 'touchend'].forEach(event => {
 				element.addEventListener(event, () => {
 					unhighlight(advancedMarkerView, property);
 				});
 			});
+
 			advancedMarkerView.addListener('click', event => {
 				unhighlight(advancedMarkerView, property);
 			});

@@ -126,10 +126,12 @@ if ($section_prolog) :
 	</div>
 	<div class="container pt-spacer">
 		<div class="row">
-			<div class="col-lg-10 mx-auto">
-				<?php
-				echo twtheme_map($map, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
-				?>
+			<div class="col-xl-10 mx-auto">
+				<div class="mx-ngutter mx-md-auto">
+					<?php
+					echo twtheme_map($map, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+					?>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -138,8 +140,8 @@ if ($section_prolog) :
 <section id="inhaltsverzeichnis">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-10 mx-auto">
-				<div class="bg-gray-100 p-gutter bg-light mb-spacer">
+			<div class="col-xl-10 mx-auto">
+				<div class="bg-gray-100 p-gutter mx-ngutter mx-md-auto bg-light mb-spacer">
 					<div class="row">
 						<div class="col-lg-8 m-auto">
 							<div class="py-6 px-gutter">

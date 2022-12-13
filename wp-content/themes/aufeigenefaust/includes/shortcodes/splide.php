@@ -81,8 +81,6 @@ function twtheme_splide_shortcode($atts)
 				},
 				breakpoints : {
 					640: {
-						fixedWidth  : 66,
-						fixedHeight : 38,
 					},
 				},
 			};

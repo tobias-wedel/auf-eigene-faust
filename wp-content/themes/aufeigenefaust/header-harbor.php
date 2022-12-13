@@ -19,7 +19,11 @@ $title = get_the_title($post_id);
 						<?php echo wp_get_attachment_image(TWTHEME__OPTIONS['general']['logo'], 'full', '', ['class' => 'logo']); ?>
 					</div>
 					<div class="col-auto">
-						<?php echo get_search_form(); ?>
+						<form method="get" id="searchform" class="searchform" action="<?php bloginfo('url'); ?>/">
+							<input class="form-control bg-dark" type="text" value="<?php the_search_query(); ?>" name="s" id="search" placeholder="nach..." />
+							<button type="submit" id="searchsubmit"><i class="fal fa-search"></i></button>
+						</form>
+
 					</div>
 				</div>
 			</div>
