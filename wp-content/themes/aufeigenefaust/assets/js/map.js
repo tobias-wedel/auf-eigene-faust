@@ -19,6 +19,8 @@ function init_gmap(el) {
 	const map = new google.maps.Map(document.getElementById(el_id), {
 		zoom: args_data.zoom ? parseFloat(args_data.zoom) : 12,
 		mapId: twtheme.gmaps_id,
+		disableDefaultUI: true,
+		zoomControl: true,
 	});
 
 	let bounds = new google.maps.LatLngBounds();
