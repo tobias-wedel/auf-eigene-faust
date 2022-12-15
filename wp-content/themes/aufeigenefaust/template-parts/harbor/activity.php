@@ -60,7 +60,7 @@ if (
 						echo '<h3 id="' . $id .'">' . $activitiy_child_headline . '</h3>';
 					
 						if (!empty(twtheme_get_value($activitiy['text']))) {
-							echo wpautop(check_hyperlinks(twtheme_get_value($activitiy['text'])));
+							echo wpautop(find_hyperlinks(twtheme_get_value($activitiy['text'])));
 						}
 					
 						if (!empty(twtheme_get_value($activitiy['gallery']))) {
@@ -93,7 +93,7 @@ if (
 						echo '<h4>' . twtheme_get_value($beach['title']) . '</h4>';
 						
 						if (!empty(twtheme_get_value($beach['text']))) {
-							echo wpautop(check_hyperlinks(twtheme_get_value($beach['text'])));
+							echo wpautop(find_hyperlinks(twtheme_get_value($beach['text'])));
 						}
 						
 						if (!empty(twtheme_get_value($beach['address-coords']))) {
@@ -140,7 +140,7 @@ if (
 						echo '<h4>' . twtheme_get_value($restaurant['title']) . '</h4>';
 						
 						if (!empty(twtheme_get_value($restaurant['text']))) {
-							echo wpautop(check_hyperlinks(twtheme_get_value($beach['text'])));
+							echo wpautop(find_hyperlinks(twtheme_get_value($beach['text'])));
 						}
 						
 						if (!empty(twtheme_get_value($restaurant['address-coords']))) {

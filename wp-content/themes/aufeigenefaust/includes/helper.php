@@ -128,22 +128,20 @@ function get_hyperlink($url, $title = '')
 	}
 		
 	// Check for Affiliate links
-	$affiliate_links = TWTHEME__OPTIONS;
+	$affiliate_options = TWTHEME__OPTIONS['affiliate'];
 	
-	if (array_search($parsed_url_host, array_column($affiliate_links['affiliate']['list'], 'domain')) !== false) {
-		$affiliate_suffix = '&sup1;';
+	if (array_search($parsed_url_host, array_column($affiliate_options['list'], 'domain')) !== false) {
+		$affiliate_suffix = get_affiliate_hint();
 	}
 	
-	foreach ($affiliate_links['affiliate']['list'] as $link) {
+	foreach ($affiliate_options['list'] as $link) {
 		$parsed_parse_url = parse_url($url, PHP_URL_HOST);
-		
-		//	if(in_array($parsed_parse_url, ))
 	}
 		
-	return '<a href="' . $url . '" target="_blank" rel="noopener nofollow noreferrer">' . $title . $affiliate_suffix . '</a>';
+	return '<a href="' . $url . '" target="_blank" rel="noopener nofollow noreferrer">' . $title . '</a>' . $affiliate_suffix ;
 }
 
-function check_hyperlinks($content)
+function find_hyperlinks($content)
 {
 	preg_match_all('/\<a.*?<\/a>/', $content, $hyperlinks);
 	
@@ -157,3 +155,11 @@ function check_hyperlinks($content)
 
 	return $content;
 }
+
+
+	function get_affiliate_hint()
+	{
+		$affiliate_options = TWTHEME__OPTIONS['affiliate'];
+
+		return $affiliate_options['hint'];
+	}

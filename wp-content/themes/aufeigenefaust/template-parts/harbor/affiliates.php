@@ -36,7 +36,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 m-auto">
-					<?php echo wpautop(check_hyperlinks(twtheme_get_value($section_affiliates['intro']))); ?>
+					<?php echo wpautop(find_hyperlinks(twtheme_get_value($section_affiliates['intro']))); ?>
 
 					<?php
 				$toc_key = array_key_last($toc);
@@ -56,7 +56,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 					echo '<h3 id="' . $id .'">' . $affiliates_child_headline . '</h3>';
 					
 					if (!empty(twtheme_get_value($affiliates['widget']))) {
-						echo wpautop(check_hyperlinks(twtheme_get_value($affiliates['widget'])));
+						echo wpautop(find_hyperlinks(twtheme_get_value($affiliates['widget'])));
 					}
 				}
 				?>

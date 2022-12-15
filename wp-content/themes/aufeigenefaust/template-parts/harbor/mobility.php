@@ -54,7 +54,7 @@ if ($section_mobility) :
 					
 					echo '<h3 id="' . $id .'">' . $mobility_child_headline . '</h3>';
 					
-					echo wpautop(check_hyperlinks(($mobility[$key]['value'])));
+					echo wpautop(find_hyperlinks(($mobility[$key]['value'])));
 					
 					if (!empty($mobility[$key . '-image']['value'])) {
 						echo '<div class="mx-ngutter">';

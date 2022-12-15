@@ -131,6 +131,13 @@ function theme_options_fields()
 						]
 					]
 				],
+				[
+					'id' => 'hint',
+					'name' => 'hint',
+					'type' => 'text',
+					'label' => 'Hinweis (HTML)',
+					'data-filter' => 'htmlentities',
+				],
 			],
 		],
 		[

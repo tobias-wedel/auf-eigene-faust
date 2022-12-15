@@ -52,7 +52,7 @@ if ($section_highlights['list'][0]['title']['value']) :
 					echo '<h3 id="' . $id .'">' . $highlight_child_headline . '</h3>';
 					
 					if (!empty(twtheme_get_value($highlight['text']))) {
-						echo wpautop(check_hyperlinks(twtheme_get_value($highlight['text'])));
+						echo wpautop(find_hyperlinks(twtheme_get_value($highlight['text'])));
 					}
 					
 					if (!empty(twtheme_get_value($highlight['gallery']))) {

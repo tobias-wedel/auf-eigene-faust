@@ -17,7 +17,7 @@ function init_gmap(el) {
 		first_el_latlng = {lat: parseFloat(first_el_coords[0].trim()), lng: parseFloat(first_el_coords[1].trim())};
 
 	const map = new google.maps.Map(document.getElementById(el_id), {
-		zoom: args_data.zoom ? parseFloat(args_data.zoom) : 12,
+		//	zoom: args_data.zoom ? parseFloat(args_data.zoom) : 12,
 		mapId: twtheme.gmaps_id,
 		disableDefaultUI: true,
 		zoomControl: true,
@@ -35,7 +35,7 @@ function init_gmap(el) {
 			}, 100);
 		} else {
 			run_map(() => {
-				calc_heights();
+				calc_advanced_marker_heights();
 			});
 		}
 	}
@@ -110,9 +110,7 @@ function init_gmap(el) {
 			const current_zoom = map.zoom;
 
 			if (args_data.zoom && args_data.zoom < current_zoom) {
-				map.setZoom(parseFloat(args_data.zoom) - 0.5);
-			} else {
-				map.setZoom(current_zoom - 0.5);
+				map.setZoom(Math.round(parseFloat(args_data.zoom) - 0.5));
 			}
 
 			google.maps.event.removeListener(listener);
@@ -121,12 +119,12 @@ function init_gmap(el) {
 		callback();
 	}
 
-	function calc_heights() {
+	function calc_advanced_marker_heights() {
 		let gmap_icons = el.querySelectorAll('.gmap-icon');
 
 		if (gmap_icons.length === 0) {
 			setTimeout(() => {
-				calc_heights();
+				calc_advanced_marker_heights();
 			}, 100);
 		}
 

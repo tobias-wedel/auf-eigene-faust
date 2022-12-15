@@ -55,7 +55,7 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 					echo '<h3 id="' . $id .'">' . $local_child_headline . '</h3>';
 					
 					if (!empty(twtheme_get_value($local['text']))) {
-						echo wpautop(check_hyperlinks(twtheme_get_value($local['text'])));
+						echo wpautop(find_hyperlinks(twtheme_get_value($local['text'])));
 					}
 					
 					$local_urls = $args->get_group('local-urls');
