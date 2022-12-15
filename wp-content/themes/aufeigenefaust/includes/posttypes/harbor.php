@@ -189,6 +189,12 @@ function twtheme_harbor_fields()
 					'label' => 'Vom Hafen in die Stadt',
 				],
 				[
+					'id' => 'shuttle-image',
+					'name' => 'shuttle-image',
+					'type' => 'image',
+					'label' => 'Bild',
+				],
+				[
 					'id' => 'shuttle',
 					'name' => 'shuttle',
 					'type' => 'editor',
@@ -201,13 +207,22 @@ function twtheme_harbor_fields()
 					]
 				],
 				[
+					'id' => 'shuttle-name',
+					'name' => 'shuttle-name',
+					'type' => 'text',
+					'title' => 'Shuttlebus',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
+					'label' => 'Abfahrt Station Name'
+				],
+				[
 					'id' => 'shuttle-address',
 					'name' => 'shuttle-address',
 					'type' => 'textarea',
 					'title' => 'Shuttlebus',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Adresse'
+					'label' => 'Abfahrt Adresse'
 				],
 				[
 					'id' => 'shuttle-address-coords',
@@ -223,6 +238,40 @@ function twtheme_harbor_fields()
 						'tool' => 'gmaps',
 						'service' => 'geocoding',
 						'source' => 'shuttle-address'
+					]
+				],
+				[
+					'id' => 'shuttle-name-arrival',
+					'name' => 'shuttle-name-arrival',
+					'type' => 'text',
+					'title' => 'Shuttlebus',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
+					'label' => 'Ankunft Station Name'
+				],
+				[
+					'id' => 'shuttle-address-arrival',
+					'name' => 'shuttle-address-arrival',
+					'type' => 'textarea',
+					'title' => 'Shuttlebus',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
+					'label' => 'Ankunft Adresse'
+				],
+				[
+					'id' => 'shuttle-address-coords-arrival',
+					'name' => 'shuttle-address-coords-arrival',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
+					'type' => 'text',
+					'readonly' => true,
+					'editable' => true,
+					'label' => 'Koordinaten',
+					'description' => 'Die Koordinaten werden automatisch, nach ändern der Adresse, generiert.',
+					'integration' => [
+						'tool' => 'gmaps',
+						'service' => 'geocoding',
+						'source' => 'shuttle-address-arrival'
 					]
 				],
 				[
