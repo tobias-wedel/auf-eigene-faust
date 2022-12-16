@@ -192,6 +192,8 @@ function twtheme_harbor_fields()
 					'id' => 'shuttle-image',
 					'name' => 'shuttle-image',
 					'type' => 'image',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'shuttle',
 					'label' => 'Bild',
 				],
 				[
@@ -213,16 +215,17 @@ function twtheme_harbor_fields()
 					'title' => 'Shuttlebus',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Abfahrt Station Name'
+					'label' => 'Einstieg Name',
+					'placeholder' => 'Shuttlebus Einstieg'
 				],
 				[
 					'id' => 'shuttle-address',
 					'name' => 'shuttle-address',
 					'type' => 'textarea',
-					'title' => 'Shuttlebus',
+					'title' => 'Shuttlebus Einstieg',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Abfahrt Adresse'
+					'label' => 'Einstieg Adresse'
 				],
 				[
 					'id' => 'shuttle-address-coords',
@@ -247,16 +250,17 @@ function twtheme_harbor_fields()
 					'title' => 'Shuttlebus',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Ankunft Station Name'
+					'label' => 'Ausstieg Name',
+					'placeholder' => 'Shuttlebus Ausstieg'
 				],
 				[
 					'id' => 'shuttle-address-arrival',
 					'name' => 'shuttle-address-arrival',
 					'type' => 'textarea',
-					'title' => 'Shuttlebus',
+					'title' => 'Shuttlebus Ausstieg',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Ankunft Adresse'
+					'label' => 'Ausstieg Adresse'
 				],
 				[
 					'id' => 'shuttle-address-coords-arrival',
@@ -277,6 +281,14 @@ function twtheme_harbor_fields()
 				[
 					'type' => 'headline',
 					'label' => 'Vom Flughafen zum Hafen',
+				],
+				[
+					'id' => 'arrival-image',
+					'name' => 'arrival-image',
+					'type' => 'image',
+					'group' => 'harbor-arrivals',
+					'group-child' => 'arrival-airport',
+					'label' => 'Bild',
 				],
 				[
 					'id' => 'arrival-airport',

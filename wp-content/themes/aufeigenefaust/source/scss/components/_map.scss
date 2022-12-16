@@ -63,7 +63,8 @@
 		transition: all 0.2s;
 		width: 120px;
 		padding: 8px 0;
-		font-size: $font-size-sm;
+		font-size: 0.75rem;
+		min-height: 36px;
 
 		.title {
 			font-weight: bold;

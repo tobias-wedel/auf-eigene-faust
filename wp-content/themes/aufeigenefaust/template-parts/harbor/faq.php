@@ -50,8 +50,8 @@ if (!empty($section_faq['faqs'][0]['question']['value'])) :
 					];
 					
 					echo '<h3 id="' . $id .'">' . $faq_child_headline . '</h3>';
-					
-					if (!empty(twtheme_get_value($faq['answer']))) {
+
+					if (twtheme_get_value($faq['answer'])) {
 						echo wpautop(find_hyperlinks(twtheme_get_value($faq['answer'])));
 					}
 				}

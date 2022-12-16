@@ -20,12 +20,10 @@ class TwthemeGetPostMeta
 	
 	private function get_post_type_fields($post_type)
 	{
-		switch ($post_type) {
-			case 'harbor':
-				$fields = twtheme_harbor_fields();
-				break;
-			default:
-				$fields = null;
+		$fields = null;
+		
+		if (function_exists('twtheme_' . $post_type . '_fields')) {
+			$fields = call_user_func('twtheme_' . $post_type . '_fields');
 		}
 		
 		return $fields;
@@ -52,7 +50,7 @@ class TwthemeGetPostMeta
 					for ($i = 0; $i < $count_entries; $i++) {
 						foreach ($field_second_level['fields'][0] as $repeater_field) {
 							foreach ($repeater_field as $field) {
-								$value = $post_meta_array[$field_second_level['name']][$i][$repeater_field['name']];
+								$value = !empty($post_meta_array[$field_second_level['name']][$i][$repeater_field['name']]) ? $post_meta_array[$field_second_level['name']][$i][$repeater_field['name']] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['label'] = !empty($repeater_field['label']) ? $repeater_field['label'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['placeholder'] = !empty($repeater_field['placeholder']) ? $repeater_field['placeholder'] : '';
 								$new_array[$field_first_level['id']][$field_second_level['name']][$i][$repeater_field['name']]['group'] = !empty($repeater_field['group']) ? $repeater_field['group'] : '';

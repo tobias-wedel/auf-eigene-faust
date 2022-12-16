@@ -48,23 +48,25 @@ if (
 						if (empty($activitiy['title']['value'])) {
 							continue;
 						}
-					
+						
 						$activitiy_child_headline = twtheme_get_value($activitiy['title']);
 						$id = sanitize_title($activitiy_child_headline);
-					
+						
 						$toc[$toc_key]['childs'][] = [
-						'id' => $id,
-						'title' => $activitiy_child_headline,
-					];
-					
+							'id' => $id,
+							'title' => $activitiy_child_headline,
+						];
+						
 						echo '<h3 id="' . $id .'">' . $activitiy_child_headline . '</h3>';
-					
+						
 						if (!empty(twtheme_get_value($activitiy['text']))) {
 							echo wpautop(find_hyperlinks(twtheme_get_value($activitiy['text'])));
 						}
-					
+						
 						if (!empty(twtheme_get_value($activitiy['gallery']))) {
+							echo '<div class="mx-ngutter">';
 							echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($activitiy['gallery']), 'medium-large') . '</div>';
+							echo '</div>';
 						}
 					}
 				}
@@ -167,7 +169,9 @@ if (
 		</div>
 	</div>
 </section>
-<?php endif;
+<?php endif; ?>
+
+<?php
 
 set_query_var('map', $map);
 set_query_var('toc', $toc);

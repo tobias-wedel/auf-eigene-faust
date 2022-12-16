@@ -96,6 +96,7 @@ if (!empty($section_harbor)) :
 				<?php
 				echo wpautop(find_hyperlinks(twtheme_get_value($section_harbor['text'])));
 				$harbor_arrivals = $args->get_group('harbor-arrivals');
+				
 				if ($harbor_arrivals) {
 					$toc_key = array_key_last($toc);
 					foreach ($harbor_arrivals as $key => $arrival) {
@@ -103,25 +104,63 @@ if (!empty($section_harbor)) :
 							$harbor_arrivals_child_headline = sprintf(twtheme_get_title($arrival[$key]), $page_title);
 							$id = sanitize_title($harbor_arrivals_child_headline);
 							echo '<h3 id="' . $id . '">' . sprintf($harbor_arrivals_child_headline, $page_title) . '</h3>';
-							
+								
 							echo wpautop(find_hyperlinks(twtheme_get_value($arrival[$key])));
 							
-							if (!empty($arrival[$key . '-address-coords']['value'])) {
-								$arrival_map_data = [];
-								$arrival_map_data[] = [
-									'address' => twtheme_get_value($arrival[$key . '-address']),
-									'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
-									'title' => twtheme_get_title($arrival[$key . '-address']),
-									'icon' => $options['icons'][$key . '-icon'],
-									'color' => $options['icons'][$key . '-color'],
-								];
-								
-								$map = array_merge($map, $arrival_map_data);
+							if (isset($arrival[$key . '-image']['value']) && twtheme_get_value($arrival[$key . '-image'])) {
 								echo '<div class="mx-ngutter">';
-								echo twtheme_map($arrival_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+								echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($arrival[$key . '-image']), 'medium-large') . '</div>';
 								echo '</div>';
 							}
-														
+							
+							$arrival_map_data = [];
+								
+							if ($key == 'shuttle') {
+								if (!empty($arrival[$key . '-address-coords']['value'])) {
+									$arrival_map_data[] = [
+										'address' => twtheme_get_value($arrival[$key . '-address']),
+										'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
+										'title' => twtheme_get_title($arrival[$key . '-address']),
+										'icon' => $options['icons'][$key . '-icon'],
+										'color' => $options['icons'][$key . '-color'],
+									];
+											
+									$map = array_merge($map, $arrival_map_data);
+								}
+								
+								if (!empty($arrival[$key . '-address-coords-arrival']['value'])) {
+									$arrival_map_data[] = [
+										'address' => twtheme_get_value($arrival[$key . '-address-arrival']),
+										'coords' => twtheme_get_value($arrival[$key . '-address-coords-arrival']),
+										'title' => twtheme_get_title($arrival[$key . '-address-arrival']),
+										'icon' => $options['icons'][$key . '-icon'],
+										'color' => $options['icons'][$key . '-color'],
+									];
+											
+									$map = array_merge($map, $arrival_map_data);
+								}
+								
+								if (!empty($arrival_map_data)) {
+									echo '<div class="mx-ngutter">';
+									echo twtheme_map($arrival_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+									echo '</div>';
+								}
+							} else {
+								if (!empty($arrival[$key . '-address-coords']['value'])) {
+									$arrival_map_data[] = [
+										'address' => twtheme_get_value($arrival[$key . '-address']),
+										'coords' => twtheme_get_value($arrival[$key . '-address-coords']),
+										'title' => twtheme_get_title($arrival[$key . '-address']),
+										'icon' => $options['icons'][$key . '-icon'],
+										'color' => $options['icons'][$key . '-color'],
+									];
+											
+									$map = array_merge($map, $arrival_map_data);
+									echo '<div class="mx-ngutter">';
+									echo twtheme_map($arrival_map_data, ['zoom' => '14', 'wrapper-class' => 'ratio ratio-16x9']);
+									echo '</div>';
+								}
+							}
 							$toc[$toc_key]['childs'][] = [
 								'id' => $id,
 								'title' => $harbor_arrivals_child_headline,
