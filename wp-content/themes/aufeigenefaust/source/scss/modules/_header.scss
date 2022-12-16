@@ -21,6 +21,11 @@
 	overflow: hidden;
 	z-index: 0;
 
+	> .container-fluid {
+		z-index: 100;
+		transform: translateY(calc(var(--topbar-height) * 0.5));
+	}
+
 	&::after {
 		position: absolute;
 		top: 0;

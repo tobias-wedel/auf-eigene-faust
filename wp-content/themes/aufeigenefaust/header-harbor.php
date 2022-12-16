@@ -12,7 +12,7 @@ $title = get_the_title($post_id);
 
 <body <?php body_class('position-relative'); ?> data-offset="0">
 	<header class="cinematic set-h[self|header]">
-		<div class="top-bar">
+		<div class="top-bar set-h[self|topbar]">
 			<div class="container-fluid mt-4">
 				<div class="row">
 					<div class="col-auto">
