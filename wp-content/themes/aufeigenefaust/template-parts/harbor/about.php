@@ -36,9 +36,7 @@ if (!empty($section_harbor)) :
 		<div class="row">
 			<?php if (twtheme_get_value($section_harbor['gallery'])) : ?>
 			<div class="col-6 offset-lg-1 pe-lg-0">
-				<div class="ratio ratio-16x11">
-					<?= wp_get_attachment_image(twtheme_get_value($section_harbor['gallery']), 'large', false, ['class' => 'img-fluid']);?>
-				</div>
+				<?= do_shortcode('[splide images="' . twtheme_get_value($section_harbor['gallery']) . '" thumbnails="false" title="Galerie über ' . $harbor_headline . '" id="' . $id . '" caption="true" class="mb-0"]'); ?>
 			</div>
 			<div class="col-4 ps-lg-0">
 				<?php

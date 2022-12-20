@@ -46,7 +46,7 @@ function twtheme_harbor_fields()
 					'id' => 'gallery',
 					'name' => 'gallery',
 					'type' => 'gallery',
-					'label' => 'Galerie',
+					'label' => 'Bilder',
 				],
 				[
 					'id' => 'prolog',
@@ -132,7 +132,7 @@ function twtheme_harbor_fields()
 					'id' => 'gallery',
 					'name' => 'gallery',
 					'type' => 'gallery',
-					'label' => 'Galerie',
+					'label' => 'Bilder',
 				],
 				[
 					'id' => 'text',
@@ -191,10 +191,10 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'shuttle-image',
 					'name' => 'shuttle-image',
-					'type' => 'image',
+					'type' => 'gallery',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'shuttle',
-					'label' => 'Bild',
+					'label' => 'Bilder',
 				],
 				[
 					'id' => 'shuttle',
@@ -285,10 +285,10 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'arrival-image',
 					'name' => 'arrival-image',
-					'type' => 'image',
+					'type' => 'gallery',
 					'group' => 'harbor-arrivals',
 					'group-child' => 'arrival-airport',
-					'label' => 'Bild',
+					'label' => 'Bilder',
 				],
 				[
 					'id' => 'arrival-airport',
@@ -396,10 +396,10 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'foot-image',
 					'name' => 'foot-image',
-					'type' => 'image',
+					'type' => 'gallery',
 					'group' => 'mobility',
 					'group-child' => 'foot',
-					'label' => 'Bild',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 				],
 				[
@@ -447,8 +447,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'bicycle-image',
 					'name' => 'bicycle-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'bicycle',
 				],
@@ -496,8 +496,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'e-scooter-image',
 					'name' => 'e-scooter-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'e-scooter',
 				],
@@ -545,8 +545,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'taxi-image',
 					'name' => 'taxi-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'taxi',
 				],
@@ -594,8 +594,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'rental-car-image',
 					'name' => 'rental-car-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'rental-car',
 				],
@@ -643,8 +643,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'bus-image',
 					'name' => 'bus-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'bus',
 				],
@@ -692,8 +692,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'hop-on-bus-image',
 					'name' => 'hop-on-bus-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'hop-on-bus',
 				],
@@ -741,8 +741,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'light-railroad-image',
 					'name' => 'light-railroad-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'light-railroad',
 				],
@@ -790,8 +790,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'tuk-tuk-image',
 					'name' => 'tuk-tuk-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'tuk-tuk',
 				],
@@ -839,8 +839,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'metro-image',
 					'name' => 'metro-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'metro',
 				],
@@ -888,8 +888,8 @@ function twtheme_harbor_fields()
 				[
 					'id' => 'train-image',
 					'name' => 'train-image',
-					'type' => 'image',
-					'label' => 'Bild',
+					'type' => 'gallery',
+					'label' => 'Bilder',
 					'group' => 'mobility',
 					'group-child' => 'train',
 				],
@@ -930,7 +930,7 @@ function twtheme_harbor_fields()
 								'id' => 'gallery',
 								'name' => 'gallery',
 								'type' => 'gallery',
-								'label' => 'Galerie',
+								'label' => 'Bilder',
 							],
 							[
 								'id' => 'text',
@@ -1016,7 +1016,7 @@ function twtheme_harbor_fields()
 								'id' => 'gallery',
 								'name' => 'gallery',
 								'type' => 'gallery',
-								'label' => 'Galerie',
+								'label' => 'Bilder',
 							],
 							[
 								'id' => 'text',
@@ -1180,7 +1180,7 @@ function twtheme_harbor_fields()
 								'id' => 'gallery',
 								'name' => 'gallery',
 								'type' => 'gallery',
-								'label' => 'Galerie',
+								'label' => 'Bilder',
 							],
 							[
 								'id' => 'text',

@@ -57,9 +57,7 @@ if ($section_mobility) :
 					echo wpautop(find_hyperlinks(($mobility[$key]['value'])));
 					
 					if (!empty($mobility[$key . '-image']['value'])) {
-						echo '<div class="mx-ngutter">';
-						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image($mobility[$key . '-image']['value'], 'medium-large') . '</div>';
-						echo '</div>';
+						echo do_shortcode('[splide images="' . twtheme_get_value($mobility[$key . '-image']) . '" thumbnails="false" title="Galerie über ' . $mobility_child_headline . '" id="' . $id . '" caption="true" class="mb-0 mx-ngutter"]');
 					}
 					
 					if (!empty($mobility[$key . '-address-coords']['value'])) {

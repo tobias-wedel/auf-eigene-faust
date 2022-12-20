@@ -91,9 +91,7 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 					}
 					
 					if (!empty(twtheme_get_value($local['gallery']))) {
-						echo '<div class="mx-ngutter">';
-						echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($local['gallery']), 'medium-large') . '</div>';
-						echo '</div>';
+						echo do_shortcode('[splide images="' . twtheme_get_value($local['gallery']) . '" thumbnails="false" title="Galerie über ' . $local_child_headline . '" id="' . $id . '" caption="true" class="mb-0 mx-ngutter"]');
 					}
 					
 					if (!empty(twtheme_get_value($local['address-coords']))) {
