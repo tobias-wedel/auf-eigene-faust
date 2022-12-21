@@ -19,7 +19,6 @@ if (!empty($section_locals['list'][0]['title']['value'])) :
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
-				
 					echo '<h2>' . $locals_headline . '</h2>';
 				
 					$toc[] = [

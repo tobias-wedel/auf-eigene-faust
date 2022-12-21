@@ -255,6 +255,67 @@ function do_fullscreen() {
 	);
 }
 
+function dynamic_content() {
+	document.querySelectorAll('[data-dynamic_fn]').forEach(dynamic_element => {
+		const dynamic_fn = dynamic_element.dataset.dynamic_fn,
+			dynamic_key = dynamic_element.dataset.dynamic_key ? dynamic_element.dataset.dynamic_key : '',
+			dynamic_action = dynamic_element.dataset.dynamic_action ? dynamic_element.dataset.dynamic_action : '';
+
+		if (!dynamic_fn) {
+			return false;
+		}
+
+		handle_the_dynamic_content_request(dynamic_fn, dynamic_key, dynamic_action);
+	});
+
+	function handle_the_dynamic_content_request(dynamic_fn, dynamic_key, dynamic_action) {
+		var formData = new FormData();
+		formData.append('action', 'dynamic_content');
+		formData.append('post_ID', twtheme.post_ID);
+		formData.append('dynamic_fn', dynamic_fn);
+
+		if (dynamic_key != '') {
+			formData.append('dynamic_key', dynamic_key);
+		}
+		if (dynamic_action) {
+			if (dynamic_action == 'lazy' && dynamic_key) {
+				console.log(dynamic_action);
+				dynamic_content_lazy_load(dynamic_key, formData);
+			}
+		} else {
+			do_the_ajax(formData);
+		}
+	}
+
+	function dynamic_content_lazy_load(dynamic_key, formData) {
+		window.addEventListener('scroll', load_content);
+
+		function load_content() {
+			if (is_in_viewport(document.querySelector('[data-dynamic_key="' + dynamic_key + '"]'), -window.innerHeight)) {
+				do_the_ajax(formData);
+				window.removeEventListener('scroll', load_content);
+			} else {
+			}
+		}
+	}
+
+	function do_the_ajax(formData) {
+		/** HTTP Request */
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.onload = function () {
+			// Hide the spinner
+			if (httpRequest.status >= 200 && httpRequest.status < 300) {
+				console.log(httpRequest.responseText);
+			} else {
+				console.log(httpRequest.responseText);
+			}
+		};
+
+		httpRequest.open('POST', ajax_url);
+		httpRequest.send(formData);
+	}
+}
+
 function toc_scroller() {
 	let toc_scroller = document.querySelector('#toc-scroller');
 	let window_width = window.innerWidth;
@@ -288,6 +349,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 	do_fullscreen();
 	toc_scroller();
 	smooth_anchor_scrolling();
+	dynamic_content();
 
 	window.addEventListener('scroll', () => {
 		toc_scroller();

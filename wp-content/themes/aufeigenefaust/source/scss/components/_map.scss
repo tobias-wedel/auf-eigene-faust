@@ -97,10 +97,9 @@
 
 .twtheme-map {
 	height: 100%;
+	background-size: cover;
 
 	&:not(.loaded) {
-		background-size: cover;
-		background-position: center center;
 		position: relative;
 
 		> div {
@@ -114,6 +113,7 @@
 			justify-content: center;
 			flex-direction: column;
 			backdrop-filter: blur(5px);
+			-webkit-backdrop-filter: blur(5px);
 			cursor: pointer;
 
 			svg {

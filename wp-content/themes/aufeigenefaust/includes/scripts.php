@@ -50,5 +50,6 @@ function twtheme_wp_enqueue_scripts()
 		'ajaxurl' => admin_url('admin-ajax.php'),
 		'themepath' => TWTHEME__PATH,
 		'gmaps_id' => TWTHEME__OPTIONS['integration']['gmaps-id'],
+		'post_ID' => get_the_ID(),
 	]);
 }

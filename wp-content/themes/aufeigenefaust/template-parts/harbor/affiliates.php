@@ -39,36 +39,32 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 					<?php echo wpautop(find_hyperlinks(twtheme_get_value($section_affiliates['intro']))); ?>
 
 					<?php
-				$toc_key = array_key_last($toc);
-				foreach ($section_affiliates['affiliates'] as $key => $affiliates) {
-					if (empty($affiliates['widget']['value'])) {
-						continue;
+					$toc_key = array_key_last($toc);
+					foreach ($section_affiliates['affiliates'] as $key => $affiliate) {
+						if (empty($affiliate['widget']['value'])) {
+							continue;
+						}
+						
+						$affiliate_child_headline = twtheme_get_value($affiliate['title']);
+						$id = sanitize_title($affiliate_child_headline);
+						
+						$toc[$toc_key]['childs'][] = [
+							'id' => $id,
+							'title' => $affiliate_child_headline,
+						];
+						
+						echo '<h3 id="' . $id .'">' . $affiliate_child_headline . '</h3>';
+						echo '<div class="booking" data-dynamic_key="' . $id .'" data-dynamic_fn="affiliate_content" data-dynamic_action="lazy"></div>';
+						echo wpautop(find_hyperlinks(twtheme_get_value($affiliate['widget'])));
 					}
-					
-					$affiliates_child_headline = twtheme_get_value($affiliates['title']);
-					$id = sanitize_title($affiliates_child_headline);
-					
-					$toc[$toc_key]['childs'][] = [
-						'id' => $id,
-						'title' => $affiliates_child_headline,
-					];
-					
-					echo '<h3 id="' . $id .'">' . $affiliates_child_headline . '</h3>';
-					
-					if (!empty(twtheme_get_value($affiliates['widget']))) {
-						echo wpautop(find_hyperlinks(twtheme_get_value($affiliates['widget'])));
-					}
-				}
-				?>
+					?>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </section>
 <?php endif;
 
 set_query_var('map', $map);
 set_query_var('toc', $toc);
-
 ?>

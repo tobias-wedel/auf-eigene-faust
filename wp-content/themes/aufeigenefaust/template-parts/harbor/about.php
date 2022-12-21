@@ -106,9 +106,7 @@ if (!empty($section_harbor)) :
 							echo wpautop(find_hyperlinks(twtheme_get_value($arrival[$key])));
 							
 							if (isset($arrival[$key . '-image']['value']) && twtheme_get_value($arrival[$key . '-image'])) {
-								echo '<div class="mx-ngutter">';
-								echo '<div class="ratio ratio-16x11">' . wp_get_attachment_image(twtheme_get_value($arrival[$key . '-image']), 'medium-large') . '</div>';
-								echo '</div>';
+								echo do_shortcode('[splide images="' . twtheme_get_value($arrival[$key . '-image']) . '" thumbnails="false" title="Galerie über ' . $harbor_arrivals_child_headline . '" id="' . $id . '" caption="true" class="mb-0 mx-ngutter"]');
 							}
 							
 							$arrival_map_data = [];
