@@ -117,7 +117,6 @@ class TwthemeGetPostMeta
 			}
 		}
 		return $group_data;
-		print_rpre($group_data);
 	}
 	
 	public function get_section($section_name)

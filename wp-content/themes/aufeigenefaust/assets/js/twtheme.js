@@ -215,7 +215,6 @@ function do_fullscreen() {
 				let fullscreen_element = document.querySelector('#' + fullscreen_id);
 
 				if (trigger_button.classList.contains('active')) {
-					console.log(document);
 					if (document.exitFullscreen) {
 						document.exitFullscreen();
 					} else if (document.mozCancelFullScreen) {
@@ -265,10 +264,10 @@ function dynamic_content() {
 			return false;
 		}
 
-		handle_the_dynamic_content_request(dynamic_fn, dynamic_key, dynamic_action);
+		handle_the_dynamic_content_request(dynamic_element, dynamic_fn, dynamic_key, dynamic_action);
 	});
 
-	function handle_the_dynamic_content_request(dynamic_fn, dynamic_key, dynamic_action) {
+	function handle_the_dynamic_content_request(dynamic_element, dynamic_fn, dynamic_key, dynamic_action) {
 		var formData = new FormData();
 		formData.append('action', 'dynamic_content');
 		formData.append('post_ID', twtheme.post_ID);
@@ -279,33 +278,37 @@ function dynamic_content() {
 		}
 		if (dynamic_action) {
 			if (dynamic_action == 'lazy' && dynamic_key) {
-				console.log(dynamic_action);
-				dynamic_content_lazy_load(dynamic_key, formData);
+				dynamic_content_lazy_load(dynamic_element, dynamic_key, formData);
 			}
 		} else {
 			do_the_ajax(formData);
 		}
 	}
 
-	function dynamic_content_lazy_load(dynamic_key, formData) {
+	function dynamic_content_lazy_load(dynamic_element, dynamic_key, formData) {
 		window.addEventListener('scroll', load_content);
 
 		function load_content() {
-			if (is_in_viewport(document.querySelector('[data-dynamic_key="' + dynamic_key + '"]'), -window.innerHeight)) {
-				do_the_ajax(formData);
+			if (is_in_viewport(dynamic_element, -(window.innerHeight * 2))) {
+				do_the_ajax(formData, ajax_response => {
+					let response = JSON.parse(ajax_response);
+					console.log(response);
+					//dynamic_element.innerHTML = ajax_response;
+				});
+
 				window.removeEventListener('scroll', load_content);
 			} else {
 			}
 		}
 	}
 
-	function do_the_ajax(formData) {
+	function do_the_ajax(formData, action) {
 		/** HTTP Request */
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.onload = function () {
-			// Hide the spinner
 			if (httpRequest.status >= 200 && httpRequest.status < 300) {
 				console.log(httpRequest.responseText);
+				action(httpRequest.responseText);
 			} else {
 				console.log(httpRequest.responseText);
 			}

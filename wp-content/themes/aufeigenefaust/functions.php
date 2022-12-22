@@ -20,6 +20,7 @@ twtheme_include_files(
 	[
 		'scripts',
 		'helper',
+		'ajax',
 		'data/data',
 		'comments',
 		'sidebars',

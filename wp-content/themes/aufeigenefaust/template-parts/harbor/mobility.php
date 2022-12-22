@@ -37,6 +37,11 @@ if ($section_mobility) :
 	<div class="container">
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
+				<?php if (!empty(($section_mobility['intro']))) : ?>
+				<div class="mt-5">
+					<?php echo wpautop(find_hyperlinks(twtheme_get_value($section_mobility['intro']))); ?>
+				</div>
+				<?php endif; ?>
 				<?php
 				$toc_key = array_key_last($toc);
 				foreach ($mobilities as $key => $mobility) {

