@@ -27,7 +27,6 @@ function set_current_viewport_on_body() {
 
 // Get the scroll position from defined element
 function is_in_viewport(element, correction, action) {
-	console.log(action);
 	if (!action) {
 		action = 'between';
 	}
