@@ -26,7 +26,11 @@ function set_current_viewport_on_body() {
 }
 
 // Get the scroll position from defined element
-function is_in_viewport(element, correction) {
+function is_in_viewport(element, correction, action) {
+	if (action == '') {
+		action = 'between';
+	}
+
 	if (!correction) {
 		correction = 0;
 	}
@@ -38,9 +42,13 @@ function is_in_viewport(element, correction) {
 		let element_client = element.getBoundingClientRect();
 		let element_height = element_client.height;
 		position_start = element_client.top + scrollTop + correction;
-		position_end = element_client.top + scrollTop + element_height + correction;
 
-		return scrollTop >= position_start && scrollTop < position_end ? true : false;
+		if (action == 'bewteen') {
+			position_end = element_client.top + scrollTop + element_height + correction;
+			return scrollTop >= position_start && scrollTop < position_end ? true : false;
+		} else if (action == 'after') {
+			return scrollTop >= position_start;
+		}
 	} else if (!isNaN(element)) {
 		position = element;
 
@@ -289,7 +297,7 @@ function dynamic_content() {
 		window.addEventListener('scroll', load_content);
 
 		function load_content() {
-			if (is_in_viewport(dynamic_element, -(window.innerHeight * 2))) {
+			if ((is_in_viewport(dynamic_element, -(window.innerHeight * 2)), 'after')) {
 				do_the_ajax(formData, ajax_response => {
 					let response = JSON.parse(ajax_response);
 
