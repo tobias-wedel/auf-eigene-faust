@@ -292,12 +292,35 @@ function dynamic_content() {
 			if (is_in_viewport(dynamic_element, -(window.innerHeight * 2))) {
 				do_the_ajax(formData, ajax_response => {
 					let response = JSON.parse(ajax_response);
-					console.log(response);
-					//dynamic_element.innerHTML = ajax_response;
+
+					dynamic_element.innerHTML = response.html;
+
+					// If script is given, add it to head section
+					if (response.script != '') {
+						// Get all attributes from the script and build it new
+						let script_split = response.script[0].split(' ');
+
+						let the_script = document.createElement('script');
+						script_split.forEach(el => {
+							let atts = /(.*?)="(.*?)"|[a-z]+/.exec(el);
+
+							// Skip script tag
+							if (atts[0] == 'script') {
+								return;
+							}
+
+							if (!atts[1]) {
+								the_script.setAttribute(atts[0], atts[0]);
+							} else {
+								the_script.setAttribute(atts[1], atts[2]);
+							}
+						});
+
+						document.head.appendChild(the_script);
+					}
 				});
 
 				window.removeEventListener('scroll', load_content);
-			} else {
 			}
 		}
 	}
@@ -307,10 +330,8 @@ function dynamic_content() {
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.onload = function () {
 			if (httpRequest.status >= 200 && httpRequest.status < 300) {
-				console.log(httpRequest.responseText);
 				action(httpRequest.responseText);
 			} else {
-				console.log(httpRequest.responseText);
 			}
 		};
 
