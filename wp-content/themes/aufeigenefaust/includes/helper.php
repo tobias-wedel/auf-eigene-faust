@@ -114,9 +114,11 @@ function get_custom_id(int $length = 6)
 	return bin2hex(random_bytes(($length - ($length % 2)) / 2));
 }
 
-function get_affiliate_hint()
+function get_affiliate_hint($affiliate_options = [])
 {
-	$affiliate_options = TWTHEME__OPTIONS['affiliate'];
+	if (empty($affiliate_options)) {
+		$affiliate_options = TWTHEME__OPTIONS['affiliate'];
+	}
 
 	return $affiliate_options['hint'];
 }
@@ -138,14 +140,14 @@ function get_hyperlink($url, $title = '')
 	$affiliate_options = TWTHEME__OPTIONS['affiliate'];
 	
 	if (array_search($parsed_url_host, array_column($affiliate_options['list'], 'domain')) !== false) {
-		$affiliate_suffix = get_affiliate_hint();
+		$affiliate_suffix = get_affiliate_hint($affiliate_options);
 	}
 	
 	foreach ($affiliate_options['list'] as $link) {
 		$parsed_parse_url = parse_url($url, PHP_URL_HOST);
 	}
 		
-	return '<a href="' . $url . '" target="_blank" rel="noopener nofollow noreferrer">' . $title . '</a>' . $affiliate_suffix ;
+	return '<a href="' . $url . '" target="_blank" rel="noopener nofollow noreferrer"><span>' . $title . '</span>' . $affiliate_suffix . '</a>';
 }
 
 function find_hyperlinks($content)

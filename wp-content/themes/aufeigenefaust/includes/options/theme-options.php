@@ -138,6 +138,13 @@ function theme_options_fields()
 					'label' => 'Hinweis (HTML)',
 					'data-filter' => 'htmlentities',
 				],
+				[
+					'id' => 'hint-disclaimer',
+					'name' => 'hint-disclaimer',
+					'type' => 'textarea',
+					'label' => 'Hinweis Disclaimer',
+					'data-filter' => 'htmlentities',
+				],
 			],
 		],
 		[

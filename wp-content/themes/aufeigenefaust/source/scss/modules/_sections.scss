@@ -16,6 +16,10 @@ section {
 	}
 
 	h4 {
-		margin-bottom: 0.25rem;
+		margin-bottom: $paragraph-margin-bottom;
+	}
+
+	h4 + p {
+		margin-top: -($paragraph-margin-bottom - ($paragraph-margin-bottom * 0.15));
 	}
 }

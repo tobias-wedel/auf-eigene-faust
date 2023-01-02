@@ -41,17 +41,17 @@ if (!empty($section_faq['faqs'][0]['question']['value'])) :
 						continue;
 					}
 					
-					$faq_child_headline = twtheme_get_value($faq['question']);
-					$id = sanitize_title($faq_child_headline);
-					
-					$toc[$toc_key]['childs'][] = [
-						'id' => $id,
-						'title' => $faq_child_headline,
-					];
-					
-					echo '<h3 id="' . $id .'">' . $faq_child_headline . '</h3>';
-
 					if (twtheme_get_value($faq['answer'])) {
+						$faq_child_headline = twtheme_get_value($faq['question']);
+						$id = sanitize_title($faq_child_headline);
+						
+						$toc[$toc_key]['childs'][] = [
+							'id' => $id,
+							'title' => $faq_child_headline,
+						];
+					
+						echo '<h3 id="' . $id .'">' . $faq_child_headline . '</h3>';
+
 						echo wpautop(find_hyperlinks(twtheme_get_value($faq['answer'])));
 					}
 				}

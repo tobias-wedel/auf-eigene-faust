@@ -50,16 +50,7 @@ function twtheme_splide_shortcode($atts)
 			pagination: false,
 			lazyLoad: "nearby",
 			rewind: true,
-			' . ($images_count < 2 ? 'arrows: false' : 'arrows: true') . ',
-			/*
-			intersection: {
-				inView: {
-					keyboard: true,
-				},
-				outView: {
-				},
-			  },
-			*/
+			' . ($images_count < 2 ? "arrows: false\n" : "arrows: true") . '
 		});
 	';
 	

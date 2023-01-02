@@ -14,12 +14,12 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 	$affiliates_headline = sprintf(twtheme_get_value($section_affiliates['headline']), get_the_title());
 	$id = sanitize_title($affiliates_headline);
 ?>
-<section id="<?= $id ?>" class="py-spacer">
+<section id="<?= $id ?>" class="pt-spacer">
 	<div class="container">
 		<div class="row">
 			<div class="col-xxl-6 col-xl-7 col-lg-8 col-md-11 m-auto">
 				<?php
-					echo '<h2>' . $affiliates_headline . '&#185;</h2>';
+					echo '<h2>' . $affiliates_headline . '</h2>';
 				
 					$toc[] = [
 						'id' => $id,
@@ -31,7 +31,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 		</div>
 	</div>
 	<hr class="mb-0">
-	<div class="pt-5 bg-light">
+	<div class="py-5 bg-light">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 m-auto">
@@ -52,7 +52,7 @@ if (!empty(twtheme_get_value($section_affiliates['intro'])) || !empty(twtheme_ge
 							'title' => $affiliate_child_headline,
 						];
 						
-						echo '<h3 id="' . $id .'">' . $affiliate_child_headline . '</h3>';
+						echo '<h3 id="' . $id .'">' . $affiliate_child_headline . ' ' . get_affiliate_hint() . '</h3>';
 						echo '<div class="booking" data-dynamic_key="' . $affiliate_child_headline .'" data-dynamic_fn="affiliate_content" data-dynamic_action="lazy"></div>';
 					}
 					?>

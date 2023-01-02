@@ -5,3 +5,7 @@ body > section {
 		}
 	}
 }
+
+.smaller {
+	font-size: $font-size-base * 0.6;
+}

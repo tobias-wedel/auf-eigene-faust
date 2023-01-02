@@ -30,9 +30,6 @@ ul {
 			}
 		}
 	}
-
-	li {
-	}
 }
 
 ol.toc,
@@ -77,5 +74,17 @@ ol.toc {
 
 	> li > a {
 		font-weight: bold;
+	}
+}
+
+ul.list-unstyled li,
+li.list-unstyled {
+	position: relative;
+
+	&::before {
+		content: var(--list-style);
+		position: absolute;
+		left: -0.6rem;
+		top: 0.15rem;
 	}
 }
